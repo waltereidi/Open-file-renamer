@@ -45,5 +45,10 @@ namespace winforms_app
         {
 
         }
+
+        private void textBox_editarArquivo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

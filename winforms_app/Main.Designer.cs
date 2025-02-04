@@ -37,6 +37,8 @@
             toolStripProgressBar1 = new ToolStripProgressBar();
             start = new Button();
             textBox_editarArquivo = new TextBox();
+            previewLabel = new Label();
+            toolStripLabel_progress = new ToolStripLabel();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -79,16 +81,16 @@
             panel_2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel_2.BackColor = SystemColors.ButtonFace;
             panel_2.BorderStyle = BorderStyle.Fixed3D;
-            panel_2.Location = new Point(439, 41);
+            panel_2.Location = new Point(439, 91);
             panel_2.Name = "panel_2";
-            panel_2.Size = new Size(339, 346);
+            panel_2.Size = new Size(339, 296);
             panel_2.TabIndex = 2;
             panel_2.Paint += panel2_Paint;
             // 
             // toolStrip2
             // 
             toolStrip2.Dock = DockStyle.Bottom;
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1 });
+            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripLabel_progress });
             toolStrip2.Location = new Point(0, 425);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Size = new Size(800, 25);
@@ -104,7 +106,7 @@
             // 
             // start
             // 
-            start.Location = new Point(367, 179);
+            start.Location = new Point(367, 205);
             start.Name = "start";
             start.Size = new Size(66, 60);
             start.TabIndex = 4;
@@ -118,14 +120,32 @@
             textBox_editarArquivo.Name = "textBox_editarArquivo";
             textBox_editarArquivo.Size = new Size(339, 23);
             textBox_editarArquivo.TabIndex = 5;
+            textBox_editarArquivo.TextChanged += textBox_editarArquivo_TextChanged;
             // 
-            // Form1
+            // previewLabel
+            // 
+            previewLabel.AutoSize = true;
+            previewLabel.Location = new Point(439, 73);
+            previewLabel.Name = "previewLabel";
+            previewLabel.Size = new Size(48, 15);
+            previewLabel.TabIndex = 6;
+            previewLabel.Text = "Preview";
+            // 
+            // toolStripLabel_progress
+            // 
+            toolStripLabel_progress.Alignment = ToolStripItemAlignment.Right;
+            toolStripLabel_progress.Name = "toolStripLabel_progress";
+            toolStripLabel_progress.Size = new Size(29, 22);
+            toolStripLabel_progress.Text = "0 % ";
+            // 
+            // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(800, 450);
+            Controls.Add(previewLabel);
             Controls.Add(textBox_editarArquivo);
             Controls.Add(start);
             Controls.Add(toolStrip2);
@@ -133,7 +153,7 @@
             Controls.Add(panel_1);
             Controls.Add(toolStrip1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "Form1";
+            Name = "Main";
             Text = "Free File Editor";
             Load += Form1_Load;
             toolStrip1.ResumeLayout(false);
@@ -155,5 +175,7 @@
         private ToolStripProgressBar toolStripProgressBar1;
         private Button start;
         private TextBox textBox_editarArquivo;
+        private Label previewLabel;
+        private ToolStripLabel toolStripLabel_progress;
     }
 }
