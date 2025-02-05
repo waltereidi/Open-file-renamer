@@ -1,26 +1,17 @@
+using ApplicationService;
+using ApplicationService.Enum;
+
 namespace winforms_app
 {
     public partial class Main : Form
     {
+        private readonly MainApplicationService _service;
         public Main()
         {
             InitializeComponent();
+            _service = new MainApplicationService();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void menuOpt_file_open_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -31,24 +22,36 @@ namespace winforms_app
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void panel_1_Paint(object sender, PaintEventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox_editarArquivo_TextChanged(object sender, EventArgs e)
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+        private void textBox_searchFilter_Changed(object sender, EventArgs e)
+        {
+            var selectedButton = radioButtonFilters.First(x => x.Enabled);
+            
+            Main_SearchFilter selectedOption;
+
+            if (!Enum.TryParse(selectedButton.Name, out selectedOption))
+                throw new ArgumentNullException(selectedButton.Name);
+
+            _service.ChangeSearchFilter(selectedOption, textBox_searchFilter.Text);
+        }
+
     }
 }

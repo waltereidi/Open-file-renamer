@@ -9,7 +9,7 @@ namespace FileManager.Interfaces
 {
     public interface IFileProcessor
     {
-        public Action Start();
-
+        public abstract Task<Action> Start();
+        public abstract Task<Action> EnsureSuccessfullOperation();
     }
 }

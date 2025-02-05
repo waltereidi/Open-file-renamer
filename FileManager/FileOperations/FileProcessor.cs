@@ -10,11 +10,14 @@ namespace FileManager.FileOperations
     public abstract class FileProcessor : IFileProcessor
     {
         protected readonly FileInfo _fileInfo;
-        public abstract Action Start();
+        public abstract Task<Action> Start();
         public FileProcessor(FileInfo fi)
         {
-            _fileInfo = fi; 
+            _fileInfo = fi;
+            EnsureFileIsValid();
         }
+        public abstract Task<Action> EnsureSuccessfullOperation();
+
         public virtual void EnsureFileIsValid()
         {
             if (!_fileInfo.Exists)
