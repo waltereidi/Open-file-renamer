@@ -1,4 +1,5 @@
 ﻿using ApplicationService.Enum;
+using Presentation.UI.Main;
 
 namespace winforms_app
 {
@@ -30,41 +31,40 @@ namespace winforms_app
         /// </summary>
         private void InitializeComponent()
         {
-            toolStrip1 = new ToolStrip();
+            toolStripTop = new ToolStrip();
             menu_file = new ToolStripDropDownButton();
             menuOpt_file_open = new ToolStripMenuItem();
-            panel_1 = new Panel();
-            panel_2 = new Panel();
-            toolStrip2 = new ToolStrip();
+            panel_folderFiles = new Panel();
+            panel_filePreview = new Panel();
+            toolStripBottom = new ToolStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             toolStripLabel_progress = new ToolStripLabel();
-            start = new Button();
+            buttonStart = new Button();
             textBox_searchFilter = new TextBox();
-            
+
             radioButtonFilters[0] = new RadioButton();
             radioButtonFilters[1] = new RadioButton();
             radioButtonFilters[2] = new RadioButton();
             radioButtonFilters[3] = new RadioButton();
 
-            groupBox_filter = new GroupBox();
-            button1 = new Button();
+            groupBox_filter = new GroupBoxFilter(textBox_searchFilter , radioButtonFilters);
+            button_rollBack = new Button();
             tabControl_numberedSequence = new TabControl();
             tabPage_numberedSequence = new TabPage();
             tabPage2 = new TabPage();
-            toolStrip1.SuspendLayout();
-            toolStrip2.SuspendLayout();
-            groupBox_filter.SuspendLayout();
+            toolStripTop.SuspendLayout();
+            toolStripBottom.SuspendLayout();
             tabControl_numberedSequence.SuspendLayout();
-            SuspendLayout();
+
             // 
-            // toolStrip1
+            // toolStripTop
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { menu_file });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(796, 25);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
+            toolStripTop.Items.AddRange(new ToolStripItem[] { menu_file });
+            toolStripTop.Location = new Point(0, 0);
+            toolStripTop.Name = "toolStripTop";
+            toolStripTop.Size = new Size(796, 25);
+            toolStripTop.TabIndex = 0;
+            toolStripTop.Text = "toolStripTop";
             // 
             // menu_file
             // 
@@ -80,34 +80,37 @@ namespace winforms_app
             menuOpt_file_open.Text = "Open";
             menuOpt_file_open.Click += menuOpt_file_open_Click;
             // 
-            // panel_1
+            // panel_folderFiles
             // 
-            panel_1.BackColor = Color.NavajoWhite;
-            panel_1.BorderStyle = BorderStyle.Fixed3D;
-            panel_1.Location = new Point(22, 116);
-            panel_1.Name = "panel_1";
-            panel_1.Size = new Size(339, 296);
-            panel_1.TabIndex = 1;
+            panel_folderFiles.BackColor = Color.NavajoWhite;
+            panel_folderFiles.BorderStyle = BorderStyle.Fixed3D;
+            panel_folderFiles.Location = new Point(22, 116);
+            panel_folderFiles.Name = "panel_folderFiles";
+            panel_folderFiles.Size = new Size(339, 296);
+            panel_folderFiles.TabIndex = 1;
+            panel_folderFiles.Paint += panel_1_Paint;
             // 
-            // panel_2
+            // panel_filePreview
             // 
-            panel_2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel_2.BackColor = SystemColors.Window;
-            panel_2.BorderStyle = BorderStyle.Fixed3D;
-            panel_2.Location = new Point(444, 116);
-            panel_2.Name = "panel_2";
-            panel_2.Size = new Size(334, 296);
-            panel_2.TabIndex = 2;
+            panel_filePreview.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel_filePreview.BackColor = SystemColors.Window;
+            panel_filePreview.BorderStyle = BorderStyle.Fixed3D;
+            panel_filePreview.Location = new Point(444, 116);
+            panel_filePreview.Name = "panel_filePreview";
+            panel_filePreview.Size = new Size(334, 296);
+            panel_filePreview.TabIndex = 2;
+            panel_filePreview.Paint += panel_2_Paint;
             // 
-            // toolStrip2
+            // toolStripBottom
             // 
-            toolStrip2.Dock = DockStyle.Bottom;
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripLabel_progress });
-            toolStrip2.Location = new Point(0, 425);
-            toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(796, 25);
-            toolStrip2.TabIndex = 3;
-            toolStrip2.Text = "toolStrip2";
+            toolStripBottom.BackColor = SystemColors.Window;
+            toolStripBottom.Dock = DockStyle.Bottom;
+            toolStripBottom.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripLabel_progress });
+            toolStripBottom.Location = new Point(0, 425);
+            toolStripBottom.Name = "toolStripBottom";
+            toolStripBottom.Size = new Size(796, 25);
+            toolStripBottom.TabIndex = 3;
+            toolStripBottom.Text = "toolStripBottom";
             // 
             // toolStripProgressBar1
             // 
@@ -123,15 +126,15 @@ namespace winforms_app
             toolStripLabel_progress.Size = new Size(29, 22);
             toolStripLabel_progress.Text = "0 % ";
             // 
-            // start
+            // buttonStart
             // 
-            start.Location = new Point(367, 116);
-            start.Name = "start";
-            start.Size = new Size(66, 60);
-            start.TabIndex = 4;
-            start.Text = "Start";
-            start.UseVisualStyleBackColor = true;
-            start.Click += button1_Click;
+            buttonStart.Location = new Point(367, 116);
+            buttonStart.Name = "buttonStart";
+            buttonStart.Size = new Size(66, 60);
+            buttonStart.TabIndex = 4;
+            buttonStart.Text = "Start";
+            buttonStart.UseVisualStyleBackColor = true;
+            buttonStart.Click += button1_Click;
             // 
             // textBox_searchFilter
             // 
@@ -157,7 +160,7 @@ namespace winforms_app
             // 
             radioButtonFilters[1].AutoSize = true;
             radioButtonFilters[1].Location = new Point(84, 22);
-            radioButtonFilters[1].Name = Main_SearchFilter.BiggerThan.ToString(); ;
+            radioButtonFilters[1].Name = Main_SearchFilter.BiggerThan.ToString();
             radioButtonFilters[1].Size = new Size(88, 19);
             radioButtonFilters[1].TabIndex = 10;
             radioButtonFilters[1].TabStop = true;
@@ -187,31 +190,17 @@ namespace winforms_app
             radioButtonFilters[3].TabStop = true;
             radioButtonFilters[3].Text = "Select";
             radioButtonFilters[3].UseVisualStyleBackColor = true;
-            radioButtonFilters[2].CheckedChanged += textBox_searchFilter_Changed;
+            radioButtonFilters[3].CheckedChanged += textBox_searchFilter_Changed;
             // 
-            // groupBox_filter
+            // button_rollBack
             // 
-            groupBox_filter.Controls.Add(radioButtonFilters[3]);
-            groupBox_filter.Controls.Add(radioButtonFilters[0]);
-            groupBox_filter.Controls.Add(radioButtonFilters[2]);
-            groupBox_filter.Controls.Add(textBox_searchFilter);
-            groupBox_filter.Controls.Add(radioButtonFilters[1]);
-            groupBox_filter.Location = new Point(22, 28);
-            groupBox_filter.Name = "groupBox_filter";
-            groupBox_filter.Size = new Size(339, 81);
-            groupBox_filter.TabIndex = 13;
-            groupBox_filter.TabStop = false;
-            groupBox_filter.Text = "Filter";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(367, 182);
-            button1.Name = "button1";
-            button1.Size = new Size(66, 57);
-            button1.TabIndex = 14;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_2;
+            button_rollBack.Location = new Point(367, 182);
+            button_rollBack.Name = "button_rollBack";
+            button_rollBack.Size = new Size(66, 57);
+            button_rollBack.TabIndex = 14;
+            button_rollBack.Text = "rollback";
+            button_rollBack.UseVisualStyleBackColor = true;
+            button_rollBack.Click += button1_Click_2;
             // 
             // tabControl_numberedSequence
             // 
@@ -251,20 +240,20 @@ namespace winforms_app
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(796, 450);
             Controls.Add(tabControl_numberedSequence);
-            Controls.Add(button1);
+            Controls.Add(button_rollBack);
             Controls.Add(groupBox_filter);
-            Controls.Add(start);
-            Controls.Add(toolStrip2);
-            Controls.Add(panel_2);
-            Controls.Add(panel_1);
-            Controls.Add(toolStrip1);
+            Controls.Add(buttonStart);
+            Controls.Add(toolStripBottom);
+            Controls.Add(panel_filePreview);
+            Controls.Add(panel_folderFiles);
+            Controls.Add(toolStripTop);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Main";
             Text = "Free File Editor";
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            toolStrip2.ResumeLayout(false);
-            toolStrip2.PerformLayout();
+            toolStripTop.ResumeLayout(false);
+            toolStripTop.PerformLayout();
+            toolStripBottom.ResumeLayout(false);
+            toolStripBottom.PerformLayout();
             groupBox_filter.ResumeLayout(false);
             groupBox_filter.PerformLayout();
             tabControl_numberedSequence.ResumeLayout(false);
@@ -274,19 +263,19 @@ namespace winforms_app
 
         #endregion
 
-        private ToolStrip toolStrip1;
+        private ToolStrip toolStripTop;
         private ToolStripDropDownButton menu_file;
         private ToolStripMenuItem menuOpt_file_open;
-        private Panel panel_1;
-        private Panel panel_2;
-        private ToolStrip toolStrip2;
+        private Panel panel_folderFiles;
+        private Panel panel_filePreview;
+        private ToolStrip toolStripBottom;
         private ToolStripProgressBar toolStripProgressBar1;
-        private Button start;
+        private Button buttonStart;
         private TextBox textBox_searchFilter;
         private ToolStripLabel toolStripLabel_progress;
         private RadioButton[] radioButtonFilters = new RadioButton[4]; 
         private GroupBox groupBox_filter;
-        private Button button1;
+        private Button button_rollBack;
         private TabControl tabControl_numberedSequence;
         private TabPage tabPage_numberedSequence;
         private TabPage tabPage2;

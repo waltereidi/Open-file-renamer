@@ -41,17 +41,26 @@ namespace winforms_app
         {
 
         }
-        private void textBox_searchFilter_Changed(object sender, EventArgs e)
+        private async void textBox_searchFilter_Changed(object sender, EventArgs e)
         {
             var selectedButton = radioButtonFilters.First(x => x.Enabled);
-            
+
             Main_SearchFilter selectedOption;
 
             if (!Enum.TryParse(selectedButton.Name, out selectedOption))
                 throw new ArgumentNullException(selectedButton.Name);
 
-            _service.ChangeSearchFilter(selectedOption, textBox_searchFilter.Text);
+            await _service.ChangeSearchFilter(selectedOption, textBox_searchFilter.Text);
         }
 
+        private void panel_1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel_2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

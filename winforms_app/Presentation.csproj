@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Enum\**" />
+    <EmbeddedResource Remove="Enum\**" />
+    <None Remove="Enum\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ApplicationService\ApplicationService.csproj" />
   </ItemGroup>
 
@@ -30,10 +36,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enum\" />
   </ItemGroup>
 
 </Project>
