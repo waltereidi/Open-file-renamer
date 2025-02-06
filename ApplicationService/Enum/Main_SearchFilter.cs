@@ -9,8 +9,8 @@ namespace ApplicationService.Enum
     public enum Main_SearchFilter
     {
         Contains,
-        BiggerThan,
+        GreaterThan,
         SmallerThan,
-        Select
+        Select,
     }
 }

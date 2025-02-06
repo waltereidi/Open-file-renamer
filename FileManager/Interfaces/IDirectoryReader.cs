@@ -10,6 +10,9 @@ namespace FileManager.Interfaces
     public interface IDirectoryReader
     {
         public List<FileInfo> GetFiles();
-        public List<FileInfo> GetFilesWithFilter(Func<FileInfo , bool> e);
+        public List<FileInfo> GetFilesContains(string text);
+        public List<FileInfo> GetFilesGreaterThan(long size);
+        public List<FileInfo> GetFilesSmallerThan(long size);
+        public List<FileInfo> GetFilesSelect(List<FileInfo> files);
     }
 }

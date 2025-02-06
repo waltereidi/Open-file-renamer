@@ -12,14 +12,22 @@ namespace FileManager.DirectoryOperations
     {
         private readonly DirectoryInfo _dir;
         public DirectoryReader(DirectoryInfo dir)
-        {
-            _dir = dir;
-        }
+            => _dir = dir.Exists 
+                ? dir 
+                : throw new DirectoryNotFoundException(dir.FullName);
 
         public List<FileInfo> GetFiles() 
             => _dir.GetFiles().ToList();
+        public List<FileInfo> GetFilesContains(string text)
+            => _dir.GetFiles().Where(f => f.Name.Contains(text)).ToList();
 
-        public List<FileInfo> GetFilesWithFilter(Func<FileInfo , bool> e) 
-            => _dir.GetFiles().Where(e).ToList();
+        public List<FileInfo> GetFilesGreaterThan(long size)
+            => _dir.GetFiles().Where(f => f.Length > size).ToList();
+
+        public List<FileInfo> GetFilesSmallerThan(long size)
+            => _dir.GetFiles().Where(f => f.Length < size).ToList();
+        public List<FileInfo> GetFilesSelect(List<FileInfo> files)
+            => _dir.GetFiles().Where(f => files.Any(x=>x.FullName == f.FullName))
+            .ToList();
     }
 }

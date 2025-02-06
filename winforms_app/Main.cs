@@ -1,5 +1,7 @@
 using ApplicationService;
 using ApplicationService.Enum;
+using Presentation.UI;
+using System.ComponentModel;
 
 namespace winforms_app
 {
@@ -17,8 +19,11 @@ namespace winforms_app
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
-                MessageBox.Show(fbd.SelectedPath);
+                label_currentDirectory.Text = fbd.SelectedPath;
+                label_currentDirectory.ForeColor = Color.Green;
 
+                flowLayoutPanel_Selection.Enabled = true;
+                searchFilter_Changed(sender, e);
             }
         }
 
@@ -36,22 +41,46 @@ namespace winforms_app
         {
 
         }
+        private async void searchFilter_Changed(object sender, EventArgs e)
+        {
+            var radioChecked = groupBox_filter.Controls
+                .OfType<RadioButton>()
+                .FirstOrDefault(r => r.Checked)
+                ?? throw new ArgumentNullException(nameof(RadioButton));
+
+            Main_SearchFilter filter ;
+            switch (radioChecked.Name)
+            {
+                case "radioButton_contains":
+                    filter = Main_SearchFilter.Contains;
+                    await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                    break;
+                case "radioButton_select":
+                    {
+                        filter = Main_SearchFilter.Select;
+                        NumberTextBox ntb = new NumberTextBox(textBox_searchFilter);
+                        await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                    }break;
+                case "radioButton_greaterThan":
+                    {
+                        filter = Main_SearchFilter.GreaterThan;
+                        NumberTextBox ntb = new NumberTextBox(textBox_searchFilter);
+                        await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                    }break;
+                case "radioButton_smallerThan":
+                    filter = Main_SearchFilter.SmallerThan;
+                    await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                    break;
+            }
+
+            
+        }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
 
         }
-        private async void textBox_searchFilter_Changed(object sender, EventArgs e)
-        {
-            var selectedButton = radioButtonFilters.First(x => x.Enabled);
 
-            Main_SearchFilter selectedOption;
-
-            if (!Enum.TryParse(selectedButton.Name, out selectedOption))
-                throw new ArgumentNullException(selectedButton.Name);
-
-            await _service.ChangeSearchFilter(selectedOption, textBox_searchFilter.Text);
-        }
 
         private void panel_1_Paint(object sender, PaintEventArgs e)
         {
@@ -59,6 +88,21 @@ namespace winforms_app
         }
 
         private void panel_2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel_1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
