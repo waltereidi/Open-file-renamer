@@ -1,6 +1,8 @@
-﻿using FileManager.Interfaces;
+﻿using FileManager.DAO;
+using FileManager.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,21 +11,33 @@ namespace FileManager.FileOperations
 {
     public abstract class FileProcessor : IFileProcessor
     {
-        protected readonly FileInfo _fileInfo;
-        public abstract Task<Action> Start();
-        public FileProcessor(FileInfo fi)
+
+        public readonly FileIdentity Id;
+        public readonly DirectoryInfo Dir;
+        public FileProcessor(DirectoryInfo dr, FileInfo fi)
         {
-            _fileInfo = fi;
+            Dir = dr; 
+            Id = FileIdentity.Instance(fi);
             EnsureFileIsValid();
         }
-        public abstract Task<Action> EnsureSuccessfullOperation();
+        protected FileInfo GetFile() => Dir.GetFiles().First(x => Id.Equals(x));
 
+        public void Start()
+        {
+            var file = this.GetFile();
+            Operation(file);
+            EnsureSuccessfullOperation();
+        }
+
+        protected abstract void Operation(FileInfo fi);
+        public abstract void EnsureSuccessfullOperation();
         public virtual void EnsureFileIsValid()
         {
-            if (!_fileInfo.Exists)
+            if (!this.GetFile().Exists)
                 throw new FileNotFoundException();
         }
-    
+
+        
 
     }
 }

@@ -9,17 +9,15 @@ namespace FileManager.FileOperations
 {
     public class FileWriter : IDisposable
     {
-        private IFileProcessor _file;
-        public FileWriter(IFileProcessor file)
+        private List<IFileProcessor> _file;
+        public FileWriter(List<IFileProcessor> file)
         {
             _file = file;
+            
         }
 
-        public async Task Start()
-        {
-            await _file.Start();
-            await _file.EnsureSuccessfullOperation();
-        }
+        public async Task Start() =>Task.WaitAll( _file.Select(s => Task.Run(() => s.Start()) ).ToArray() );
+
 
         public void Dispose()
         {

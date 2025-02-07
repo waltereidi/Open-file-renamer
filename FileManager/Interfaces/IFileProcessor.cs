@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileManager.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -9,7 +10,6 @@ namespace FileManager.Interfaces
 {
     public interface IFileProcessor
     {
-        public abstract Task<Action> Start();
-        public abstract Task<Action> EnsureSuccessfullOperation();
+        public abstract void Start();
     }
 }

@@ -9,36 +9,33 @@ namespace FileManager.FileOperations
     public class FileRenamer : FileProcessor
     {
         public string? _renameTo { get; private set; }
-        public FileRenamer(string path) : base(new FileInfo(path))
-        {
-
-        }
+        private FileRenamer(DirectoryInfo path , FileInfo fi) : base(path , fi) { }
 
         
-        public void NumberSequenceBeforeExtension(int sequence , string? separator = null )
+        public static FileRenamer NumberSequenceBeforeExtension(int sequence , string? separator = null )
         {
-            string nameWithouthExtension = _fileInfo.Name
-                .Substring(0, _fileInfo.Name.LastIndexOf('.'));
+            var fr = new FileRenamer();
+            var file = GetFile();
+            string nameWithouthExtension = file.Name
+                .Substring(0, file.Name.LastIndexOf('.'));
 
             _renameTo = String.Concat
                 (
                     nameWithouthExtension,
                     separator ,
                     sequence , 
-                    _fileInfo.Extension 
+                    file.Extension 
                 );
-            
         }
 
+        protected override void Operation(FileInfo fi) 
+            => fi.MoveTo(Path.Combine(Dir.FullName, _renameTo 
+               ?? throw new ArgumentNullException(nameof(_renameTo))));
 
-        public override async Task<Action> Start()
-            => !String.IsNullOrEmpty(_renameTo) 
-            ? () => _fileInfo.MoveTo(_renameTo)
-            : throw new ArgumentNullException("File name was not provided");
 
-        public override async Task<Action> EnsureSuccessfullOperation()
+        public override void EnsureSuccessfullOperation()
         {
-            return () => { };
+            throw new NotImplementedException();
         }
     }
 }
