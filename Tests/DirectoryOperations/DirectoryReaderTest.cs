@@ -29,7 +29,7 @@ namespace Tests.DirectoryOperations
         {
             DirectoryReader dr = new(new("C:/"));
             
-            var files = dr.GetFilesWithFilter((x)=> !String.IsNullOrEmpty(x.Name ) );
+            var files = dr.GetFilesContains("Files" );
 
             Assert.True(files.Count() > 0);
         }

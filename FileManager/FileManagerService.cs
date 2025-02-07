@@ -1,4 +1,5 @@
-﻿using FileManager.FileOperations;
+﻿using FileManager.DAO;
+using FileManager.FileOperations;
 using FileManager.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace FileManager
 {
     public class FileManagerService : IFileManager
     {
+        private readonly MementoFileManger _memento = new MementoFileManger();
         public FileManagerService()
         {
-
         }
 
         public async Task NumberSequenceBeforeExtension(List<FileInfo> files , string separator )
@@ -29,6 +30,11 @@ namespace FileManager
             }
             
             await Task.WhenAll(tasks);
+
+        }
+        public async Task RollbackOperation(List<FileInfo> fi , Guid version)
+        {
+            VersionedModifications.Version old = _memento.GetStateById(version);
 
         }
 

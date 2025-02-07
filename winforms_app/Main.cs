@@ -51,29 +51,30 @@ namespace winforms_app
             switch (radioChecked.Name)
             {
                 case "radioButton_contains":
-                     _service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains);
+                    _service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains);
                     break;
                 case "radioButton_select":
                     {
-                        
 
-                         
-                    }break;
+
+
+                    }
+                    break;
                 case "radioButton_greaterThan":
                     _service.SearchFilesFromSize(
-                        textBox_searchFilter.GetSize(), 
-                        label_currentDirectory.Text, 
+                        textBox_searchFilter.GetSize(),
+                        label_currentDirectory.Text,
                         Main_SearchFilter.BiggerThan
-                        );break;
+                        ); break;
                 case "radioButton_smallerThan":
                     _service.SearchFilesFromSize(
-                        textBox_searchFilter.GetSize(), 
-                        label_currentDirectory.Text, 
+                        textBox_searchFilter.GetSize(),
+                        label_currentDirectory.Text,
                         Main_SearchFilter.SmallerThan
-                        );break;
+                        ); break;
             }
 
-            
+
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -103,6 +104,11 @@ namespace winforms_app
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridView_selection_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

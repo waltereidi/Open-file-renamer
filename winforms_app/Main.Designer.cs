@@ -39,30 +39,34 @@ namespace winforms_app
             toolStripLabel_progress = new ToolStripLabel();
             start = new Button();
             groupBox_filter = new GroupBox();
-            radioButton_select = new RadioButton();
             radioButton_greaterThan = new RadioButton();
             radioButton_smallerThan = new RadioButton();
             radioButton_contains = new RadioButton();
+            textBox_searchFilter = new AlsoNumberTextBox();
             button1 = new Button();
             tabControl_numberedSequence = new TabControl();
             tabPage_numberedSequence = new TabPage();
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
-            flowLayoutPanel_preview = new FlowLayoutPanel();
             dataGridView_selection = new DataGridView();
+            Column_Selection_FileName = new DataGridViewTextBoxColumn();
+            Column_Selection_FileExtension = new DataGridViewTextBoxColumn();
+            Column_Selection_FileSize = new DataGridViewTextBoxColumn();
+            Column_Selection_Hidden_FullName = new DataGridViewTextBoxColumn();
+            Column_Preview_FileName = new DataGridViewTextBoxColumn();
+            Column_Preview_FileExtension = new DataGridViewTextBoxColumn();
+            Column_Preview_FileSize = new DataGridViewTextBoxColumn();
+            Column_Preview_Hidden_FullName = new DataGridViewTextBoxColumn();
+            flowLayoutPanel_preview = new FlowLayoutPanel();
             dataGridView_preview = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
             tabControl_numberedSequence.SuspendLayout();
             flowLayoutPanel_Selection.SuspendLayout();
-            flowLayoutPanel_preview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).BeginInit();
+            flowLayoutPanel_preview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_preview).BeginInit();
             SuspendLayout();
             // 
@@ -117,7 +121,7 @@ namespace winforms_app
             // 
             // start
             // 
-            start.Location = new Point(368, 229);
+            start.Location = new Point(368, 186);
             start.Margin = new Padding(4, 3, 4, 3);
             start.Name = "start";
             start.Size = new Size(66, 56);
@@ -128,10 +132,10 @@ namespace winforms_app
             // 
             // groupBox_filter
             // 
-            groupBox_filter.Controls.Add(radioButton_select);
             groupBox_filter.Controls.Add(radioButton_greaterThan);
             groupBox_filter.Controls.Add(radioButton_smallerThan);
             groupBox_filter.Controls.Add(radioButton_contains);
+            groupBox_filter.Controls.Add(textBox_searchFilter);
             groupBox_filter.Location = new Point(4, 18);
             groupBox_filter.Margin = new Padding(4, 3, 4, 3);
             groupBox_filter.Name = "groupBox_filter";
@@ -141,24 +145,10 @@ namespace winforms_app
             groupBox_filter.TabStop = false;
             groupBox_filter.Text = "Filter";
             // 
-            // radioButton_select
-            // 
-            radioButton_select.AutoSize = true;
-            radioButton_select.Location = new Point(282, 21);
-            radioButton_select.Margin = new Padding(4, 3, 4, 3);
-            radioButton_select.Name = "radioButton_select";
-            radioButton_select.Size = new Size(59, 19);
-            radioButton_select.TabIndex = 9;
-            radioButton_select.TabStop = true;
-            radioButton_select.Text = "Select";
-            radioButton_select.TextAlign = ContentAlignment.BottomLeft;
-            radioButton_select.UseVisualStyleBackColor = true;
-            radioButton_select.CheckedChanged += searchFilter_Changed;
-            // 
             // radioButton_greaterThan
             // 
             radioButton_greaterThan.AutoSize = true;
-            radioButton_greaterThan.Location = new Point(184, 21);
+            radioButton_greaterThan.Location = new Point(235, 21);
             radioButton_greaterThan.Margin = new Padding(4, 3, 4, 3);
             radioButton_greaterThan.Name = "radioButton_greaterThan";
             radioButton_greaterThan.Size = new Size(97, 19);
@@ -171,7 +161,7 @@ namespace winforms_app
             // radioButton_smallerThan
             // 
             radioButton_smallerThan.AutoSize = true;
-            radioButton_smallerThan.Location = new Point(84, 21);
+            radioButton_smallerThan.Location = new Point(110, 21);
             radioButton_smallerThan.Margin = new Padding(4, 3, 4, 3);
             radioButton_smallerThan.Name = "radioButton_smallerThan";
             radioButton_smallerThan.Size = new Size(99, 19);
@@ -195,14 +185,23 @@ namespace winforms_app
             radioButton_contains.UseVisualStyleBackColor = true;
             radioButton_contains.CheckedChanged += searchFilter_Changed;
             // 
+            // textBox_searchFilter
+            // 
+            textBox_searchFilter.Location = new Point(5, 44);
+            textBox_searchFilter.Margin = new Padding(4, 3, 4, 3);
+            textBox_searchFilter.Name = "textBox_searchFilter";
+            textBox_searchFilter.Size = new Size(328, 21);
+            textBox_searchFilter.TabIndex = 5;
+            textBox_searchFilter.TextChanged += searchFilter_Changed;
+            // 
             // button1
             // 
-            button1.Location = new Point(368, 291);
+            button1.Location = new Point(368, 248);
             button1.Margin = new Padding(4, 3, 4, 3);
             button1.Name = "button1";
             button1.Size = new Size(66, 53);
             button1.TabIndex = 14;
-            button1.Text = "button1";
+            button1.Text = "rollback";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click_2;
             // 
@@ -264,6 +263,58 @@ namespace winforms_app
             flowLayoutPanel_Selection.TabIndex = 0;
             flowLayoutPanel_Selection.Paint += flowLayoutPanel1_Paint;
             // 
+            // dataGridView_selection
+            // 
+            dataGridView_selection.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { Column_Selection_FileName, Column_Selection_FileExtension, Column_Selection_FileSize, Column_Selection_Hidden_FullName });
+            dataGridView_selection.Location = new Point(3, 100);
+            dataGridView_selection.Name = "dataGridView_selection";
+            dataGridView_selection.Size = new Size(341, 275);
+            dataGridView_selection.TabIndex = 0;
+            dataGridView_selection.CellContentClick += dataGridView_selection_CellContentClick;
+            // 
+            // Column_Selection_FileName
+            // 
+            Column_Selection_FileName.HeaderText = "Name";
+            Column_Selection_FileName.Name = "Column_Selection_FileName";
+            // 
+            // Column_Selection_FileExtension
+            // 
+            Column_Selection_FileExtension.HeaderText = "Extension";
+            Column_Selection_FileExtension.Name = "Column_Selection_FileExtension";
+            // 
+            // Column_Selection_FileSize
+            // 
+            Column_Selection_FileSize.HeaderText = "Size";
+            Column_Selection_FileSize.Name = "Column_Selection_FileSize";
+            // 
+            // Column_Selection_Hidden_FullName
+            // 
+            Column_Selection_Hidden_FullName.HeaderText = "hidden fullName";
+            Column_Selection_Hidden_FullName.Name = "Column_Selection_Hidden_FullName";
+            Column_Selection_Hidden_FullName.Visible = false;
+            // 
+            // Column_Preview_FileName
+            // 
+            Column_Preview_FileName.HeaderText = "Name";
+            Column_Preview_FileName.Name = "Column_Preview_FileName";
+            // 
+            // Column_Preview_FileExtension
+            // 
+            Column_Preview_FileExtension.HeaderText = "Extension";
+            Column_Preview_FileExtension.Name = "Column_Preview_FileExtension";
+            // 
+            // Column_Preview_FileSize
+            // 
+            Column_Preview_FileSize.HeaderText = "Size";
+            Column_Preview_FileSize.Name = "Column_Preview_FileSize";
+            // 
+            // Column_Preview_Hidden_FullName
+            // 
+            Column_Preview_Hidden_FullName.HeaderText = "hidden fullName";
+            Column_Preview_Hidden_FullName.Name = "Column_Preview_Hidden_FullName";
+            Column_Preview_Hidden_FullName.Visible = false;
+            // 
             // flowLayoutPanel_preview
             // 
             flowLayoutPanel_preview.Controls.Add(tabControl_numberedSequence);
@@ -274,43 +325,14 @@ namespace winforms_app
             flowLayoutPanel_preview.Size = new Size(344, 386);
             flowLayoutPanel_preview.TabIndex = 0;
             // 
-            // dataGridView_selection
-            // 
-            dataGridView_selection.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
-            dataGridView_selection.Location = new Point(3, 100);
-            dataGridView_selection.Name = "dataGridView_selection";
-            dataGridView_selection.Size = new Size(341, 275);
-            dataGridView_selection.TabIndex = 0;
-            // 
             // dataGridView_preview
             // 
             dataGridView_preview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { Column_Preview_FileName, Column_Preview_FileExtension, Column_Preview_FileSize, Column_Preview_Hidden_FullName });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.Size = new Size(335, 277);
             dataGridView_preview.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Column1";
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Column2";
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Column3";
-            Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Column4";
-            Column4.Name = "Column4";
-            Column4.Visible = false;
             // 
             // Main
             // 
@@ -339,8 +361,8 @@ namespace winforms_app
             tabControl_numberedSequence.ResumeLayout(false);
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
-            flowLayoutPanel_preview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
+            flowLayoutPanel_preview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView_preview).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -363,17 +385,21 @@ namespace winforms_app
         private TabPage tabPage2;
         private RadioButton radioButton_smallerThan;
         private RadioButton radioButton_contains;
-        private RadioButton radioButton_select;
         private RadioButton radioButton_greaterThan;
-        private RadioButton radioButton_filters;
         private Label label_currentDirectory;
         private FlowLayoutPanel flowLayoutPanel_Selection;
         private FlowLayoutPanel flowLayoutPanel_preview;
         private DataGridView dataGridView_selection;
         private DataGridView dataGridView_preview;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column_Selection_FileName;
+        private DataGridViewTextBoxColumn Column_Selection_FileExtension;
+        private DataGridViewTextBoxColumn Column_Selection_FileSize;
+        private DataGridViewTextBoxColumn Column_Selection_Hidden_FullName;
+
+        private DataGridViewTextBoxColumn Column_Preview_FileName;
+        private DataGridViewTextBoxColumn Column_Preview_FileExtension;
+        private DataGridViewTextBoxColumn Column_Preview_FileSize;
+        private DataGridViewTextBoxColumn Column_Preview_Hidden_FullName;
+
     }
 }
