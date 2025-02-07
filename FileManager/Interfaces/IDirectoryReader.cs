@@ -11,8 +11,7 @@ namespace FileManager.Interfaces
     {
         public List<FileInfo> GetFiles();
         public List<FileInfo> GetFilesContains(string text);
-        public List<FileInfo> GetFilesGreaterThan(long size);
-        public List<FileInfo> GetFilesSmallerThan(long size);
-        public List<FileInfo> GetFilesSelect(List<FileInfo> files);
+        public List<FileInfo> GetFilesGreaterThan(long? size);
+        public List<FileInfo> GetFilesSmallerThan(long? size);
     }
 }

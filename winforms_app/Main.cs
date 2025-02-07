@@ -48,29 +48,29 @@ namespace winforms_app
                 .FirstOrDefault(r => r.Checked)
                 ?? throw new ArgumentNullException(nameof(RadioButton));
 
-            Main_SearchFilter filter ;
             switch (radioChecked.Name)
             {
                 case "radioButton_contains":
-                    filter = Main_SearchFilter.Contains;
-                    await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                     _service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains);
                     break;
                 case "radioButton_select":
                     {
-                        filter = Main_SearchFilter.Select;
-                        NumberTextBox ntb = new NumberTextBox(textBox_searchFilter);
-                        await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
+                        
+
+                         
                     }break;
                 case "radioButton_greaterThan":
-                    {
-                        filter = Main_SearchFilter.GreaterThan;
-                        NumberTextBox ntb = new NumberTextBox(textBox_searchFilter);
-                        await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
-                    }break;
+                    _service.SearchFilesFromSize(
+                        textBox_searchFilter.GetSize(), 
+                        label_currentDirectory.Text, 
+                        Main_SearchFilter.BiggerThan
+                        );break;
                 case "radioButton_smallerThan":
-                    filter = Main_SearchFilter.SmallerThan;
-                    await _service.ChangeSearchFilter(textBox_searchFilter.Text, label_currentDirectory.Text, filter);
-                    break;
+                    _service.SearchFilesFromSize(
+                        textBox_searchFilter.GetSize(), 
+                        label_currentDirectory.Text, 
+                        Main_SearchFilter.SmallerThan
+                        );break;
             }
 
             

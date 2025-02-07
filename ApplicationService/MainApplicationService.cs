@@ -17,26 +17,23 @@ public class MainApplicationService
 
     }
 
-    public async Task<List<FileInfo>> ChangeSearchFilter(string searchText,string directory, Main_SearchFilter? filter = null )
+    public List<FileInfo> SearchFiles(string searchText,string directory, Main_SearchFilter? filter = null )
+    {
+        var dr = new DirectoryReader(new(directory));
+        return dr.GetFilesContains(searchText);
+    }
+    public List<FileInfo> SearchFilesFromSize(long? size, string directory, Main_SearchFilter? filter = null)
     {
         var dr = new DirectoryReader(new(directory));
 
-
         switch(filter)
         {
-            case Main_SearchFilter.Contains:
-                return await dr.GetFilesContains(searchText);
-                break;
-            case Main_SearchFilter.GreaterThan:
-                return await dr.GetFilesGreaterThan(int.Parse(searchText));
-                break;
-            case Main_SearchFilter.SmallerThan:
-                return await dr.GetFilesSmallerThan(searchText);
-                break;
-            default:
-                break;
+            case Main_SearchFilter.SmallerThan: 
+                return dr.GetFilesSmallerThan(size);
+            case Main_SearchFilter.BiggerThan:
+                return dr.GetFilesGreaterThan(size);
+            default: throw new InvalidOperationException();
         }
-
     }
 
 

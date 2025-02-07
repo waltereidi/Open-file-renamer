@@ -1,4 +1,5 @@
 ﻿using ApplicationService.Enum;
+using Presentation.UI;
 
 namespace winforms_app
 {
@@ -33,13 +34,10 @@ namespace winforms_app
             toolStrip1 = new ToolStrip();
             menu_file = new ToolStripDropDownButton();
             menuOpt_file_open = new ToolStripMenuItem();
-            panel_selection = new Panel();
-            panel_preview = new Panel();
             toolStrip2 = new ToolStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             toolStripLabel_progress = new ToolStripLabel();
             start = new Button();
-            textBox_searchFilter = new TextBox();
             groupBox_filter = new GroupBox();
             radioButton_select = new RadioButton();
             radioButton_greaterThan = new RadioButton();
@@ -52,12 +50,20 @@ namespace winforms_app
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
+            dataGridView_selection = new DataGridView();
+            dataGridView_preview = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
             tabControl_numberedSequence.SuspendLayout();
             flowLayoutPanel_Selection.SuspendLayout();
             flowLayoutPanel_preview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_selection).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_preview).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -83,28 +89,6 @@ namespace winforms_app
             menuOpt_file_open.Size = new Size(103, 22);
             menuOpt_file_open.Text = "Open";
             menuOpt_file_open.Click += menuOpt_file_open_Click;
-            // 
-            // panel_selection
-            // 
-            panel_selection.BackColor = Color.NavajoWhite;
-            panel_selection.BorderStyle = BorderStyle.Fixed3D;
-            panel_selection.Location = new Point(4, 99);
-            panel_selection.Margin = new Padding(4, 3, 4, 3);
-            panel_selection.Name = "panel_selection";
-            panel_selection.Size = new Size(338, 277);
-            panel_selection.TabIndex = 1;
-            panel_selection.Paint += panel_1_Paint_1;
-            // 
-            // panel_preview
-            // 
-            panel_preview.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel_preview.BackColor = SystemColors.Window;
-            panel_preview.BorderStyle = BorderStyle.Fixed3D;
-            panel_preview.Location = new Point(4, 98);
-            panel_preview.Margin = new Padding(4, 3, 4, 3);
-            panel_preview.Name = "panel_preview";
-            panel_preview.Size = new Size(335, 277);
-            panel_preview.TabIndex = 2;
             // 
             // toolStrip2
             // 
@@ -142,23 +126,13 @@ namespace winforms_app
             start.UseVisualStyleBackColor = true;
             start.Click += button1_Click;
             // 
-            // textBox_searchFilter
-            // 
-            textBox_searchFilter.Location = new Point(5, 44);
-            textBox_searchFilter.Margin = new Padding(4, 3, 4, 3);
-            textBox_searchFilter.Name = "textBox_searchFilter";
-            textBox_searchFilter.Size = new Size(328, 21);
-            textBox_searchFilter.TabIndex = 5;
-            textBox_searchFilter.TextChanged += searchFilter_Changed;
-            // 
             // groupBox_filter
             // 
             groupBox_filter.Controls.Add(radioButton_select);
             groupBox_filter.Controls.Add(radioButton_greaterThan);
             groupBox_filter.Controls.Add(radioButton_smallerThan);
             groupBox_filter.Controls.Add(radioButton_contains);
-            groupBox_filter.Controls.Add(textBox_searchFilter);
-            groupBox_filter.Location = new Point(4, 17);
+            groupBox_filter.Location = new Point(4, 18);
             groupBox_filter.Margin = new Padding(4, 3, 4, 3);
             groupBox_filter.Name = "groupBox_filter";
             groupBox_filter.Padding = new Padding(4, 3, 4, 3);
@@ -173,7 +147,7 @@ namespace winforms_app
             radioButton_select.Location = new Point(282, 21);
             radioButton_select.Margin = new Padding(4, 3, 4, 3);
             radioButton_select.Name = "radioButton_select";
-            radioButton_select.Size = new Size(52, 18);
+            radioButton_select.Size = new Size(59, 19);
             radioButton_select.TabIndex = 9;
             radioButton_select.TabStop = true;
             radioButton_select.Text = "Select";
@@ -187,7 +161,7 @@ namespace winforms_app
             radioButton_greaterThan.Location = new Point(184, 21);
             radioButton_greaterThan.Margin = new Padding(4, 3, 4, 3);
             radioButton_greaterThan.Name = "radioButton_greaterThan";
-            radioButton_greaterThan.Size = new Size(88, 18);
+            radioButton_greaterThan.Size = new Size(97, 19);
             radioButton_greaterThan.TabIndex = 8;
             radioButton_greaterThan.TabStop = true;
             radioButton_greaterThan.Text = "Greater Than";
@@ -200,7 +174,7 @@ namespace winforms_app
             radioButton_smallerThan.Location = new Point(84, 21);
             radioButton_smallerThan.Margin = new Padding(4, 3, 4, 3);
             radioButton_smallerThan.Name = "radioButton_smallerThan";
-            radioButton_smallerThan.Size = new Size(89, 18);
+            radioButton_smallerThan.Size = new Size(99, 19);
             radioButton_smallerThan.TabIndex = 7;
             radioButton_smallerThan.TabStop = true;
             radioButton_smallerThan.Text = "Smaller Than";
@@ -214,7 +188,7 @@ namespace winforms_app
             radioButton_contains.Location = new Point(5, 21);
             radioButton_contains.Margin = new Padding(4, 3, 4, 3);
             radioButton_contains.Name = "radioButton_contains";
-            radioButton_contains.Size = new Size(66, 18);
+            radioButton_contains.Size = new Size(73, 19);
             radioButton_contains.TabIndex = 6;
             radioButton_contains.TabStop = true;
             radioButton_contains.Text = "Contains";
@@ -245,11 +219,11 @@ namespace winforms_app
             // 
             // tabPage_numberedSequence
             // 
-            tabPage_numberedSequence.Location = new Point(4, 23);
+            tabPage_numberedSequence.Location = new Point(4, 24);
             tabPage_numberedSequence.Margin = new Padding(4, 3, 4, 3);
             tabPage_numberedSequence.Name = "tabPage_numberedSequence";
             tabPage_numberedSequence.Padding = new Padding(4, 3, 4, 3);
-            tabPage_numberedSequence.Size = new Size(326, 62);
+            tabPage_numberedSequence.Size = new Size(326, 61);
             tabPage_numberedSequence.TabIndex = 0;
             tabPage_numberedSequence.Text = "Numbered Sequence";
             tabPage_numberedSequence.UseVisualStyleBackColor = true;
@@ -273,7 +247,7 @@ namespace winforms_app
             label_currentDirectory.Location = new Point(4, 0);
             label_currentDirectory.Margin = new Padding(4, 0, 4, 0);
             label_currentDirectory.Name = "label_currentDirectory";
-            label_currentDirectory.Size = new Size(86, 14);
+            label_currentDirectory.Size = new Size(100, 15);
             label_currentDirectory.TabIndex = 16;
             label_currentDirectory.Text = "Select a directory";
             label_currentDirectory.Click += label1_Click;
@@ -282,7 +256,7 @@ namespace winforms_app
             // 
             flowLayoutPanel_Selection.Controls.Add(label_currentDirectory);
             flowLayoutPanel_Selection.Controls.Add(groupBox_filter);
-            flowLayoutPanel_Selection.Controls.Add(panel_selection);
+            flowLayoutPanel_Selection.Controls.Add(dataGridView_selection);
             flowLayoutPanel_Selection.Enabled = false;
             flowLayoutPanel_Selection.Location = new Point(12, 35);
             flowLayoutPanel_Selection.Name = "flowLayoutPanel_Selection";
@@ -293,16 +267,54 @@ namespace winforms_app
             // flowLayoutPanel_preview
             // 
             flowLayoutPanel_preview.Controls.Add(tabControl_numberedSequence);
-            flowLayoutPanel_preview.Controls.Add(panel_preview);
+            flowLayoutPanel_preview.Controls.Add(dataGridView_preview);
             flowLayoutPanel_preview.Enabled = false;
             flowLayoutPanel_preview.Location = new Point(441, 35);
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
-            flowLayoutPanel_preview.Size = new Size(356, 386);
+            flowLayoutPanel_preview.Size = new Size(344, 386);
             flowLayoutPanel_preview.TabIndex = 0;
+            // 
+            // dataGridView_selection
+            // 
+            dataGridView_selection.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
+            dataGridView_selection.Location = new Point(3, 100);
+            dataGridView_selection.Name = "dataGridView_selection";
+            dataGridView_selection.Size = new Size(341, 275);
+            dataGridView_selection.TabIndex = 0;
+            // 
+            // dataGridView_preview
+            // 
+            dataGridView_preview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_preview.Location = new Point(3, 98);
+            dataGridView_preview.Name = "dataGridView_preview";
+            dataGridView_preview.Size = new Size(335, 277);
+            dataGridView_preview.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Column1";
+            Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Column2";
+            Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Column3";
+            Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Column4";
+            Column4.Name = "Column4";
+            Column4.Visible = false;
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(7F, 14F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
@@ -313,7 +325,7 @@ namespace winforms_app
             Controls.Add(start);
             Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
-            Font = new Font("Baskerville Old Face", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(4, 3, 4, 3);
             Name = "Main";
@@ -328,6 +340,8 @@ namespace winforms_app
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
             flowLayoutPanel_preview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_preview).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -337,12 +351,10 @@ namespace winforms_app
         private ToolStrip toolStrip1;
         private ToolStripDropDownButton menu_file;
         private ToolStripMenuItem menuOpt_file_open;
-        private Panel panel_selection;
-        private Panel panel_preview;
         private ToolStrip toolStrip2;
         private ToolStripProgressBar toolStripProgressBar1;
         private Button start;
-        private TextBox textBox_searchFilter;
+        private AlsoNumberTextBox textBox_searchFilter;
         private ToolStripLabel toolStripLabel_progress;
         private GroupBox groupBox_filter;
         private Button button1;
@@ -357,5 +369,11 @@ namespace winforms_app
         private Label label_currentDirectory;
         private FlowLayoutPanel flowLayoutPanel_Selection;
         private FlowLayoutPanel flowLayoutPanel_preview;
+        private DataGridView dataGridView_selection;
+        private DataGridView dataGridView_preview;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
     }
 }

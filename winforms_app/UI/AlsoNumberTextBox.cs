@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace Presentation.UI
 {
-    public class NumberTextBox : TextBox
+    public class AlsoNumberTextBox : TextBox
     {
-        public NumberTextBox() { }
-        public NumberTextBox(TextBox old ) 
-        {
-            ObjectClone.CopyProperties(old, this);
-        }
+        private bool IsNumber { get; set; } = false;
+        public AlsoNumberTextBox() { }
+
+        public void ChangeToText() => IsNumber = false;
+        public void ChangeToNumber() => IsNumber = true;
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
+            if (!IsNumber)
+                return;
+
             base.OnKeyPress(e);
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -25,6 +28,12 @@ namespace Presentation.UI
             {
                 e.Handled = true;
             }
+        }
+        public long? GetSize()
+        {
+            long size = 0;
+            long.TryParse(this.Text , out size);
+            return size != 0 ? size : null; 
         }
     }
 }
