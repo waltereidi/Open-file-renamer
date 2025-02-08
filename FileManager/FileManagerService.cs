@@ -1,46 +1,32 @@
-﻿using FileManager.DAO;
+﻿using FileManager.DirectoryOperations;
 using FileManager.FileOperations;
 using FileManager.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static FileManager.DAO.VersionedModifications;
+
 
 namespace FileManager
 {
-    public class FileManagerService : IFileManager
+    public class FileManagerService : IFileManager, IDirectoryReader
     {
-        private readonly MementoFileManger _memento = new MementoFileManger();
-        public FileManagerService()
-        {
-        }
+        private readonly IMementoFileManager _memento = new MementoFileManger();
+        private readonly DirectoryReader _dir;
+        public FileManagerService(DirectoryInfo dr) => _dir = new DirectoryReader(dr);
+        public List<FileInfo> GetFiles() => _dir.GetFiles();
+        public List<FileInfo> GetFilesContains(string text) => _dir.GetFilesContains(text);
+        public List<FileInfo> GetFilesGreaterThan(long? size) => _dir.GetFilesGreaterThan(size);
+        public List<FileInfo> GetFilesSmallerThan(long? size) => _dir.GetFilesSmallerThan(size);
+        
 
         public async Task NumberSequenceBeforeExtension(List<FileInfo> files , string separator )
         {
-
-
+            List<IFileProcessor> list = files.Select((value, i) 
+                => FileRenamer.NumberSequenceBeforeExtension(_dir._dir, value, i, separator))
+                .ToList();
+            
+            await _memento.SetState(list);
         }
         public async Task RollbackOperation(List<FileInfo> fi , Guid version)
-        {
-            VersionedModifications.Version old = _memento.GetStateById(version);
+            => await _memento.Rollback(version, fi);
 
-        }
-
-        //public bool EnsureRollBackCanHappen(List<FileInfo> current, Guid id)
-        //{
-        //    if (!Versions.Any(f => f.id == id))
-        //        return false;
-
-        //    var target = Versions.First(f => f.id == f.id);
-
-        //    if (!AllFilesHaveSameCreationTimeInTicks(current, target.files))
-        //        return false;
-
-        //    //Add here additional checks to ensure rollback can happen
-        //    return true;
-        //}
 
     }
 }

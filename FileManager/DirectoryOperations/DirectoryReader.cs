@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FileManager.DirectoryOperations
 {
-    public class DirectoryReader : IDirectoryReader
+    public class DirectoryReader
     {
-        private readonly DirectoryInfo _dir;
+        public readonly DirectoryInfo _dir;
         public DirectoryReader(DirectoryInfo dir)
             => _dir = dir.Exists 
                 ? dir 

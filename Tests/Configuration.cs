@@ -11,7 +11,7 @@ namespace Tests
                 (
                     Path.Combine(
                         Directory.GetParent(AppContext.BaseDirectory)
-                            .Parent.Parent.Parent.Parent.FullName, "Tests")
+                            .Parent.Parent.Parent.Parent.FullName, "Tests" , "TestFiles")
                 );
         }
 

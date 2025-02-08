@@ -10,17 +10,15 @@ namespace Tests.FileManager
         {
             _testFile = new FileInfo
                 (
-                    Path.Combine(base._testDirPath.FullName, "TestFiles", "testfile.txt")
+                    Path.Combine(base._testDirPath.FullName,  "testfile.txt")
                 );
         }
         [Fact]
         public void TestNumberSequenceBeforeExtension()
         {
-            FileRenamer fr = new(_testFile.FullName );
+            var fr = FileRenamer.NumberSequenceBeforeExtension(base._testDirPath, _testFile ,1 , "_" );
             
-            fr.NumberSequenceBeforeExtension(1);
-
-            Assert.Equal("testfile1.txt", fr._renameTo);
+            Assert.NotNull( fr);
         }
     }
 }

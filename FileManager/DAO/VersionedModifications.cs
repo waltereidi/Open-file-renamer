@@ -18,8 +18,8 @@ namespace FileManager.DAO
             var id = Guid.NewGuid();
             Versions.Add(new Version(id, files, Versions.Count()+1 ));
         }
-        public VersionedModifications.Version GetVersion(Guid id) 
-            => Versions.First(f => f.id == f.id);
+        public List<IFileProcessor> GetVersionById(Guid id)
+            => Versions.First(f => f.id == f.id).files;
 
         private bool AllFilesHaveSameCreationTimeInTicks(List<FileInfo> current, List<FileInfo> target )
             => target.Where(w => current.Any(x => x.CreationTime.Ticks == w.CreationTime.Ticks)).Count() == current.Count();

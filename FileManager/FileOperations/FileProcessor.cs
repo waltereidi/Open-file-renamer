@@ -20,7 +20,12 @@ namespace FileManager.FileOperations
             Id = FileIdentity.Instance(fi);
             EnsureFileIsValid();
         }
-        protected FileInfo GetFile() => Dir.GetFiles().First(x => Id.Equals(x));
+        protected FileInfo GetFile()
+        {
+            var d = Dir.GetFiles();
+            var f= d.First(x => Id.Equals(x));
+            return f; 
+        }
 
         public void Start()
         {

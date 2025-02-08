@@ -9,6 +9,6 @@ namespace FileManager.Interfaces
     public interface IFileManager
     {
         public Task NumberSequenceBeforeExtension(List<FileInfo> files , string separator);
-
+        public List<FileInfo> GetFiles();
     }
 }
