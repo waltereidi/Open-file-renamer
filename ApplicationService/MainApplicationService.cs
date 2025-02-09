@@ -11,9 +11,9 @@ public class MainApplicationService
     private readonly IFileManager _fileManager;
 
 
-    public MainApplicationService()
+    public MainApplicationService(DirectoryInfo  dr)
     {
-        _fileManager = new FileManagerService();
+        _fileManager = new FileManagerService(dr);
 
     }
 

@@ -11,7 +11,6 @@ namespace FileManager.FileOperations
 {
     public abstract class FileProcessor : IFileProcessor
     {
-
         public readonly FileIdentity Id;
         public readonly DirectoryInfo Dir;
         public FileProcessor(DirectoryInfo dr, FileInfo fi)
@@ -20,12 +19,13 @@ namespace FileManager.FileOperations
             Id = FileIdentity.Instance(fi);
             EnsureFileIsValid();
         }
-        protected FileInfo GetFile()
+        public FileInfo GetFile()
         {
             var d = Dir.GetFiles();
             var f= d.First(x => Id.Equals(x));
             return f; 
         }
+        public abstract string GetRenameTo();
 
         public void Start()
         {
@@ -34,15 +34,16 @@ namespace FileManager.FileOperations
             EnsureSuccessfullOperation();
         }
 
-        protected abstract void Operation(FileInfo fi);
-        public abstract void EnsureSuccessfullOperation();
+        private void Operation(FileInfo fi)
+            => fi.MoveTo(Path.Combine(Dir.FullName, GetRenameTo()
+               ?? throw new ArgumentNullException()));
+
+        protected abstract void EnsureSuccessfullOperation();
         public virtual void EnsureFileIsValid()
         {
             if (!this.GetFile().Exists)
                 throw new FileNotFoundException();
         }
-
-        
 
     }
 }

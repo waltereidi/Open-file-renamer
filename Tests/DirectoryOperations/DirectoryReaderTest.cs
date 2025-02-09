@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tests.DirectoryOperations
 {
-    public class DirectoryReaderTest
+    public class DirectoryReaderTest : Configuration
     {
        
         public DirectoryReaderTest() { }
@@ -15,7 +15,7 @@ namespace Tests.DirectoryOperations
         [Fact]
         public void GetFilesReturnsFilesInFolder() 
         {
-            DirectoryReader dr = new(new("C:/"));
+            DirectoryReader dr = new(base._testDirPath);
             
             var files = dr.GetFiles();
             
@@ -27,9 +27,9 @@ namespace Tests.DirectoryOperations
         [Fact]
         public void GetFilesWithFilterReturnsFiles()
         {
-            DirectoryReader dr = new(new("C:/"));
+            DirectoryReader dr = new(base._testDirPath);
             
-            var files = dr.GetFilesContains("Files" );
+            var files = dr.GetFilesContains("test" );
 
             Assert.True(files.Count() > 0);
         }

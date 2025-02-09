@@ -7,39 +7,34 @@ using System.Threading.Tasks;
 
 namespace FileManager.FileOperations
 {
-    public class FileRenamer : FileProcessor
+    public class NumberSequenceBeforeExtension : FileProcessor
     {
-        public string? _renameTo { get; private set; }
-        private FileRenamer(DirectoryInfo path , FileInfo fi) : base(path , fi) { }
-
-        
-        public static IFileProcessor NumberSequenceBeforeExtension(DirectoryInfo path, FileInfo fi , int sequence , string? separator = null )
+        private readonly int Sequence;
+        private readonly string? Separator;
+        public NumberSequenceBeforeExtension(DirectoryInfo path, FileInfo fi, int sequence, string? separator = null) : base(path , fi) 
         {
-            var fr = new FileRenamer(path , fi);
-            
-            var file = fr.GetFile();
+            Sequence = sequence;
+            Separator = separator;
+        }
+
+        protected override void EnsureSuccessfullOperation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetRenameTo()
+        {
+            var file = base.GetFile();
             string nameWithouthExtension = file.Name
                 .Substring(0, file.Name.LastIndexOf('.'));
 
-            fr._renameTo = String.Concat
+            return String.Concat
                 (
                     nameWithouthExtension,
-                    separator ,
-                    sequence , 
-                    file.Extension 
+                    Separator,
+                    Sequence,
+                    file.Extension
                 );
-            return fr;
-        }
-
-
-        protected override void Operation(FileInfo fi) 
-            => fi.MoveTo(Path.Combine(Dir.FullName, _renameTo 
-               ?? throw new ArgumentNullException(nameof(_renameTo))));
-
-
-        public override void EnsureSuccessfullOperation()
-        {
-            throw new NotImplementedException();
         }
     }
 }
