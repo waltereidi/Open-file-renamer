@@ -17,23 +17,19 @@ namespace FileManager.FileOperations
             Separator = separator;
         }
 
-        protected override void EnsureSuccessfullOperation()
-        {
-            throw new NotImplementedException();
-        }
 
+        
         public override string GetRenameTo()
         {
-            var file = base.GetFile();
-            string nameWithouthExtension = file.Name
-                .Substring(0, file.Name.LastIndexOf('.'));
+            string nameWithouthExtension = base.FileNameBefore
+                .Substring(0, base.FileNameBefore.LastIndexOf('.'));
 
             return String.Concat
                 (
                     nameWithouthExtension,
                     Separator,
                     Sequence,
-                    file.Extension
+                    base.FileExtensionBefore
                 );
         }
     }

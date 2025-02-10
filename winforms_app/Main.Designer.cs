@@ -49,17 +49,17 @@ namespace winforms_app
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
-            dataGridView_selection = new DataGridView();
-            Column_Selection_FileName = new DataGridViewTextBoxColumn();
-            Column_Selection_FileExtension = new DataGridViewTextBoxColumn();
-            Column_Selection_FileSize = new DataGridViewTextBoxColumn();
-            Column_Selection_Hidden_FullName = new DataGridViewTextBoxColumn();
+            dataGridView_selection = new DataGridView_Files();
             Column_Preview_FileName = new DataGridViewTextBoxColumn();
             Column_Preview_FileExtension = new DataGridViewTextBoxColumn();
             Column_Preview_FileSize = new DataGridViewTextBoxColumn();
             Column_Preview_Hidden_FullName = new DataGridViewTextBoxColumn();
             flowLayoutPanel_preview = new FlowLayoutPanel();
-            dataGridView_preview = new DataGridView();
+            dataGridView_preview = new DataGridView_Files();
+            tabControl1 = new TabControl();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -98,7 +98,7 @@ namespace winforms_app
             // 
             toolStrip2.Dock = DockStyle.Bottom;
             toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripLabel_progress });
-            toolStrip2.Location = new Point(0, 424);
+            toolStrip2.Location = new Point(0, 454);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new Padding(0, 0, 2, 0);
             toolStrip2.Size = new Size(797, 25);
@@ -259,80 +259,61 @@ namespace winforms_app
             flowLayoutPanel_Selection.Enabled = false;
             flowLayoutPanel_Selection.Location = new Point(12, 35);
             flowLayoutPanel_Selection.Name = "flowLayoutPanel_Selection";
-            flowLayoutPanel_Selection.Size = new Size(349, 386);
+            flowLayoutPanel_Selection.Size = new Size(349, 398);
             flowLayoutPanel_Selection.TabIndex = 0;
             flowLayoutPanel_Selection.Paint += flowLayoutPanel1_Paint;
             // 
             // dataGridView_selection
             // 
-            dataGridView_selection.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { Column_Selection_FileName, Column_Selection_FileExtension, Column_Selection_FileSize, Column_Selection_Hidden_FullName });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
-            dataGridView_selection.Size = new Size(341, 275);
+            dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellContentClick += dataGridView_selection_CellContentClick;
-            // 
-            // Column_Selection_FileName
-            // 
-            Column_Selection_FileName.HeaderText = "Name";
-            Column_Selection_FileName.Name = "Column_Selection_FileName";
-            // 
-            // Column_Selection_FileExtension
-            // 
-            Column_Selection_FileExtension.HeaderText = "Extension";
-            Column_Selection_FileExtension.Name = "Column_Selection_FileExtension";
-            // 
-            // Column_Selection_FileSize
-            // 
-            Column_Selection_FileSize.HeaderText = "Size";
-            Column_Selection_FileSize.Name = "Column_Selection_FileSize";
-            // 
-            // Column_Selection_Hidden_FullName
-            // 
-            Column_Selection_Hidden_FullName.HeaderText = "hidden fullName";
-            Column_Selection_Hidden_FullName.Name = "Column_Selection_Hidden_FullName";
-            Column_Selection_Hidden_FullName.Visible = false;
-            // 
-            // Column_Preview_FileName
-            // 
-            Column_Preview_FileName.HeaderText = "Name";
-            Column_Preview_FileName.Name = "Column_Preview_FileName";
-            // 
-            // Column_Preview_FileExtension
-            // 
-            Column_Preview_FileExtension.HeaderText = "Extension";
-            Column_Preview_FileExtension.Name = "Column_Preview_FileExtension";
-            // 
-            // Column_Preview_FileSize
-            // 
-            Column_Preview_FileSize.HeaderText = "Size";
-            Column_Preview_FileSize.Name = "Column_Preview_FileSize";
-            // 
-            // Column_Preview_Hidden_FullName
-            // 
-            Column_Preview_Hidden_FullName.HeaderText = "hidden fullName";
-            Column_Preview_Hidden_FullName.Name = "Column_Preview_Hidden_FullName";
-            Column_Preview_Hidden_FullName.Visible = false;
             // 
             // flowLayoutPanel_preview
             // 
             flowLayoutPanel_preview.Controls.Add(tabControl_numberedSequence);
             flowLayoutPanel_preview.Controls.Add(dataGridView_preview);
+            flowLayoutPanel_preview.Controls.Add(tabControl1);
             flowLayoutPanel_preview.Enabled = false;
             flowLayoutPanel_preview.Location = new Point(441, 35);
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
-            flowLayoutPanel_preview.Size = new Size(344, 386);
+            flowLayoutPanel_preview.Size = new Size(344, 398);
             flowLayoutPanel_preview.TabIndex = 0;
             // 
             // dataGridView_preview
             // 
-            dataGridView_preview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { Column_Preview_FileName, Column_Preview_FileExtension, Column_Preview_FileSize, Column_Preview_Hidden_FullName });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
-            dataGridView_preview.Size = new Size(335, 277);
+            dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            tabControl1.Location = new Point(3, 344);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(341, 51);
+            tabControl1.TabIndex = 16;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn2.HeaderText = "Size";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Visible = false;
             // 
             // Main
             // 
@@ -340,7 +321,7 @@ namespace winforms_app
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(797, 449);
+            ClientSize = new Size(797, 479);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
             Controls.Add(button1);
@@ -389,8 +370,7 @@ namespace winforms_app
         private Label label_currentDirectory;
         private FlowLayoutPanel flowLayoutPanel_Selection;
         private FlowLayoutPanel flowLayoutPanel_preview;
-        private DataGridView dataGridView_selection;
-        private DataGridView dataGridView_preview;
+        private DataGridView_Files dataGridView_preview;
         private DataGridViewTextBoxColumn Column_Selection_FileName;
         private DataGridViewTextBoxColumn Column_Selection_FileExtension;
         private DataGridViewTextBoxColumn Column_Selection_FileSize;
@@ -400,6 +380,10 @@ namespace winforms_app
         private DataGridViewTextBoxColumn Column_Preview_FileExtension;
         private DataGridViewTextBoxColumn Column_Preview_FileSize;
         private DataGridViewTextBoxColumn Column_Preview_Hidden_FullName;
-
+        private TabControl tabControl1;
+        private DataGridView_Files dataGridView_selection;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
     }
 }

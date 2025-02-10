@@ -7,20 +7,35 @@ using System.Threading.Tasks;
 
 namespace FileManager.FileOperations
 {
-    public class FileWriter : IDisposable
+    public class FileWriter 
     {
         private List<IFileProcessor> _file;
         public FileWriter(List<IFileProcessor> file) => _file = file;
-        public async Task Start() =>Task.WaitAll( _file.Select(s => Task.Run(() => s.Start()) ).ToArray() );
-
-        public void Dispose()
+        public async Task Start()
         {
+            try
+            {
+                var e = _file.Select(s => Task.Run(() => s.Start())).ToArray();
+                await Task.WhenAll(e);
+            }
+            catch (Exception ex)
+            {
+                var e = _file.Select(s => Task.Run(() => s.Revert())).ToArray();
+                await Task.WhenAll(e);
+                throw new Exception(ex.Message);
+            }
 
         }
-
         public async Task Rollback(List<FileInfo> current )
         {
-            throw new NotImplementedException();
+            if(_file.Any(x => current.Any(a => x.GetIdentity().Equals(a))))
+            {
+                var canRollback = _file.Where(x => current.Any(a => x.GetIdentity().Equals(a)));
+                canRollback.ToList();
+                _file.Select(s => Task.Run(() => s.Start())).ToArray();
+            }
+            
+            
         }
     }
 }

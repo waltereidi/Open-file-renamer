@@ -7,11 +7,10 @@ namespace winforms_app
 {
     public partial class Main : Form
     {
-        private readonly MainApplicationService _service;
+        private MainApplicationService _service { get; set; }
         public Main()
         {
             InitializeComponent();
-            _service = new MainApplicationService();
         }
 
         private void menuOpt_file_open_Click(object sender, EventArgs e)
@@ -19,6 +18,8 @@ namespace winforms_app
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
+                _service = new MainApplicationService(new(fbd.SelectedPath));
+                
                 label_currentDirectory.Text = fbd.SelectedPath;
                 label_currentDirectory.ForeColor = Color.Green;
 
@@ -48,32 +49,26 @@ namespace winforms_app
                 .FirstOrDefault(r => r.Checked)
                 ?? throw new ArgumentNullException(nameof(RadioButton));
 
+            List<FileInfo> files = new();
             switch (radioChecked.Name)
             {
                 case "radioButton_contains":
-                    _service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains);
-                    break;
-                case "radioButton_select":
-                    {
-
-
-
-                    }
+                     files.AddRange(_service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains));
                     break;
                 case "radioButton_greaterThan":
-                    _service.SearchFilesFromSize(
+                    files.AddRange(_service.SearchFilesFromSize(
                         textBox_searchFilter.GetSize(),
                         label_currentDirectory.Text,
                         Main_SearchFilter.BiggerThan
-                        ); break;
+                        )); break;
                 case "radioButton_smallerThan":
-                    _service.SearchFilesFromSize(
+                    files.AddRange(_service.SearchFilesFromSize(
                         textBox_searchFilter.GetSize(),
                         label_currentDirectory.Text,
                         Main_SearchFilter.SmallerThan
-                        ); break;
+                        )); break;
             }
-
+            dataGridView_selection.AddNewRowList(files);
 
         }
 

@@ -10,10 +10,16 @@ namespace FileManager
         public  void ClearMemento() 
             => _versioning = new VersionedModifications();
         
-        public List<VersionedModifications.Version> GetAll() 
+        public List<VersionedModifications.Version> GetAllVersions() 
             => _versioning.Versions;
         public Task SetState(List<IFileProcessor> files) 
         {
+            if (!_versioning.Versions.Any()) 
+            { 
+                var original = new List<IFileProcessor>();
+                files.ForEach(f => original.Add(new OriginalFile( f.GetDirectory(), f.GetFile())));
+                _versioning.AddVersion(original);
+            }
             _versioning.AddVersion(files);
             return ExecuteOperation(files);
         }
