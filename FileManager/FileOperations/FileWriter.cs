@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileManager.FileOperations
 {
-    public class FileWriter 
+    public class FileWriter
     {
         private List<IFileProcessor> _file;
         public FileWriter(List<IFileProcessor> file) => _file = file;

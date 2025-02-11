@@ -33,15 +33,17 @@ namespace Presentation.UI
             this.AllowUserToAddRows = false;
             
         }
-        public void AddNewRowList(List<FileInfo> files)
+        public void AddNewRowList(List<FileInfo> files , DataGridView_Files anotherGrid)
         {
             this.AllowUserToAddRows = true;
             this.Rows.Clear();
-            AppendRows(files);
+            AppendRows(files , anotherGrid);
             this.AllowUserToAddRows = false;
         }
-        public void AppendRows(List<FileInfo> files)
-            => files.ForEach(f => this.Rows.Add(GetRow(f)));
+        public void AppendRows(List<FileInfo> files, DataGridView_Files anotherGrid)
+            => files.Where(x => EnsureFileCanBeAdded(anotherGrid, FileIdentity.Instance(x)))
+            .ToList()
+            .ForEach(f => this.Rows.Add(GetRow(f)));
         private DataGridViewRow GetRow(FileInfo file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
@@ -52,12 +54,26 @@ namespace Presentation.UI
             row.Cells[2].Value = id.Id.ToString();
             return row;
         }
-        
+        /// <summary>
+        /// in case it is preview grid files could not have duplicated identity<br></br>
+        /// </summary>
+        /// <param name="anotherGrid"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public bool EnsureFileCanBeAdded(DataGridView_Files anotherGrid , FileIdentity id )
+        {
+            foreach(DataGridViewRow  row in anotherGrid.Rows)
+            {
+                var fileId = FileIdentity.Instance(row.Cells[2].Value.ToString() , id.Dir);
+                if (fileId.Id == id.Id)
+                    return false;
+            }
+            return true;
+        }
         
 
-        public void SelectRow(DataGridView_Files preview , List<FileInfo> list)
+        public void AddSelectRowFromThisToThere(DataGridView_Files preview , List<FileInfo> list)
         {
-            preview.AppendRows(list);
         }
 
         public void GetSelectedRow()

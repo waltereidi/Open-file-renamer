@@ -258,46 +258,12 @@ namespace winforms_app
             // dataGridView_selection
             // 
             dataGridView_selection.AllowUserToAddRows = false;
-            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
-            dataGridView_selection.CellContentClick += dataGridView_selection_CellContentClick;
-            dataGridView_selection.CellContentDoubleClick += dataGridView_selection_CellContentClick;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Size";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // Column_Preview_FileName
-            // 
-            Column_Preview_FileName.Name = "Column_Preview_FileName";
-            // 
-            // Column_Preview_FileExtension
-            // 
-            Column_Preview_FileExtension.Name = "Column_Preview_FileExtension";
-            // 
-            // Column_Preview_FileSize
-            // 
-            Column_Preview_FileSize.Name = "Column_Preview_FileSize";
-            // 
-            // Column_Preview_Hidden_FullName
-            // 
-            Column_Preview_Hidden_FullName.Name = "Column_Preview_Hidden_FullName";
+            dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
+
             // 
             // flowLayoutPanel_preview
             // 
@@ -309,15 +275,16 @@ namespace winforms_app
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
             flowLayoutPanel_preview.Size = new Size(344, 398);
             flowLayoutPanel_preview.TabIndex = 0;
+
             // 
             // dataGridView_preview
             // 
             dataGridView_preview.AllowUserToAddRows = false;
-            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
+            dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -386,6 +353,8 @@ namespace winforms_app
             ResumeLayout(false);
             PerformLayout();
         }
+
+
 
         #endregion
 

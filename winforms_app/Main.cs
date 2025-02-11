@@ -1,5 +1,6 @@
 using ApplicationService;
 using ApplicationService.Enum;
+using FileManager.DAO;
 using Presentation.UI;
 using System.ComponentModel;
 
@@ -71,8 +72,7 @@ namespace winforms_app
                         Main_SearchFilter.SmallerThan
                         )); break;
             }
-            dataGridView_selection.AddNewRowList(files);
-
+            dataGridView_selection.AddNewRowList(files ,dataGridView_preview );
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -105,10 +105,23 @@ namespace winforms_app
         {
 
         }
-
-        private void dataGridView_selection_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_selection_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string id = dataGridView_selection.Rows[e.RowIndex].Cells[2].Value.ToString();
+            DirectoryInfo dir = new(label_currentDirectory.Text);
+            var dd = dir.GetFiles();
+            FileIdentity fi = FileIdentity.Instance(id, dir);
+            
+            dataGridView_selection.Rows.RemoveAt(e.RowIndex);
 
+            List<FileInfo> list = new();
+            list.Add(fi.GetFile());
+            dataGridView_preview.AppendRows(list , dataGridView_selection);
         }
+        private void dataGridView_preview_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
