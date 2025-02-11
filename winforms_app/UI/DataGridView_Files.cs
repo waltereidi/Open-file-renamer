@@ -30,11 +30,15 @@ namespace Presentation.UI
             column_Hidden_FullName.HeaderText = "hidden Id";
             column_Hidden_FullName.Name = "Column_Hidden_Id";
             column_Hidden_FullName.Visible = false;
+            this.AllowUserToAddRows = false;
+            
         }
         public void AddNewRowList(List<FileInfo> files)
         {
+            this.AllowUserToAddRows = true;
             this.Rows.Clear();
             AppendRows(files);
+            this.AllowUserToAddRows = false;
         }
         public void AppendRows(List<FileInfo> files)
             => files.ForEach(f => this.Rows.Add(GetRow(f)));
@@ -51,9 +55,9 @@ namespace Presentation.UI
         
         
 
-        public void SelectRow()
+        public void SelectRow(DataGridView_Files preview , List<FileInfo> list)
         {
-
+            preview.AppendRows(list);
         }
 
         public void GetSelectedRow()

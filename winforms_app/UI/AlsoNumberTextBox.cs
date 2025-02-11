@@ -19,15 +19,15 @@ namespace Presentation.UI
             if (!IsNumber)
                 return;
 
+            if (this.Text.Any(x => !char.IsDigit(x)))
+                this.Text = "";
+
             base.OnKeyPress(e);
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
             }
-            if (e.KeyChar == '.' && this.Text.Contains("."))
-            {
-                e.Handled = true;
-            }
+            
         }
         public long? GetSize()
         {

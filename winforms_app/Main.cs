@@ -53,15 +53,18 @@ namespace winforms_app
             switch (radioChecked.Name)
             {
                 case "radioButton_contains":
-                     files.AddRange(_service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains));
+                    textBox_searchFilter.ChangeToText();
+                    files.AddRange(_service.SearchFiles(textBox_searchFilter.Text, label_currentDirectory.Text, Main_SearchFilter.Contains));
                     break;
                 case "radioButton_greaterThan":
+                    textBox_searchFilter.ChangeToNumber();
                     files.AddRange(_service.SearchFilesFromSize(
                         textBox_searchFilter.GetSize(),
                         label_currentDirectory.Text,
                         Main_SearchFilter.BiggerThan
                         )); break;
                 case "radioButton_smallerThan":
+                    textBox_searchFilter.ChangeToNumber();
                     files.AddRange(_service.SearchFilesFromSize(
                         textBox_searchFilter.GetSize(),
                         label_currentDirectory.Text,

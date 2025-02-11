@@ -43,23 +43,26 @@ namespace winforms_app
             radioButton_smallerThan = new RadioButton();
             radioButton_contains = new RadioButton();
             textBox_searchFilter = new AlsoNumberTextBox();
-            button1 = new Button();
             tabControl_numberedSequence = new TabControl();
             tabPage_numberedSequence = new TabPage();
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             dataGridView_selection = new DataGridView_Files();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             Column_Preview_FileName = new DataGridViewTextBoxColumn();
             Column_Preview_FileExtension = new DataGridViewTextBoxColumn();
             Column_Preview_FileSize = new DataGridViewTextBoxColumn();
             Column_Preview_Hidden_FullName = new DataGridViewTextBoxColumn();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             dataGridView_preview = new DataGridView_Files();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            button_selectFiles = new Button();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -121,7 +124,7 @@ namespace winforms_app
             // 
             // start
             // 
-            start.Location = new Point(368, 186);
+            start.Location = new Point(368, 247);
             start.Margin = new Padding(4, 3, 4, 3);
             start.Name = "start";
             start.Size = new Size(66, 56);
@@ -194,17 +197,6 @@ namespace winforms_app
             textBox_searchFilter.TabIndex = 5;
             textBox_searchFilter.TextChanged += searchFilter_Changed;
             // 
-            // button1
-            // 
-            button1.Location = new Point(368, 248);
-            button1.Margin = new Padding(4, 3, 4, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(66, 53);
-            button1.TabIndex = 14;
-            button1.Text = "rollback";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_2;
-            // 
             // tabControl_numberedSequence
             // 
             tabControl_numberedSequence.Controls.Add(tabPage_numberedSequence);
@@ -265,11 +257,47 @@ namespace winforms_app
             // 
             // dataGridView_selection
             // 
+            dataGridView_selection.AllowUserToAddRows = false;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellContentClick += dataGridView_selection_CellContentClick;
+            dataGridView_selection.CellContentDoubleClick += dataGridView_selection_CellContentClick;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.HeaderText = "Size";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // Column_Preview_FileName
+            // 
+            Column_Preview_FileName.Name = "Column_Preview_FileName";
+            // 
+            // Column_Preview_FileExtension
+            // 
+            Column_Preview_FileExtension.Name = "Column_Preview_FileExtension";
+            // 
+            // Column_Preview_FileSize
+            // 
+            Column_Preview_FileSize.Name = "Column_Preview_FileSize";
+            // 
+            // Column_Preview_Hidden_FullName
+            // 
+            Column_Preview_Hidden_FullName.Name = "Column_Preview_Hidden_FullName";
             // 
             // flowLayoutPanel_preview
             // 
@@ -284,10 +312,29 @@ namespace winforms_app
             // 
             // dataGridView_preview
             // 
+            dataGridView_preview.AllowUserToAddRows = false;
+            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn4.HeaderText = "Name";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.HeaderText = "Size";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.HeaderText = "hidden Id";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.Visible = false;
             // 
             // tabControl1
             // 
@@ -297,23 +344,14 @@ namespace winforms_app
             tabControl1.Size = new Size(341, 51);
             tabControl1.TabIndex = 16;
             // 
-            // dataGridViewTextBoxColumn1
+            // button_selectFiles
             // 
-            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn2.HeaderText = "Size";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Visible = false;
+            button_selectFiles.Location = new Point(368, 185);
+            button_selectFiles.Name = "button_selectFiles";
+            button_selectFiles.Size = new Size(66, 56);
+            button_selectFiles.TabIndex = 5;
+            button_selectFiles.Text = "Select Files";
+            button_selectFiles.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -322,9 +360,9 @@ namespace winforms_app
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(797, 479);
+            Controls.Add(button_selectFiles);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
-            Controls.Add(button1);
             Controls.Add(start);
             Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
@@ -360,7 +398,6 @@ namespace winforms_app
         private AlsoNumberTextBox textBox_searchFilter;
         private ToolStripLabel toolStripLabel_progress;
         private GroupBox groupBox_filter;
-        private Button button1;
         private TabControl tabControl_numberedSequence;
         private TabPage tabPage_numberedSequence;
         private TabPage tabPage2;
@@ -385,5 +422,9 @@ namespace winforms_app
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private Button button_selectFiles;
     }
 }
