@@ -35,15 +35,21 @@ namespace Presentation.UI
         }
         public void AddNewRowList(List<FileInfo> files , DataGridView_Files anotherGrid)
         {
-            this.AllowUserToAddRows = true;
             this.Rows.Clear();
             AppendRows(files , anotherGrid);
-            this.AllowUserToAddRows = false;
         }
-        public void AppendRows(List<FileInfo> files, DataGridView_Files anotherGrid)
-            => files.Where(x => EnsureFileCanBeAdded(anotherGrid, FileIdentity.Instance(x)))
-            .ToList()
-            .ForEach(f => this.Rows.Add(GetRow(f)));
+        private void AppendRows(List<FileInfo> files, DataGridView_Files anotherGrid)
+        {
+            var add = files.Where(x => EnsureFileCanBeAdded(anotherGrid, FileIdentity.Instance(x)))
+            .ToList();
+            if(add.Count() > 0 )
+            {
+                this.AllowUserToAddRows = true;
+                add.ForEach(f => this.Rows.Add(GetRow(f)));
+                this.AllowUserToAddRows = false;
+            }
+        }
+
         private DataGridViewRow GetRow(FileInfo file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
@@ -62,23 +68,33 @@ namespace Presentation.UI
         /// <returns></returns>
         public bool EnsureFileCanBeAdded(DataGridView_Files anotherGrid , FileIdentity id )
         {
-            foreach(DataGridViewRow  row in anotherGrid.Rows)
+            foreach (DataGridViewRow row in anotherGrid.Rows)
             {
-                var fileId = FileIdentity.Instance(row.Cells[2].Value.ToString() , id.Dir);
+                var fileId = FileIdentity.Instance(row.Cells[2].Value.ToString(), id.Dir);
                 if (fileId.Id == id.Id)
                     return false;
             }
             return true;
         }
+        private FileIdentity RemoveRow(DirectoryInfo dir , int rowIndex )
+        {
+            string id = this.Rows[rowIndex].Cells[2].Value.ToString();
+            
+            this.Rows.RemoveAt(rowIndex);
+
+            return FileIdentity.Instance( id.ToString() , dir);
+        }
+
+        public List<FileIdentity> AddSelectRowsFromThisToThere(DirectoryInfo dir , DataGridView_Files formToAdd , List<int> list)
+        {
+            List<FileIdentity> files = list.Select(s => RemoveRow(dir, s)).ToList();
+            var fileInfoList = files.Select(s => s.GetFile())
+                .ToList();
+            
+            formToAdd.AppendRows(fileInfoList , this);
+
+            return files; 
+        }
         
-
-        public void AddSelectRowFromThisToThere(DataGridView_Files preview , List<FileInfo> list)
-        {
-        }
-
-        public void GetSelectedRow()
-        {
-
-        }
     }
 }

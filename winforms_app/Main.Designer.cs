@@ -49,18 +49,9 @@ namespace winforms_app
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             dataGridView_selection = new DataGridView_Files();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            Column_Preview_FileName = new DataGridViewTextBoxColumn();
-            Column_Preview_FileExtension = new DataGridViewTextBoxColumn();
-            Column_Preview_FileSize = new DataGridViewTextBoxColumn();
-            Column_Preview_Hidden_FullName = new DataGridViewTextBoxColumn();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             dataGridView_preview = new DataGridView_Files();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+
             tabControl1 = new TabControl();
             button_selectFiles = new Button();
             toolStrip1.SuspendLayout();
@@ -257,7 +248,6 @@ namespace winforms_app
             // 
             // dataGridView_selection
             // 
-            dataGridView_selection.AllowUserToAddRows = false;
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.Size = new Size(341, 291);
@@ -279,29 +269,11 @@ namespace winforms_app
             // 
             // dataGridView_preview
             // 
-            dataGridView_preview.AllowUserToAddRows = false;
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn4.HeaderText = "Name";
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Size";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.HeaderText = "hidden Id";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Visible = false;
             // 
             // tabControl1
             // 
@@ -377,23 +349,8 @@ namespace winforms_app
         private FlowLayoutPanel flowLayoutPanel_Selection;
         private FlowLayoutPanel flowLayoutPanel_preview;
         private DataGridView_Files dataGridView_preview;
-        private DataGridViewTextBoxColumn Column_Selection_FileName;
-        private DataGridViewTextBoxColumn Column_Selection_FileExtension;
-        private DataGridViewTextBoxColumn Column_Selection_FileSize;
-        private DataGridViewTextBoxColumn Column_Selection_Hidden_FullName;
-
-        private DataGridViewTextBoxColumn Column_Preview_FileName;
-        private DataGridViewTextBoxColumn Column_Preview_FileExtension;
-        private DataGridViewTextBoxColumn Column_Preview_FileSize;
-        private DataGridViewTextBoxColumn Column_Preview_Hidden_FullName;
         private TabControl tabControl1;
         private DataGridView_Files dataGridView_selection;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private Button button_selectFiles;
     }
 }

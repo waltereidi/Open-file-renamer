@@ -44,7 +44,8 @@ namespace Tests.FileManager
             //Place a breakpoint here to assert file name has changed
             
             Thread.Sleep(100);
-            Assert.True(new FileInfo(firstFileNameForAssert).Exists);
+            var test = new FileInfo(firstFileNameForAssert);
+            Assert.True(test.Exists);
         }
 
     }

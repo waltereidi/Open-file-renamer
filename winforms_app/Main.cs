@@ -3,6 +3,7 @@ using ApplicationService.Enum;
 using FileManager.DAO;
 using Presentation.UI;
 using System.ComponentModel;
+using System.Net.NetworkInformation;
 
 namespace winforms_app
 {
@@ -107,20 +108,21 @@ namespace winforms_app
         }
         private void dataGridView_selection_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = dataGridView_selection.Rows[e.RowIndex].Cells[2].Value.ToString();
-            DirectoryInfo dir = new(label_currentDirectory.Text);
-            var dd = dir.GetFiles();
-            FileIdentity fi = FileIdentity.Instance(id, dir);
-            
-            dataGridView_selection.Rows.RemoveAt(e.RowIndex);
+            List<int> indexes = new();
+            indexes.Add(e.RowIndex);
 
-            List<FileInfo> list = new();
-            list.Add(fi.GetFile());
-            dataGridView_preview.AppendRows(list , dataGridView_selection);
+            DirectoryInfo di = new DirectoryInfo(label_currentDirectory.Text);
+
+            dataGridView_selection.AddSelectRowsFromThisToThere(di , dataGridView_preview , indexes);
         }
         private void dataGridView_preview_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            throw new NotImplementedException();
+            List<int> indexes = new();
+            indexes.Add(e.RowIndex);
+
+            DirectoryInfo di = new DirectoryInfo(label_currentDirectory.Text);
+
+            dataGridView_preview.AddSelectRowsFromThisToThere(di, dataGridView_selection, indexes);
         }
 
     }
