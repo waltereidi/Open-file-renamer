@@ -248,12 +248,13 @@ namespace winforms_app
             // 
             // dataGridView_selection
             // 
+            dataGridView_selection.AllowUserToAddRows = false;
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
-
+       
             // 
             // flowLayoutPanel_preview
             // 
@@ -265,10 +266,10 @@ namespace winforms_app
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
             flowLayoutPanel_preview.Size = new Size(344, 398);
             flowLayoutPanel_preview.TabIndex = 0;
-
             // 
             // dataGridView_preview
             // 
+            dataGridView_preview.AllowUserToAddRows = false;
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.Size = new Size(335, 240);
@@ -352,5 +353,6 @@ namespace winforms_app
         private TabControl tabControl1;
         private DataGridView_Files dataGridView_selection;
         private Button button_selectFiles;
+
     }
 }

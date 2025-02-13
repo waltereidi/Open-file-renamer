@@ -24,7 +24,7 @@ namespace winforms_app
                 
                 label_currentDirectory.Text = fbd.SelectedPath;
                 label_currentDirectory.ForeColor = Color.Green;
-
+                flowLayoutPanel_preview.Enabled = true;
                 flowLayoutPanel_Selection.Enabled = true;
                 searchFilter_Changed(sender, e);
             }
