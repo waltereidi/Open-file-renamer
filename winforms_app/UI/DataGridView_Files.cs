@@ -36,20 +36,21 @@ namespace Presentation.UI
         public void AddNewRowList(List<FileInfo> files , DataGridView_Files anotherGrid)
         {
             this.Rows.Clear();
-            files.ForEach(f => AppendRow(f, anotherGrid)); 
+            foreach (var f in files)
+            {
+                AppendRow(f, anotherGrid);
+            }
         }
-        private Task AppendRow(FileInfo file, DataGridView_Files anotherGrid)
-           => EnsureFileCanBeAdded(anotherGrid, FileIdentity.Instance(file))
-                .ContinueWith(_ => 
-                {
-                    if (!_.Result)
-                        return;
-
-                    this.AllowUserToAddRows = true;
-                    this.Rows.Add(GetRow(file));
-                    this.AllowUserToAddRows = false;
-                });
-
+        private void AppendRow(FileInfo file, DataGridView_Files anotherGrid)
+        {
+            this.AllowUserToAddRows = true;
+            var rowIdentities = GetTableRowIdentities(anotherGrid);
+            EnsureFileCanBeAdded(rowIdentities, FileIdentity.Instance(file));
+            var row = GetRow(file);
+            this.Rows.Add(row);
+            this.AllowUserToAddRows = false;
+        }
+           
         private DataGridViewRow GetRow(FileInfo file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
@@ -66,38 +67,25 @@ namespace Presentation.UI
         /// <param name="anotherGrid"></param>
         /// <param name="file"></param>
         /// <returns></returns>
-        public async Task<bool> EnsureFileCanBeAdded(DataGridView_Files anotherGrid , FileIdentity id )
+        public bool EnsureFileCanBeAdded(List<string> rowIdentities, FileIdentity id)
+            => !rowIdentities.Any( x => id.Equals(x) );
+
+        public List<string> GetTableRowIdentities(DataGridView_Files source)
         {
-            await foreach (var rowId in GetRowsAsync(anotherGrid) )
+            List<string> list = new(); 
+            for (int i = 0; i < source.Rows.Count; i++)
             {
-                Thread.Sleep(20);
-                var fileId = FileIdentity.Instance( rowId , id.Dir);
-                if (fileId.Id == id.Id)
-                    return false;
+                var id = source.Rows[i].Cells[2].Value.ToString();
+                list.Add(id);
             }
-            return true;
+            return list;
         }
-        public async IAsyncEnumerable<string> GetRowsAsync(DataGridView_Files collection)
+
+        public void AddSelectRowsFromThisToThere(DirectoryInfo dir , DataGridView_Files gridToAdd , List<int> list)
         {
-            for (int i = 0; i < collection.Rows.Count; i++)
-            {
-                Thread.Sleep(20);
-                await Task.Delay(i);
-                yield return collection.Rows[i].Cells[2].Value.ToString();
-            }
+
         }
-        private async Task<FileIdentity> RemoveRow(DirectoryInfo dir , int rowIndex )
-        {
-            string id = this.Rows[rowIndex].Cells[2].Value.ToString();
             
-            this.Rows.RemoveAt(rowIndex);
-
-            return FileIdentity.Instance( id.ToString() , dir);
-        }
-
-        public async Task AddSelectRowsFromThisToThere(DirectoryInfo dir , DataGridView_Files gridToAdd , List<int> list)
-            => list.ForEach(f => RemoveRow(dir, f)
-                .ContinueWith(_ => AppendRow(_.Result.GetFile(), gridToAdd)));
 
     }
 }

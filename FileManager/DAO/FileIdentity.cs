@@ -19,13 +19,24 @@ namespace FileManager.DAO
             Dir = fi.Directory;
         }
         public static FileIdentity Instance(FileInfo fi) => new FileIdentity(fi);
-        public static FileIdentity Instance(string Id , DirectoryInfo di)
+        public static FileIdentity Instance(string id , DirectoryInfo di)
         {
-            var file = di.GetFiles().First(x=> x.CreationTime.Ticks.ToString() == Id);
+            var file = di.GetFiles().First(x=> x.CreationTime.Ticks.ToString() == id);
             return Instance(file);
+        }
+
+        public static List<FileIdentity> Instances(List<string> listId, DirectoryInfo di)
+        {
+            var files = di.GetFiles();
+            var fileIdentities = files.Select( s => FileIdentity.Instance(s) );
+
+            return fileIdentities
+                .Where(x => listId.Any(a => x.Equals(a) ) )
+                .ToList();
         }
         public FileInfo GetFile() => Dir.GetFiles().First(x => this.Equals(x) );
         public bool Equals(FileInfo fi) => Id == fi.CreationTime.Ticks;
+        public bool Equals(string id ) => Id.ToString() == id;
 
     }
 }

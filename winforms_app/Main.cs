@@ -44,7 +44,7 @@ namespace winforms_app
         {
 
         }
-        private async void searchFilter_Changed(object sender, EventArgs e)
+        private void searchFilter_Changed(object sender, EventArgs e)
         {
             var radioChecked = groupBox_filter.Controls
                 .OfType<RadioButton>()
@@ -73,7 +73,7 @@ namespace winforms_app
                         Main_SearchFilter.SmallerThan
                         )); break;
             }
-            dataGridView_selection.AddNewRowList(files ,dataGridView_preview );
+             dataGridView_selection.AddNewRowList(files, dataGridView_preview);
         }
 
         private void button1_Click_2(object sender, EventArgs e)
