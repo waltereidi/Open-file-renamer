@@ -45,19 +45,23 @@ namespace winforms_app
             textBox_searchFilter = new AlsoNumberTextBox();
             tabControl_numberedSequence = new TabControl();
             tabPage_numberedSequence = new TabPage();
+            numberedSequence_label = new Label();
+            textBox1 = new TextBox();
+            numbered_Sequence_before = new RadioButton();
+            numbered_sequence_after = new RadioButton();
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             dataGridView_selection = new DataGridView_Files();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             dataGridView_preview = new DataGridView_Files();
-
             tabControl1 = new TabControl();
-            button_selectFiles = new Button();
+            button_moveSelectedFiles = new Button();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
             tabControl_numberedSequence.SuspendLayout();
+            tabPage_numberedSequence.SuspendLayout();
             flowLayoutPanel_Selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).BeginInit();
             flowLayoutPanel_preview.SuspendLayout();
@@ -201,6 +205,10 @@ namespace winforms_app
             // 
             // tabPage_numberedSequence
             // 
+            tabPage_numberedSequence.Controls.Add(numberedSequence_label);
+            tabPage_numberedSequence.Controls.Add(textBox1);
+            tabPage_numberedSequence.Controls.Add(numbered_Sequence_before);
+            tabPage_numberedSequence.Controls.Add(numbered_sequence_after);
             tabPage_numberedSequence.Location = new Point(4, 24);
             tabPage_numberedSequence.Margin = new Padding(4, 3, 4, 3);
             tabPage_numberedSequence.Name = "tabPage_numberedSequence";
@@ -209,6 +217,44 @@ namespace winforms_app
             tabPage_numberedSequence.TabIndex = 0;
             tabPage_numberedSequence.Text = "Numbered Sequence";
             tabPage_numberedSequence.UseVisualStyleBackColor = true;
+            // 
+            // numberedSequence_label
+            // 
+            numberedSequence_label.AutoSize = true;
+            numberedSequence_label.Location = new Point(7, 12);
+            numberedSequence_label.Name = "numberedSequence_label";
+            numberedSequence_label.Size = new Size(75, 15);
+            numberedSequence_label.TabIndex = 3;
+            numberedSequence_label.Text = "Append Text";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(7, 34);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(211, 21);
+            textBox1.TabIndex = 2;
+            // 
+            // numbered_Sequence_before
+            // 
+            numbered_Sequence_before.AutoSize = true;
+            numbered_Sequence_before.Location = new Point(224, 6);
+            numbered_Sequence_before.Name = "numbered_Sequence_before";
+            numbered_Sequence_before.Size = new Size(61, 19);
+            numbered_Sequence_before.TabIndex = 1;
+            numbered_Sequence_before.TabStop = true;
+            numbered_Sequence_before.Text = "Before";
+            numbered_Sequence_before.UseVisualStyleBackColor = true;
+            // 
+            // numbered_sequence_after
+            // 
+            numbered_sequence_after.AutoSize = true;
+            numbered_sequence_after.Location = new Point(224, 39);
+            numbered_sequence_after.Name = "numbered_sequence_after";
+            numbered_sequence_after.Size = new Size(49, 19);
+            numbered_sequence_after.TabIndex = 0;
+            numbered_sequence_after.TabStop = true;
+            numbered_sequence_after.Text = "After";
+            numbered_sequence_after.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -254,7 +300,7 @@ namespace winforms_app
             dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
-       
+            dataGridView_selection.SelectionChanged += dataGridView_selection_selectionChanged;
             // 
             // flowLayoutPanel_preview
             // 
@@ -275,6 +321,7 @@ namespace winforms_app
             dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
+            dataGridView_preview.SelectionChanged += dataGridView_preview_selectionChanged;
             // 
             // tabControl1
             // 
@@ -284,14 +331,15 @@ namespace winforms_app
             tabControl1.Size = new Size(341, 51);
             tabControl1.TabIndex = 16;
             // 
-            // button_selectFiles
+            // button_moveSelectedFiles
             // 
-            button_selectFiles.Location = new Point(368, 185);
-            button_selectFiles.Name = "button_selectFiles";
-            button_selectFiles.Size = new Size(66, 56);
-            button_selectFiles.TabIndex = 5;
-            button_selectFiles.Text = "Select Files";
-            button_selectFiles.UseVisualStyleBackColor = true;
+            button_moveSelectedFiles.Location = new Point(368, 185);
+            button_moveSelectedFiles.Name = "button_moveSelectedFiles";
+            button_moveSelectedFiles.Size = new Size(66, 56);
+            button_moveSelectedFiles.TabIndex = 5;
+            button_moveSelectedFiles.Text = "Move Selected Files";
+            button_moveSelectedFiles.UseVisualStyleBackColor = true;
+            button_moveSelectedFiles.Click += button_moveSelectedFiles_Click;
             // 
             // Main
             // 
@@ -300,7 +348,7 @@ namespace winforms_app
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(797, 479);
-            Controls.Add(button_selectFiles);
+            Controls.Add(button_moveSelectedFiles);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
             Controls.Add(start);
@@ -318,6 +366,8 @@ namespace winforms_app
             groupBox_filter.ResumeLayout(false);
             groupBox_filter.PerformLayout();
             tabControl_numberedSequence.ResumeLayout(false);
+            tabPage_numberedSequence.ResumeLayout(false);
+            tabPage_numberedSequence.PerformLayout();
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
@@ -326,6 +376,8 @@ namespace winforms_app
             ResumeLayout(false);
             PerformLayout();
         }
+
+
 
 
 
@@ -352,7 +404,10 @@ namespace winforms_app
         private DataGridView_Files dataGridView_preview;
         private TabControl tabControl1;
         private DataGridView_Files dataGridView_selection;
-        private Button button_selectFiles;
-
+        private Button button_moveSelectedFiles;
+        private RadioButton numbered_Sequence_before;
+        private RadioButton numbered_sequence_after;
+        private Label numberedSequence_label;
+        private TextBox textBox1;
     }
 }

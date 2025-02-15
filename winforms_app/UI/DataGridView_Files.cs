@@ -54,11 +54,14 @@ namespace Presentation.UI
         private DataGridViewRow GetRow(FileInfo file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
+            row.ReadOnly = true;
             row.Cells[0].Value = file.Name;
-            row.Cells[1].Value = file.Length;
             
+            row.Cells[1].Value = file.Length;
+
             var id = FileIdentity.Instance(file);
             row.Cells[2].Value = id.Id.ToString();
+
             return row;
         }
         /// <summary>
@@ -72,20 +75,43 @@ namespace Presentation.UI
 
         public List<string> GetTableRowIdentities(DataGridView_Files source)
         {
-            List<string> list = new(); 
+            List<string> result = new(); 
             for (int i = 0; i < source.Rows.Count; i++)
             {
                 var id = source.Rows[i].Cells[2].Value.ToString();
-                list.Add(id);
+                result.Add(id);
             }
-            return list;
+            return result;
         }
+        public List<string> GetIdentityFromIndexes(List<int> indexes)
+            => indexes.Select(s 
+                => this.Rows[s].Cells[2].Value.ToString() ?? throw new ArgumentNullException() )
+            .ToList();
 
-        public void AddSelectRowsFromThisToThere(DirectoryInfo dir , DataGridView_Files gridToAdd , List<int> list)
+        public void AddSelectRowsFromThisToThere(DirectoryInfo di , DataGridView_Files gridToAdd , List<int> list)
         {
+            var rowIdentities = GetIdentityFromIndexes(list); 
+
+            var identities = FileIdentity.Instances(rowIdentities, di);
+            
+            list.ForEach(f => this.Rows.RemoveAt(f));
+
+            identities.ForEach(f => gridToAdd.AppendRow(f.GetFile() , this ));
 
         }
-            
+        public void DeselectAnotherGrid(DataGridView_Files grid)
+            => grid.ClearSelection();
+        
+        public List<int> GetSelectedRowsIndexes()
+        {
+            var result = new List<int>();
+            for(int i = 0; i < this.SelectedRows.Count; i++ )
+            {
+                result.Add( this.SelectedRows[i].Index );
+            }
+            return result;
+        }           
+
 
     }
 }

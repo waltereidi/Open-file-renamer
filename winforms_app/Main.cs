@@ -2,6 +2,7 @@ using ApplicationService;
 using ApplicationService.Enum;
 using FileManager.DAO;
 using Presentation.UI;
+using System;
 using System.ComponentModel;
 using System.Net.NetworkInformation;
 
@@ -21,7 +22,7 @@ namespace winforms_app
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
                 _service = new MainApplicationService(new(fbd.SelectedPath));
-                
+
                 label_currentDirectory.Text = fbd.SelectedPath;
                 label_currentDirectory.ForeColor = Color.Green;
                 flowLayoutPanel_preview.Enabled = true;
@@ -73,7 +74,7 @@ namespace winforms_app
                         Main_SearchFilter.SmallerThan
                         )); break;
             }
-             dataGridView_selection.AddNewRowList(files, dataGridView_preview);
+            dataGridView_selection.AddNewRowList(files, dataGridView_preview);
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -113,7 +114,7 @@ namespace winforms_app
 
             DirectoryInfo di = new DirectoryInfo(label_currentDirectory.Text);
 
-            dataGridView_selection.AddSelectRowsFromThisToThere(di , dataGridView_preview , indexes);
+            dataGridView_selection.AddSelectRowsFromThisToThere(di, dataGridView_preview, indexes);
         }
         private void dataGridView_preview_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -125,5 +126,23 @@ namespace winforms_app
             dataGridView_preview.AddSelectRowsFromThisToThere(di, dataGridView_selection, indexes);
         }
 
+        private void button_moveSelectedFiles_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_selection.SelectedRows.Count > 0)
+            {
+                var indexes = dataGridView_selection.GetSelectedRowsIndexes();
+                dataGridView_selection.AddSelectRowsFromThisToThere(new(label_currentDirectory.Text), dataGridView_preview, indexes );
+            }
+            else
+            {
+                var indexes = dataGridView_preview.GetSelectedRowsIndexes();
+                dataGridView_preview.AddSelectRowsFromThisToThere(new(label_currentDirectory.Text), dataGridView_selection, indexes);
+            }
+                
+        }
+        private void dataGridView_selection_selectionChanged(object sender, EventArgs e)
+            => dataGridView_selection.DeselectAnotherGrid(dataGridView_preview);
+        private void dataGridView_preview_selectionChanged(object sender, EventArgs e)
+            => dataGridView_preview.DeselectAnotherGrid(dataGridView_selection);
     }
 }

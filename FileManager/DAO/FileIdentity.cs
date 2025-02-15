@@ -34,6 +34,7 @@ namespace FileManager.DAO
                 .Where(x => listId.Any(a => x.Equals(a) ) )
                 .ToList();
         }
+
         public FileInfo GetFile() => Dir.GetFiles().First(x => this.Equals(x) );
         public bool Equals(FileInfo fi) => Id == fi.CreationTime.Ticks;
         public bool Equals(string id ) => Id.ToString() == id;
