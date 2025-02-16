@@ -1,5 +1,7 @@
 ﻿using ApplicationService.Enum;
+using FileManager.Interfaces;
 using Presentation.UI;
+using Presentation.Wrappers;
 
 namespace winforms_app
 {
@@ -46,7 +48,7 @@ namespace winforms_app
             tabControl_numberedSequence = new TabControl();
             tabPage_numberedSequence = new TabPage();
             numberedSequence_label = new Label();
-            textBox1 = new TextBox();
+            NumberedSequence_text = new TextBox();
             numbered_Sequence_before = new RadioButton();
             numbered_sequence_after = new RadioButton();
             tabPage2 = new TabPage();
@@ -196,6 +198,7 @@ namespace winforms_app
             // 
             tabControl_numberedSequence.Controls.Add(tabPage_numberedSequence);
             tabControl_numberedSequence.Controls.Add(tabPage2);
+            tabControl_numberedSequence.Dock = DockStyle.Bottom;
             tabControl_numberedSequence.Location = new Point(4, 3);
             tabControl_numberedSequence.Margin = new Padding(4, 3, 4, 3);
             tabControl_numberedSequence.Name = "tabControl_numberedSequence";
@@ -205,10 +208,18 @@ namespace winforms_app
             // 
             // tabPage_numberedSequence
             // 
+
             tabPage_numberedSequence.Controls.Add(numberedSequence_label);
-            tabPage_numberedSequence.Controls.Add(textBox1);
+            tabPage_numberedSequence.Controls.Add(NumberedSequence_text);
             tabPage_numberedSequence.Controls.Add(numbered_Sequence_before);
             tabPage_numberedSequence.Controls.Add(numbered_sequence_after);
+            TabNumberedSequenceWrapper = new TabNumberedSequence(label_currentDirectory, 
+                numberedSequence_label ,
+                NumberedSequence_text , 
+                numbered_Sequence_before , 
+                numbered_sequence_after ,
+                dataGridView_preview
+                );
             tabPage_numberedSequence.Location = new Point(4, 24);
             tabPage_numberedSequence.Margin = new Padding(4, 3, 4, 3);
             tabPage_numberedSequence.Name = "tabPage_numberedSequence";
@@ -227,12 +238,13 @@ namespace winforms_app
             numberedSequence_label.TabIndex = 3;
             numberedSequence_label.Text = "Append Text";
             // 
-            // textBox1
+            // NumberedSequence_text
             // 
-            textBox1.Location = new Point(7, 34);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(211, 21);
-            textBox1.TabIndex = 2;
+            NumberedSequence_text.Location = new Point(7, 34);
+            NumberedSequence_text.Name = "NumberedSequence_text";
+            NumberedSequence_text.Size = new Size(211, 21);
+            NumberedSequence_text.TabIndex = 2;
+            NumberedSequence_text.KeyUp += TabNumberedSequenceWrapper.TextAppendChanged;
             // 
             // numbered_Sequence_before
             // 
@@ -244,6 +256,7 @@ namespace winforms_app
             numbered_Sequence_before.TabStop = true;
             numbered_Sequence_before.Text = "Before";
             numbered_Sequence_before.UseVisualStyleBackColor = true;
+            numbered_Sequence_before.CheckedChanged += TabNumberedSequenceWrapper.NumberedSequenceBeforeChecked;
             // 
             // numbered_sequence_after
             // 
@@ -255,6 +268,7 @@ namespace winforms_app
             numbered_sequence_after.TabStop = true;
             numbered_sequence_after.Text = "After";
             numbered_sequence_after.UseVisualStyleBackColor = true;
+            numbered_sequence_after.CheckedChanged += TabNumberedSequenceWrapper.NumberedSequenceAfterChecked;
             // 
             // tabPage2
             // 
@@ -278,7 +292,6 @@ namespace winforms_app
             label_currentDirectory.Size = new Size(100, 15);
             label_currentDirectory.TabIndex = 16;
             label_currentDirectory.Text = "Select a directory";
-            label_currentDirectory.Click += label1_Click;
             // 
             // flowLayoutPanel_Selection
             // 
@@ -290,13 +303,14 @@ namespace winforms_app
             flowLayoutPanel_Selection.Name = "flowLayoutPanel_Selection";
             flowLayoutPanel_Selection.Size = new Size(349, 398);
             flowLayoutPanel_Selection.TabIndex = 0;
-            flowLayoutPanel_Selection.Paint += flowLayoutPanel1_Paint;
             // 
             // dataGridView_selection
             // 
             dataGridView_selection.AllowUserToAddRows = false;
+            dataGridView_selection.AllowUserToResizeRows = false;
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
+            dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_selection.Size = new Size(341, 291);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
@@ -316,8 +330,10 @@ namespace winforms_app
             // dataGridView_preview
             // 
             dataGridView_preview.AllowUserToAddRows = false;
+            dataGridView_preview.AllowUserToResizeRows = false;
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
+            dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_preview.Size = new Size(335, 240);
             dataGridView_preview.TabIndex = 0;
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
@@ -408,6 +424,7 @@ namespace winforms_app
         private RadioButton numbered_Sequence_before;
         private RadioButton numbered_sequence_after;
         private Label numberedSequence_label;
-        private TextBox textBox1;
+        private TextBox NumberedSequence_text;
+        private ITabNumberedSequence TabNumberedSequenceWrapper; 
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FileManager
 {
-    public class FileManagerService : IFileManager, IDirectoryReader
+    public class FileManagerService : IFileManager
     {
         private readonly IMementoFileManager _memento = new MementoFileManger();
         private readonly DirectoryReader _dir;

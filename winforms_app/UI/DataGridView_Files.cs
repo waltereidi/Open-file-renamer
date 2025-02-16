@@ -31,7 +31,8 @@ namespace Presentation.UI
             column_Hidden_FullName.Name = "Column_Hidden_Id";
             column_Hidden_FullName.Visible = false;
             this.AllowUserToAddRows = false;
-            
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.AllowUserToResizeRows = false; 
         }
         public void AddNewRowList(List<FileInfo> files , DataGridView_Files anotherGrid)
         {
@@ -111,6 +112,10 @@ namespace Presentation.UI
             }
             return result;
         }           
+        public void PreviewChanged()
+        {
+
+        }
 
 
     }

@@ -1,10 +1,5 @@
 using ApplicationService;
 using ApplicationService.Enum;
-using FileManager.DAO;
-using Presentation.UI;
-using System;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
 
 namespace winforms_app
 {
@@ -21,7 +16,7 @@ namespace winforms_app
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
-                _service = new MainApplicationService(new(fbd.SelectedPath));
+                _service = new MainApplicationService();
 
                 label_currentDirectory.Text = fbd.SelectedPath;
                 label_currentDirectory.ForeColor = Color.Green;
@@ -77,36 +72,6 @@ namespace winforms_app
             dataGridView_selection.AddNewRowList(files, dataGridView_preview);
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void panel_1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         private void dataGridView_selection_cellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             List<int> indexes = new();
