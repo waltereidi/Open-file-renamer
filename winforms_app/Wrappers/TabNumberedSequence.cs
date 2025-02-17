@@ -1,4 +1,6 @@
-﻿using FileManager.Interfaces;
+﻿using ApplicationService;
+using FileManager.Enum;
+using FileManager.Interfaces;
 using Presentation.UI;
 
 namespace Presentation.Wrappers
@@ -9,8 +11,9 @@ namespace Presentation.Wrappers
         private readonly TextBox _text;
         private readonly RadioButton _radioButton_sequenceBefore;
         private readonly RadioButton _radioButton_sequenceAfter;
-        private readonly Label _directory; 
-        
+        private readonly Label _directory;
+        private readonly MainApplicationService _service = new();
+        private string GetSeparator() => _text.Text.ToString();
         public TabNumberedSequence(Label directory ,
             Label label ,
             TextBox text ,
@@ -25,24 +28,15 @@ namespace Presentation.Wrappers
             _radioButton_sequenceAfter = sequenceAfter; 
             _directory = directory;
         }
-
-        public void NumberedSequenceAfterChecked(object sender, EventArgs e)
+        public void GetPreview(object sender, EventArgs e)
         {
-            
-        }
+            //if (_radioButton_sequenceAfter.Checked) 
+            //    return _service.GetNumberedSequenceAfterPreview(_directory.Text.ToString(), GetSeparator());
 
-        public void NumberedSequenceBeforeChecked(object sender, EventArgs e)
-        {
+            //else if (_radioButton_sequenceBefore.Checked) 
+            //    return _service.GetNumberedSequenceBeforePreview(_directory.Text.ToString(),GetSeparator());
 
-
-        }
-        public void TextAppendChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void GetPreview()
-        {
-
+            //throw new ArgumentNullException("Option is not selected");
         }
 
 

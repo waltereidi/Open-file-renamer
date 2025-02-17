@@ -11,6 +11,13 @@ public class MainApplicationService
     {
     }
 
+    public List<IFileProcessor> GetNumberedSequenceAfterPreview(string directory,  string separator)
+    {
+        IFileManager fm = new FileManagerService(new DirectoryInfo(directory));
+
+
+    }
+
     public List<FileInfo> SearchFiles(string searchText,string directory, Main_SearchFilter? filter = null )
         => new FileManagerService(new DirectoryInfo(directory)).GetFilesContains(searchText);
     public List<FileInfo> SearchFilesFromSize(long? size, string directory, Main_SearchFilter? filter = null)

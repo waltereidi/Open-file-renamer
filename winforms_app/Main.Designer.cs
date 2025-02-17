@@ -244,7 +244,7 @@ namespace winforms_app
             NumberedSequence_text.Name = "NumberedSequence_text";
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
-            NumberedSequence_text.KeyUp += TabNumberedSequenceWrapper.TextAppendChanged;
+            NumberedSequence_text.KeyUp += TabNumberedSequenceWrapper.GetPreview;
             // 
             // numbered_Sequence_before
             // 
@@ -256,7 +256,8 @@ namespace winforms_app
             numbered_Sequence_before.TabStop = true;
             numbered_Sequence_before.Text = "Before";
             numbered_Sequence_before.UseVisualStyleBackColor = true;
-            numbered_Sequence_before.CheckedChanged += TabNumberedSequenceWrapper.NumberedSequenceBeforeChecked;
+            numbered_Sequence_before.Checked = true; 
+            numbered_Sequence_before.CheckedChanged += TabNumberedSequenceWrapper.GetPreview;
             // 
             // numbered_sequence_after
             // 
@@ -268,7 +269,7 @@ namespace winforms_app
             numbered_sequence_after.TabStop = true;
             numbered_sequence_after.Text = "After";
             numbered_sequence_after.UseVisualStyleBackColor = true;
-            numbered_sequence_after.CheckedChanged += TabNumberedSequenceWrapper.NumberedSequenceAfterChecked;
+            numbered_sequence_after.CheckedChanged += TabNumberedSequenceWrapper.GetPreview;
             // 
             // tabPage2
             // 

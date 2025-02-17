@@ -1,4 +1,5 @@
-﻿using FileManager.Interfaces;
+﻿using FileManager.DAO;
+using FileManager.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FileManager.FileOperations
     {
         private readonly int Sequence;
         private readonly string? Separator;
-        public NumberSequenceBeforeExtension(DirectoryInfo path, FileInfo fi, int sequence, string? separator = null) : base(path , fi) 
+        public NumberSequenceBeforeExtension(DirectoryInfo path, FileIdentity fi, int sequence, string? separator = null) : base(path , fi) 
         {
             Sequence = sequence;
             Separator = separator;

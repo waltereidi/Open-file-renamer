@@ -8,8 +8,6 @@ namespace FileManager.Interfaces
 {
     public interface ITabNumberedSequence
     {
-        public void NumberedSequenceBeforeChecked(object sender, EventArgs e);
-        public void NumberedSequenceAfterChecked(object sender, EventArgs e);
-        public void TextAppendChanged(object sender, EventArgs e);
+        public void GetPreview(object sender, EventArgs e);
     }
 }

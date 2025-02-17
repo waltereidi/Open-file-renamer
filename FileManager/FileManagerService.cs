@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FileManager
 {
-    public class FileManagerService : IFileManager
+    public class FileManagerService : INumberedSequence , IDirectoryReader
     {
         private readonly IMementoFileManager _memento = new MementoFileManger();
         private readonly DirectoryReader _dir;
@@ -18,18 +18,32 @@ namespace FileManager
         public List<FileInfo> GetFilesGreaterThan(long? size) => _dir.GetFilesGreaterThan(size);
         public List<FileInfo> GetFilesSmallerThan(long? size) => _dir.GetFilesSmallerThan(size);
 
-        public List<IFileProcessor> NumberSequenceBeforeExtensionPreview(List<FileInfo> files, string separator)
+        public List<IFileProcessor> GetNumberedSequenceAfterPreview(List<FileIdentity> files, string separator)
             => files.Select((value, i)
                 =>{
                        IFileProcessor f = new NumberSequenceBeforeExtension(_dir._dir, value, i, separator);
                        return f;
                   }).ToList();
-        public async Task NumberSequenceBeforeExtension(List<FileInfo> files, string separator)
-            => await _memento.SetState(NumberSequenceBeforeExtensionPreview(files, separator));
+        public async Task NumberSequenceBeforeExtension(List<FileIdentity> files, string separator)
+            => await _memento.SetState(GetNumberedSequenceAfterPreview(files, separator));
 
         public async Task RollbackOperation(List<FileInfo> fi , Guid version)
             => await _memento.Rollback(version, fi);
 
+     
+        public List<IFileProcessor> GetNumberedSequenceBeforePreview(List<FileIdentity> files, string separator)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void GetNumberedSequenceBefore(List<FileIdentity> files, string separator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,42 +10,42 @@ namespace FileManager.FileOperations
         public readonly DirectoryInfo Dir;
         public readonly string FileNameBefore;
         public readonly string FileExtensionBefore;
-        public FileProcessor(DirectoryInfo dr, FileInfo fi)
+        public FileProcessor(DirectoryInfo dr, FileIdentity fi)
         {
-            Dir = dr; 
-            Id = FileIdentity.Instance(fi);
-            FileNameBefore = fi.Name;
-            FileExtensionBefore = fi.Extension;
+            var file = fi.GetFile();
+            Dir = dr;
+            Id = fi;
+            FileNameBefore = file.Name;
+            FileExtensionBefore = file.Extension;
             EnsureFileIsValid();
         }
-        public FileInfo GetFile() 
-            => Dir.GetFiles().First(x => Id.Equals(x));
         
         public abstract string GetRenameTo();
 
         public Task Start()
             => Task.Run(() => {
-                var file = this.GetFile();
+                var file = this.Id.GetFile();
                 Operation(file);
                 EnsureSuccessfullOperation();
             }); 
 
         public Task Revert()
             => Task.Run(() => {
-                var file = this.GetFile();
+                var file = this.Id.GetFile();
                 RevertOperation();
                 EnsureSuccessfullRevert();
             });
         private void EnsureSuccessfullRevert()
         {
-            if (!this.GetFile().Exists)
+            var file = this.Id.GetFile();
+            if (!file.Exists)
                 throw new FileNotFoundException("Error during revert operation, file does not exists");
             
-            if(!this.GetFile().Name.Equals(FileNameBefore))
+            if(!file.Name.Equals(FileNameBefore))
                 throw new IOException("Could not rename file back to its original name before operation");
         }
         private void RevertOperation()
-            => GetFile()
+            => this.Id.GetFile()
                 .MoveTo(Path.Combine(Dir.FullName , FileNameBefore));
 
         private void Operation(FileInfo fi)
@@ -54,14 +54,14 @@ namespace FileManager.FileOperations
 
         protected virtual void EnsureSuccessfullOperation()
         {
-            var file = GetFile();
+            var file = this.Id.GetFile();
             if (!file.Name.Equals(GetRenameTo()) || !file.Exists)
                 throw new IOException($"Could not find a file named {GetRenameTo()}");
         }
 
         public virtual void EnsureFileIsValid()
         {
-            if (!this.GetFile().Exists)
+            if (!this.Id.GetFile().Exists)
                 throw new FileNotFoundException();
         }
         public FileIdentity GetIdentity() => this.Id;
