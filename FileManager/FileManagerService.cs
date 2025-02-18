@@ -11,7 +11,10 @@ namespace FileManager
     {
         private readonly IMementoFileManager _memento = new MementoFileManger();
         private readonly DirectoryReader _dir;
-        public FileManagerService(DirectoryInfo dr) => _dir = new DirectoryReader(dr);
+        public FileManagerService(DirectoryInfo dr) 
+            => _dir = new DirectoryReader(dr);
+
+
         public List<VersionedModifications.Version> GetAllVersions() => _memento.GetAllVersions();
         public List<FileInfo> GetFiles() => _dir.GetFiles();
         public List<FileInfo> GetFilesContains(string text) => _dir.GetFilesContains(text);
@@ -24,7 +27,7 @@ namespace FileManager
                        IFileProcessor f = new NumberSequenceBeforeExtension(_dir._dir, value, i, separator);
                        return f;
                   }).ToList();
-        public async Task NumberSequenceBeforeExtension(List<FileIdentity> files, string separator)
+        public async Task GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
             => await _memento.SetState(GetNumberedSequenceAfterPreview(files, separator));
 
         public async Task RollbackOperation(List<FileInfo> fi , Guid version)
@@ -41,7 +44,7 @@ namespace FileManager
             throw new NotImplementedException();
         }
 
-        public void GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
+        void INumberedSequence.GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
         {
             throw new NotImplementedException();
         }

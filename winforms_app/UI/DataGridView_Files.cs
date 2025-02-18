@@ -1,5 +1,6 @@
 ﻿using FileManager.DAO;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace Presentation.UI
@@ -89,7 +90,10 @@ namespace Presentation.UI
                 => this.Rows[s].Cells[2].Value.ToString() ?? throw new ArgumentNullException() )
             .ToList();
 
-        public void AddSelectRowsFromThisToThere(DirectoryInfo di , DataGridView_Files gridToAdd , List<int> list)
+        public void AddSelectRowsFromThisToThere(DirectoryInfo di , 
+            DataGridView_Files gridToAdd , 
+            List<int> list
+            )
         {
             var rowIdentities = GetIdentityFromIndexes(list); 
 
@@ -117,6 +121,14 @@ namespace Presentation.UI
 
         }
 
+        public List<FileIdentity> GetAllFiles(DirectoryInfo di)
+        {
+            DataGridViewRow[] rows = new DataGridViewRow[this.Rows.Count];
+            this.Rows.CopyTo(rows , 0);
 
+            return rows.ToList()
+                .Select(s => FileIdentity.Instance(s.Cells[2].Value.ToString(),di) )
+                .ToList();
+        }
     }
 }

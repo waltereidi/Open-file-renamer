@@ -218,7 +218,8 @@ namespace winforms_app
                 NumberedSequence_text , 
                 numbered_Sequence_before , 
                 numbered_sequence_after ,
-                dataGridView_preview
+                dataGridView_preview, 
+                dataGridView_selection
                 );
             tabPage_numberedSequence.Location = new Point(4, 24);
             tabPage_numberedSequence.Margin = new Padding(4, 3, 4, 3);

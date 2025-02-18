@@ -1,5 +1,6 @@
 ﻿using ApplicationService.Enum;
 using FileManager;
+using FileManager.DAO;
 using FileManager.Interfaces;
 
 namespace ApplicationService; 
@@ -11,18 +12,22 @@ public class MainApplicationService
     {
     }
 
-    public List<IFileProcessor> GetNumberedSequenceAfterPreview(string directory,  string separator)
+    public List<IFileProcessor> GetNumberedSequenceAfterPreview(string directory, string separator , List<FileIdentity> files)
     {
-        IFileManager fm = new FileManagerService(new DirectoryInfo(directory));
-
-
+        INumberedSequence fm = new FileManagerService(new DirectoryInfo(directory));
+        return fm.GetNumberedSequenceAfterPreview(files, separator);
+    }
+    public List<IFileProcessor> GetNumberedSequenceBeforePreview(string directory, string separator, List<FileIdentity> files)
+    {
+        INumberedSequence fm = new FileManagerService(new DirectoryInfo(directory));
+        return fm.GetNumberedSequenceBeforePreview(files , separator);
     }
 
     public List<FileInfo> SearchFiles(string searchText,string directory, Main_SearchFilter? filter = null )
         => new FileManagerService(new DirectoryInfo(directory)).GetFilesContains(searchText);
     public List<FileInfo> SearchFilesFromSize(long? size, string directory, Main_SearchFilter? filter = null)
     {
-        IFileManager fm = new FileManagerService(new DirectoryInfo(directory));
+        IDirectoryReader fm = new FileManagerService(new DirectoryInfo(directory));
 
         switch(filter)
         {

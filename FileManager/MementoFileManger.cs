@@ -17,7 +17,7 @@ namespace FileManager
             if (!_versioning.Versions.Any()) 
             { 
                 var original = new List<IFileProcessor>();
-                files.ForEach(f => original.Add(new OriginalFile( f.GetDirectory(), f.GetFile())));
+                files.ForEach(f => original.Add(new OriginalFile( f.GetDirectory(), f.GetIdentity())));
                 _versioning.AddVersion(original);
             }
             _versioning.AddVersion(files);

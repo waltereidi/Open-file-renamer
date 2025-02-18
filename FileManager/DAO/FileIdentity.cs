@@ -16,7 +16,7 @@ namespace FileManager.DAO
         private FileIdentity(FileInfo fi )
         {
             Id = fi.CreationTime.Ticks;
-            Dir = fi.Directory;
+            Dir = fi.Directory ?? throw new Exception(nameof(fi));
         }
         public static FileIdentity Instance(FileInfo fi) => new FileIdentity(fi);
         public static FileIdentity Instance(string id , DirectoryInfo di)
