@@ -1,4 +1,6 @@
 ﻿using FileManager.DAO;
+using FileManager.FileOperations;
+using FileManager.Interfaces;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
@@ -35,34 +37,36 @@ namespace Presentation.UI
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.AllowUserToResizeRows = false; 
         }
-        public void AddNewRowList(List<FileInfo> files , DataGridView_Files anotherGrid)
+        
+        public void AddNewRowList(List<IFileProcessor> files, DataGridView_Files anotherGrid)
+            => AddNewRowList(files.Select(s => new FilePreview(s)).ToList() , anotherGrid);
+        public void AddNewRowList(List<FileInfo> files, DataGridView_Files anotherGrid)
+            => AddNewRowList(files.Select(s => new FilePreview(s)).ToList(), anotherGrid);
+        public void AddNewRowList(List<FilePreview> files, DataGridView_Files anotherGrid)
         {
             this.Rows.Clear();
-            foreach (var f in files)
-            {
-                AppendRow(f, anotherGrid);
-            }
+            files.ForEach(f => AppendRow(f , anotherGrid) );
         }
-        private void AppendRow(FileInfo file, DataGridView_Files anotherGrid)
+
+        private void AppendRow(FilePreview file, DataGridView_Files anotherGrid)
         {
             this.AllowUserToAddRows = true;
             var rowIdentities = GetTableRowIdentities(anotherGrid);
-            EnsureFileCanBeAdded(rowIdentities, FileIdentity.Instance(file));
+            EnsureFileCanBeAdded(rowIdentities, file.Id );
             var row = GetRow(file);
             this.Rows.Add(row);
             this.AllowUserToAddRows = false;
         }
            
-        private DataGridViewRow GetRow(FileInfo file)
+        private DataGridViewRow GetRow(FilePreview file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
             row.ReadOnly = true;
-            row.Cells[0].Value = file.Name;
+            row.Cells[0].Value = file.DisplayName;
             
             row.Cells[1].Value = file.Length;
 
-            var id = FileIdentity.Instance(file);
-            row.Cells[2].Value = id.Id.ToString();
+            row.Cells[2].Value = file.Id.GetId();
 
             return row;
         }
@@ -101,7 +105,7 @@ namespace Presentation.UI
             
             list.ForEach(f => this.Rows.RemoveAt(f));
 
-            identities.ForEach(f => gridToAdd.AppendRow(f.GetFile() , this ));
+            identities.ForEach(f => gridToAdd.AppendRow(new FilePreview(f.GetFile()) , this ));
 
         }
         public void DeselectAnotherGrid(DataGridView_Files grid)

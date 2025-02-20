@@ -24,7 +24,7 @@ namespace FileManager
         public List<IFileProcessor> GetNumberedSequenceAfterPreview(List<FileIdentity> files, string separator)
             => files.Select((value, i)
                 =>{
-                       IFileProcessor f = new NumberSequenceBeforeExtension(_dir._dir, value, i, separator);
+                       IFileProcessor f = new NumberSequenceAfterExtension(_dir._dir, value, i, separator);
                        return f;
                   }).ToList();
         public async Task GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
@@ -35,18 +35,15 @@ namespace FileManager
 
      
         public List<IFileProcessor> GetNumberedSequenceBeforePreview(List<FileIdentity> files, string separator)
-        {
-            throw new NotImplementedException();
-        }
+            => files.Select((value, i)
+                =>
+            {
+                IFileProcessor f = new NumberSequenceBeforeExtension(_dir._dir, value, i, separator);
+                return f;
+            }).ToList();
 
-        public void GetNumberedSequenceBefore(List<FileIdentity> files, string separator)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task GetNumberedSequenceBefore(List<FileIdentity> files, string separator)
+            => await _memento.SetState(GetNumberedSequenceBeforePreview(files, separator));
 
-        void INumberedSequence.GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -57,9 +57,7 @@ namespace Presentation.Wrappers
         public void GetPreview(object sender, EventArgs e)
         {
             var files = Command();
-            _previewGrid.AddNewRowList(files.Select(s=>
-                s.GetIdentity().GetFile()).ToList(),
-                _selectionGrid );
+            _previewGrid.AddNewRowList(files , _selectionGrid);
         }
     }
 }

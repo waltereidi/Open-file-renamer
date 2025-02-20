@@ -13,6 +13,7 @@ namespace FileManager.DAO
     {
         public readonly long Id;
         public readonly DirectoryInfo Dir;
+        public string GetId() => Id.ToString();
         private FileIdentity(FileInfo fi )
         {
             Id = fi.CreationTime.Ticks;
@@ -30,6 +31,7 @@ namespace FileManager.DAO
             var files = di.GetFiles();
             var fileIdentities = files.Select( s => FileIdentity.Instance(s) );
 
+            
             return fileIdentities
                 .Where(x => listId.Any(a => x.Equals(a) ) )
                 .ToList();

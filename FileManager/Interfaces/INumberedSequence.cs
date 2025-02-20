@@ -11,7 +11,7 @@ namespace FileManager.Interfaces
     {
         public List<IFileProcessor> GetNumberedSequenceAfterPreview(List<FileIdentity> files, string separator);
         public List<IFileProcessor> GetNumberedSequenceBeforePreview(List<FileIdentity> files, string separator);
-        public void GetNumberedSequenceBefore(List<FileIdentity> files, string separator);
-        public void GetNumberedSequenceAfter(List<FileIdentity> files, string separator);
+        Task GetNumberedSequenceBefore(List<FileIdentity> files, string separator);
+        Task GetNumberedSequenceAfter(List<FileIdentity> files, string separator);
     }
 }
