@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager.Interfaces
+namespace Presentation.Interfaces
 {
-    public interface ITabNumberedSequence
+    public interface IComboBoxVersioning
     {
-        public void GetPreview(object sender, EventArgs e);
     }
 }

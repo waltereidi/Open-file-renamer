@@ -96,18 +96,23 @@ namespace winforms_app
             if (dataGridView_selection.SelectedRows.Count > 0)
             {
                 var indexes = dataGridView_selection.GetSelectedRowsIndexes();
-                dataGridView_selection.AddSelectRowsFromThisToThere(new(label_currentDirectory.Text), dataGridView_preview, indexes );
+                dataGridView_selection.AddSelectRowsFromThisToThere(new(label_currentDirectory.Text), dataGridView_preview, indexes);
             }
             else
             {
                 var indexes = dataGridView_preview.GetSelectedRowsIndexes();
                 dataGridView_preview.AddSelectRowsFromThisToThere(new(label_currentDirectory.Text), dataGridView_selection, indexes);
             }
-                
+
         }
         private void dataGridView_selection_selectionChanged(object sender, EventArgs e)
             => dataGridView_selection.DeselectAnotherGrid(dataGridView_preview);
         private void dataGridView_preview_selectionChanged(object sender, EventArgs e)
             => dataGridView_preview.DeselectAnotherGrid(dataGridView_selection);
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
