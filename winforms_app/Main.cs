@@ -26,8 +26,9 @@ namespace winforms_app
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_start_click(object sender, EventArgs e)
         {
+            
 
         }
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FileManager
 {
-    public class FileManagerService : INumberedSequence , IDirectoryReader
+    public class FileManagerService : INumberedSequence, IDirectoryReader, IVersionControl
     {
         private readonly IMementoFileManager _memento = new MementoFileManger();
         private readonly DirectoryReader _dir;
@@ -44,6 +44,13 @@ namespace FileManager
 
         public async Task GetNumberedSequenceBefore(List<FileIdentity> files, string separator)
             => await _memento.SetState(GetNumberedSequenceBeforePreview(files, separator));
+
+        public List<VersionedModifications.Version> GetAllVersion()
+            => _memento.GetAllVersions();
+
+        public VersionedModifications.Version GetVersionById(Guid id)
+            => _memento.GetVersionById(id);
+
 
     }
 }

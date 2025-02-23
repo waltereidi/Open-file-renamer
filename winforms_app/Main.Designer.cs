@@ -40,7 +40,7 @@ namespace winforms_app
             toolStrip2 = new ToolStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             toolStripLabel_progress = new ToolStripLabel();
-            start = new Button();
+            button_start = new Button();
             groupBox_filter = new GroupBox();
             radioButton_greaterThan = new RadioButton();
             radioButton_smallerThan = new RadioButton();
@@ -55,13 +55,23 @@ namespace winforms_app
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridView_selection = new DataGridView_Files();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             label_versioning = new Label();
             comboBox_versioning = new ComboBox();
+            comboBoxWrapper = new ComboBox_Versioning(
+                comboBox_versioning
+                , tabControl 
+                , dataGridView_preview 
+                , label_currentDirectory );
             button_moveSelectedFiles = new Button();
-            comboBoxVersiong = new ComboBox_Versioning(comboBox_versioning, tabControl);
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -122,16 +132,16 @@ namespace winforms_app
             toolStripLabel_progress.Size = new Size(29, 22);
             toolStripLabel_progress.Text = "0 % ";
             // 
-            // start
+            // button_start
             // 
-            start.Location = new Point(368, 247);
-            start.Margin = new Padding(4, 3, 4, 3);
-            start.Name = "start";
-            start.Size = new Size(66, 56);
-            start.TabIndex = 4;
-            start.Text = "Start";
-            start.UseVisualStyleBackColor = true;
-            start.Click += button1_Click;
+            button_start.Location = new Point(368, 247);
+            button_start.Margin = new Padding(4, 3, 4, 3);
+            button_start.Name = "button_start";
+            button_start.Size = new Size(66, 56);
+            button_start.TabIndex = 4;
+            button_start.Text = "Start";
+            button_start.UseVisualStyleBackColor = true;
+            button_start.Click += button_start_click;
             // 
             // groupBox_filter
             // 
@@ -290,6 +300,7 @@ namespace winforms_app
             // 
             dataGridView_preview.AllowUserToAddRows = false;
             dataGridView_preview.AllowUserToResizeRows = false;
+            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -298,10 +309,28 @@ namespace winforms_app
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
             dataGridView_preview.SelectionChanged += dataGridView_preview_selectionChanged;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.HeaderText = "Size";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Visible = false;
+            // 
             // dataGridView_selection
             // 
             dataGridView_selection.AllowUserToAddRows = false;
             dataGridView_selection.AllowUserToResizeRows = false;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -309,6 +338,23 @@ namespace winforms_app
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
             dataGridView_selection.SelectionChanged += dataGridView_selection_selectionChanged;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn4.HeaderText = "Name";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.HeaderText = "Size";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.HeaderText = "hidden Id";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.Visible = false;
             // 
             // flowLayoutPanel_Selection
             // 
@@ -333,6 +379,20 @@ namespace winforms_app
             flowLayoutPanel_preview.Size = new Size(344, 398);
             flowLayoutPanel_preview.TabIndex = 0;
             // 
+            // label_versioning
+            // 
+            label_versioning.Location = new Point(3, 372);
+            label_versioning.Name = "label_versioning";
+            label_versioning.Size = new Size(100, 23);
+            label_versioning.TabIndex = 16;
+            // 
+            // comboBox_versioning
+            // 
+            comboBox_versioning.Location = new Point(109, 375);
+            comboBox_versioning.Name = "comboBox_versioning";
+            comboBox_versioning.Size = new Size(121, 23);
+            comboBox_versioning.TabIndex = 17;
+            // 
             // button_moveSelectedFiles
             // 
             button_moveSelectedFiles.Location = new Point(368, 185);
@@ -353,7 +413,7 @@ namespace winforms_app
             Controls.Add(button_moveSelectedFiles);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
-            Controls.Add(start);
+            Controls.Add(button_start);
             Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
             Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -375,7 +435,6 @@ namespace winforms_app
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
             flowLayoutPanel_preview.ResumeLayout(false);
-            flowLayoutPanel_preview.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -387,7 +446,7 @@ namespace winforms_app
         private ToolStripMenuItem menuOpt_file_open;
         private ToolStrip toolStrip2;
         private ToolStripProgressBar toolStripProgressBar1;
-        private Button start;
+        private Button button_start;
         private AlsoNumberTextBox textBox_searchFilter;
         private ToolStripLabel toolStripLabel_progress;
         private GroupBox groupBox_filter;
@@ -410,6 +469,12 @@ namespace winforms_app
         private ITabNumberedSequence TabNumberedSequenceWrapper;
         private Label label_versioning;
         private ComboBox comboBox_versioning;
-        private IComboBoxVersioning comboBoxVersiong;
+        private IComboBoxVersioning comboBoxWrapper;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }
