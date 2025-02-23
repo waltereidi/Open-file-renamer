@@ -55,13 +55,7 @@ namespace winforms_app
             tabPage2 = new TabPage();
             label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridView_selection = new DataGridView_Files();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             label_versioning = new Label();
@@ -70,7 +64,18 @@ namespace winforms_app
                 comboBox_versioning
                 , tabControl 
                 , dataGridView_preview 
-                , label_currentDirectory );
+                , dataGridView_selection
+                , label_currentDirectory 
+                );
+            TabNumberedSequenceWrapper = new TabNumberedSequence(
+                label_currentDirectory,
+                numberedSequence_label, 
+                NumberedSequence_text,
+                numbered_Sequence_before,
+                numbered_sequence_after,
+                dataGridView_preview,
+                dataGridView_selection
+                );
             button_moveSelectedFiles = new Button();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
@@ -249,6 +254,7 @@ namespace winforms_app
             NumberedSequence_text.Name = "NumberedSequence_text";
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
+            NumberedSequence_text.KeyUp += TabNumberedSequenceWrapper.GetPreview;
             // 
             // numbered_Sequence_before
             // 
@@ -261,6 +267,7 @@ namespace winforms_app
             numbered_Sequence_before.TabStop = true;
             numbered_Sequence_before.Text = "Before";
             numbered_Sequence_before.UseVisualStyleBackColor = true;
+            numbered_Sequence_before.Click += TabNumberedSequenceWrapper.GetPreview;
             // 
             // numbered_sequence_after
             // 
@@ -272,6 +279,7 @@ namespace winforms_app
             numbered_sequence_after.TabStop = true;
             numbered_sequence_after.Text = "After";
             numbered_sequence_after.UseVisualStyleBackColor = true;
+            numbered_sequence_after.Click += TabNumberedSequenceWrapper.GetPreview;
             // 
             // tabPage2
             // 
@@ -300,7 +308,6 @@ namespace winforms_app
             // 
             dataGridView_preview.AllowUserToAddRows = false;
             dataGridView_preview.AllowUserToResizeRows = false;
-            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
             dataGridView_preview.Location = new Point(3, 98);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -309,28 +316,10 @@ namespace winforms_app
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
             dataGridView_preview.SelectionChanged += dataGridView_preview_selectionChanged;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Size";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "hidden Id";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Visible = false;
-            // 
             // dataGridView_selection
             // 
             dataGridView_selection.AllowUserToAddRows = false;
             dataGridView_selection.AllowUserToResizeRows = false;
-            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -338,23 +327,6 @@ namespace winforms_app
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
             dataGridView_selection.SelectionChanged += dataGridView_selection_selectionChanged;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn4.HeaderText = "Name";
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Size";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.HeaderText = "hidden Id";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Visible = false;
             // 
             // flowLayoutPanel_Selection
             // 
@@ -470,11 +442,5 @@ namespace winforms_app
         private Label label_versioning;
         private ComboBox comboBox_versioning;
         private IComboBoxVersioning comboBoxWrapper;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }

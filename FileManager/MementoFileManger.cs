@@ -24,13 +24,13 @@ namespace FileManager
             return ExecuteOperation(files);
         }
         public Task Rollback(Guid old , List<FileInfo> current) 
-            => new FileWriter(_versioning.GetVersionById(old))
+            => new FileWriter(_versioning.GetVersionById(old).files)
             .Rollback(current);
 
         private Task ExecuteOperation(List<IFileProcessor> files) 
             => new FileWriter(files).Start();
-        
-        
 
+        public VersionedModifications.Version GetVersionById(Guid id)
+            => _versioning.GetVersionById(id);
     }
 }

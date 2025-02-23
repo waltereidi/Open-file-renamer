@@ -1,14 +1,14 @@
 ﻿using FileManager.DAO;
 using FileManager.FileOperations;
 using FileManager.Interfaces;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 
 namespace Presentation.UI
 {
     public class DataGridView_Files : DataGridView
     {
+        private DataGridViewRowCollection StoredRows { get; set; }
+
         public DataGridView_Files() 
         {
             var column_FileName = new DataGridViewTextBoxColumn();
@@ -93,7 +93,11 @@ namespace Presentation.UI
             => indexes.Select(s 
                 => this.Rows[s].Cells[2].Value.ToString() ?? throw new ArgumentNullException() )
             .ToList();
-
+        public void DirectoryChanged()
+        {
+            this.Rows.Clear();
+            this.StoredRows.Clear();
+        }
         public void AddSelectRowsFromThisToThere(DirectoryInfo di , 
             DataGridView_Files gridToAdd , 
             List<int> list
@@ -119,10 +123,23 @@ namespace Presentation.UI
                 result.Add( this.SelectedRows[i].Index );
             }
             return result;
-        }           
-        public void PreviewChanged()
-        {
+        }
 
+        public void SaveCurrentGrid()
+            => this.StoredRows = this.Rows;
+
+        public void RestoreStoredRows()
+        {
+            this.Rows.Clear();
+            if (StoredRows != null && StoredRows.Count > 0 )
+            {
+                
+                foreach (var item in StoredRows)
+                {
+                    this.Rows.Add(item);
+                }
+                StoredRows.Clear();
+            }
         }
 
         public List<FileIdentity> GetAllFiles(DirectoryInfo di)

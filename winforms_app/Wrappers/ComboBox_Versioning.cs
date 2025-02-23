@@ -1,6 +1,7 @@
 ﻿
 using ApplicationService;
 using FileManager;
+using FileManager.DAO;
 using Presentation.Interfaces;
 using Presentation.UI;
 
@@ -10,7 +11,8 @@ namespace Presentation.Wrappers
     {
         private readonly ComboBox _comboBox;
         private readonly TabControl _tabControl;
-        private readonly DataGridView_Files _dataGrid;
+        private readonly DataGridView_Files _previewDataGrid;
+        private readonly DataGridView_Files _selectionDataGrid;
         private readonly Label _directory;
         private readonly MainApplicationService _service = new MainApplicationService();
         private List<Tuple<Guid, int>> Versions 
@@ -21,36 +23,44 @@ namespace Presentation.Wrappers
         (
             ComboBox c, 
             TabControl t, 
-            DataGridView_Files d, 
+            DataGridView_Files preview_grid,
+            DataGridView_Files selection_grid,
             Label directory 
         )
         {
             _comboBox = c;
             _tabControl = t;
-            _dataGrid = d;
+            _previewDataGrid = preview_grid;
+            _selectionDataGrid = selection_grid;
             _directory = directory;
 
             _comboBox.Items.Insert(0 , "Current");
             _comboBox.SelectedIndex = 0;
             _comboBox.SelectedIndexChanged += Combobox_changed;
-            _comboBox.Click+= LoadVersions;
+            _comboBox.Click+= AddNewOptionList;
 
-        }
-
-        private void LoadVersions(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void Combobox_changed(object? sender, EventArgs e)
         {
             if (_comboBox.SelectedIndex != 0)
+            {
                 _tabControl.Enabled = false;
-            else 
+                _previewDataGrid.SaveCurrentGrid();
+            }
+            else
+            {
                 _tabControl.Enabled = true;
+                _previewDataGrid.RestoreStoredRows();
+                _previewDataGrid.AddNewRowList(GetSelectedVersion().files,  _selectionDataGrid);
+            }
+                
         }
-
-        private void AddNewOptionList(List<Tuple<Guid , int>> list)
+        private VersionedModifications.Version GetSelectedVersion()
+            => _service.GetVersionById( _directory.Text ,Versions
+                .First(f => f.Item2 == _comboBox.SelectedIndex).Item1);
+        
+        private void AddNewOptionList(object? sender, EventArgs e)
         {
             _comboBox.Items.Clear();
             _comboBox.Items.Insert(0, "Current");

@@ -12,7 +12,12 @@ public class MainApplicationService
     {
     }
 
-    public List<IFileProcessor> GetNumberedSequenceAfterPreview(string directory, string separator , List<FileIdentity> files)
+    public List<IFileProcessor> GetNumberedSequenceAfterPreview
+        (
+            string directory,
+            string separator,
+            List<FileIdentity> files
+        )
     {
         INumberedSequence fm = new FileManagerService(new DirectoryInfo(directory));
         return fm.GetNumberedSequenceAfterPreview(files, separator);
@@ -34,6 +39,7 @@ public class MainApplicationService
         IVersionControl vc = new FileManagerService(new(directory));
         return vc.GetVersionById(id);
     }
+
     public List<FileInfo> SearchFiles(string searchText,string directory, Main_SearchFilter? filter = null )
         => new FileManagerService(new DirectoryInfo(directory)).GetFilesContains(searchText);
     public List<FileInfo> SearchFilesFromSize(long? size, string directory, Main_SearchFilter? filter = null)
