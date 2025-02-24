@@ -56,6 +56,13 @@ namespace winforms_app
             label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
             dataGridView_selection = new DataGridView_Files();
+            selection_column_FileName = new DataGridViewTextBoxColumn();
+            selection_column_FileSize = new DataGridViewTextBoxColumn();
+            selection_column_Hidden_FullName = new DataGridViewTextBoxColumn();
+            preview_column_FileName = new DataGridViewTextBoxColumn();
+            preview_column_FileSize = new DataGridViewTextBoxColumn();
+            preview_column_Hidden_FullName = new DataGridViewTextBoxColumn();
+
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             label_versioning = new Label();
@@ -315,6 +322,33 @@ namespace winforms_app
             dataGridView_preview.TabIndex = 0;
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
             dataGridView_preview.SelectionChanged += dataGridView_preview_selectionChanged;
+            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] 
+            { 
+                preview_column_FileName, 
+                preview_column_FileSize, 
+                preview_column_Hidden_FullName 
+            });
+            // 
+            // Column_preview_FileName
+            // 
+            preview_column_FileName.HeaderText = "Name";
+            preview_column_FileName.Name = "preview_Column_FileName";
+            preview_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // 
+            // Column_preview_FileSize
+            // 
+            preview_column_FileSize.HeaderText = "Size";
+            preview_column_FileSize.Name = "Column_preview_FileSize";
+            preview_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // 
+            // Column_preview_Hidden_FullName
+            // 
+            preview_column_Hidden_FullName.HeaderText = "hidden Id";
+            preview_column_Hidden_FullName.Name = "Column_Hidden_Id";
+            preview_column_Hidden_FullName.Visible = false;
+            dataGridView_preview.AllowUserToAddRows = false;
+            dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView_preview.AllowUserToResizeRows = false;
             // 
             // dataGridView_selection
             // 
@@ -327,6 +361,34 @@ namespace winforms_app
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
             dataGridView_selection.SelectionChanged += dataGridView_selection_selectionChanged;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] 
+            { 
+                selection_column_FileName, 
+                selection_column_FileSize, 
+                selection_column_Hidden_FullName 
+            });
+            // 
+            // Column_Selection_FileName
+            // 
+            selection_column_FileName.HeaderText = "Name";
+            selection_column_FileName.Name = "selection_Column_FileName";
+            selection_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // 
+            // Column_Selection_FileSize
+            // 
+            selection_column_FileSize.HeaderText = "Size";
+            selection_column_FileSize.Name = "Column_Selection_FileSize";
+            selection_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            // 
+            // Column_Selection_Hidden_FullName
+            // 
+            selection_column_Hidden_FullName.HeaderText = "hidden Id";
+            selection_column_Hidden_FullName.Name = "Column_Hidden_Id";
+            selection_column_Hidden_FullName.Visible = false;
+            dataGridView_selection.AllowUserToAddRows = false;
+            dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView_selection.AllowUserToResizeRows = false;
+
             // 
             // flowLayoutPanel_Selection
             // 
@@ -409,6 +471,7 @@ namespace winforms_app
             flowLayoutPanel_preview.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
+            
         }
 
         #endregion
@@ -423,6 +486,7 @@ namespace winforms_app
         private ToolStripLabel toolStripLabel_progress;
         private GroupBox groupBox_filter;
         private TabControl tabControl;
+        
         private TabPage tabPage_numberedSequence;
         private TabPage tabPage2;
         private RadioButton radioButton_smallerThan;
@@ -439,8 +503,15 @@ namespace winforms_app
         private Label numberedSequence_label;
         private TextBox NumberedSequence_text;
         private ITabNumberedSequence TabNumberedSequenceWrapper;
+        private ITabControlWrapper TabControlWrapper;
         private Label label_versioning;
         private ComboBox comboBox_versioning;
         private IComboBoxVersioning comboBoxWrapper;
+        private DataGridViewTextBoxColumn selection_column_FileName;
+        private DataGridViewTextBoxColumn selection_column_FileSize;
+        private DataGridViewTextBoxColumn selection_column_Hidden_FullName;
+        private DataGridViewTextBoxColumn preview_column_FileName;
+        private DataGridViewTextBoxColumn preview_column_FileSize;
+        private DataGridViewTextBoxColumn preview_column_Hidden_FullName;
     }
 }

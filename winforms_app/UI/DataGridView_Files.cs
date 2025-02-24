@@ -11,31 +11,6 @@ namespace Presentation.UI
 
         public DataGridView_Files() 
         {
-            var column_FileName = new DataGridViewTextBoxColumn();
-            var column_FileSize = new DataGridViewTextBoxColumn();
-            var column_Hidden_FullName = new DataGridViewTextBoxColumn();
-            this.Columns.AddRange(new DataGridViewColumn[] { column_FileName ,  column_FileSize, column_Hidden_FullName });
-            // 
-            // Column_Selection_FileName
-            // 
-            column_FileName.HeaderText = "Name";
-            column_FileName.Name = "Column_FileName";
-            column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            // 
-            // Column_Selection_FileSize
-            // 
-            column_FileSize.HeaderText = "Size";
-            column_FileSize.Name = "Column_Selection_FileSize";
-            column_FileName.AutoSizeMode  = DataGridViewAutoSizeColumnMode.Fill;
-            // 
-            // Column_Selection_Hidden_FullName
-            // 
-            column_Hidden_FullName.HeaderText = "hidden Id";
-            column_Hidden_FullName.Name = "Column_Hidden_Id";
-            column_Hidden_FullName.Visible = false;
-            this.AllowUserToAddRows = false;
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.AllowUserToResizeRows = false; 
         }
         
         public void AddNewRowList(List<IFileProcessor> files, DataGridView_Files anotherGrid)
