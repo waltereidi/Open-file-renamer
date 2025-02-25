@@ -81,7 +81,8 @@ namespace winforms_app
                 numbered_Sequence_before,
                 numbered_sequence_after,
                 dataGridView_preview,
-                dataGridView_selection
+                dataGridView_selection,
+                tabPage_numberedSequence
                 );
             button_moveSelectedFiles = new Button();
             toolStrip1.SuspendLayout();
@@ -221,8 +222,10 @@ namespace winforms_app
             // 
             // tabControl
             // 
-            tabControl.Controls.Add(tabPage_numberedSequence);
-            tabControl.Controls.Add(tabPage2);
+            var tabs = new List<ITabControl> { TabNumberedSequenceWrapper };
+            TabControlWrapper = new TabControlWrapper(tabControl, tabs);
+            tabs.ForEach(f => tabControl.Controls.Add(f.TabGetInstance()));
+            
             tabControl.Dock = DockStyle.Bottom;
             tabControl.Location = new Point(4, 3);
             tabControl.Margin = new Padding(4, 3, 4, 3);

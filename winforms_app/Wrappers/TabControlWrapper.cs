@@ -1,10 +1,6 @@
 ﻿using FileManager.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Presentation.Interfaces;
+using System.Windows.Forms;
 namespace Presentation.Wrappers
 {
     public class TabControlWrapper : ITabControlWrapper
@@ -17,7 +13,8 @@ namespace Presentation.Wrappers
             _tabs = tabs;
         }
 
-
+        public T GetSelectedTabData<T>()
+            => _tabs.ElementAt(_tabControl.SelectedIndex).GetTabContent<T>();
 
 
     }

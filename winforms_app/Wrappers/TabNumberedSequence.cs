@@ -8,6 +8,7 @@ namespace Presentation.Wrappers
 {
     public class TabNumberedSequence : ITabNumberedSequence
     {
+        
         private readonly Label _label;
         private readonly TextBox _text;
         private readonly RadioButton _radioButton_sequenceBefore;
@@ -16,6 +17,7 @@ namespace Presentation.Wrappers
         private readonly MainApplicationService _service = new();
         private readonly DataGridView_Files _previewGrid;
         private readonly DataGridView_Files _selectionGrid;
+        public readonly TabPage _tab; 
         private string GetSeparator() => _text.Text.ToString();
         public TabNumberedSequence(Label directory ,
             Label label ,
@@ -23,7 +25,8 @@ namespace Presentation.Wrappers
             RadioButton sequenceBefore,
             RadioButton sequenceAfter,
             DataGridView_Files previewGrid ,
-            DataGridView_Files selectionGrid
+            DataGridView_Files selectionGrid , 
+            TabPage tab 
             ) 
         {
             _label = label;
@@ -33,6 +36,7 @@ namespace Presentation.Wrappers
             _directory = directory;
             _previewGrid = previewGrid;
             _selectionGrid = selectionGrid;
+            _tab = tab;
         }
 
         
@@ -60,5 +64,13 @@ namespace Presentation.Wrappers
             var files = Command();
             _previewGrid.AddNewRowList(files , _selectionGrid);
         }
+
+        public T GetTabContent<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TabPage TabGetInstance() => this._tab;
+        
     }
 }
