@@ -8,7 +8,7 @@ namespace Presentation.Interfaces
 {
     public interface ITabControl
     {
-        public T GetTabContent<T>();
+        public IOperationContract GetTabContent();
         public TabPage TabGetInstance();
 
     }

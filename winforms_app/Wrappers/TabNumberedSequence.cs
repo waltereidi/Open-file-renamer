@@ -1,8 +1,10 @@
 ﻿using ApplicationService;
+using ApplicationService.Contracts;
+using ApplicationService.Enum;
 using FileManager.Interfaces;
 using Presentation.Interfaces;
 using Presentation.UI;
-using System.Drawing.Text;
+
 
 namespace Presentation.Wrappers
 {
@@ -64,10 +66,11 @@ namespace Presentation.Wrappers
             var files = Command();
             _previewGrid.AddNewRowList(files , _selectionGrid);
         }
-
-        public T GetTabContent<T>()
+        public IOperationContract GetTabContent()
         {
-            throw new NotImplementedException();
+            if (_radioButton_sequenceAfter.Checked) return new NumberedSequenceBefore(GetSeparator());
+            else if (_radioButton_sequenceBefore.Checked) return new NumberedSequenceBefore(GetSeparator());
+            else throw new InvalidOperationException();
         }
 
         public TabPage TabGetInstance() => this._tab;
