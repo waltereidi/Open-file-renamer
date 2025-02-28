@@ -11,6 +11,6 @@ namespace FileManager.Interfaces
     {
         public List<VersionedModifications.Version> GetAllVersion();
         public VersionedModifications.Version GetVersionById(Guid id);
-
+        public Task RollbackOperation(List<FileIdentity> fi, Guid version);
     }
 }

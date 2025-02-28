@@ -23,5 +23,8 @@ namespace ApplicationService.Contracts
             => _Directory;
         public List<FileIdentity> GetFiles()
             => _Files;
+
+        public object GetInstance()
+            => this;
     }
 }

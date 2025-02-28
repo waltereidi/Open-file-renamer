@@ -7,13 +7,12 @@ using System.Collections.Generic;
 
 namespace FileManager
 {
-    public class FileManagerService : INumberedSequence, IDirectoryReader, IVersionControl
+    public class FileManagerService : IDirectoryReader, IVersionControl
     {
         private readonly IMementoFileManager _memento = new MementoFileManger();
         private readonly DirectoryReader _dir;
         public FileManagerService(DirectoryInfo dr) 
             => _dir = new DirectoryReader(dr);
-
 
         public List<VersionedModifications.Version> GetAllVersions() => _memento.GetAllVersions();
         public List<FileInfo> GetFiles() => _dir.GetFiles();
@@ -30,7 +29,7 @@ namespace FileManager
         public async Task GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
             => await _memento.SetState(GetNumberedSequenceAfterPreview(files, separator));
 
-        public async Task RollbackOperation(List<FileInfo> fi , Guid version)
+        public async Task RollbackOperation(List<FileIdentity> fi , Guid version)
             => await _memento.Rollback(version, fi);
 
      

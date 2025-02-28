@@ -9,7 +9,6 @@ namespace FileManager
         private static VersionedModifications _versioning = new VersionedModifications();
         public  void ClearMemento() 
             => _versioning = new VersionedModifications();
-        
         public List<VersionedModifications.Version> GetAllVersions() 
             => _versioning.Versions;
         public Task SetState(List<IFileProcessor> files) 
@@ -20,10 +19,11 @@ namespace FileManager
                 files.ForEach(f => original.Add(new OriginalFile( f.GetDirectory(), f.GetIdentity())));
                 _versioning.AddVersion(original);
             }
+
             _versioning.AddVersion(files);
             return ExecuteOperation(files);
         }
-        public Task Rollback(Guid old , List<FileInfo> current) 
+        public Task Rollback(Guid old , List<FileIdentity> current) 
             => new FileWriter(_versioning.GetVersionById(old).files)
             .Rollback(current);
 

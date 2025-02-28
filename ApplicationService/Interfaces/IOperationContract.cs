@@ -8,5 +8,6 @@ namespace Presentation.Interfaces
     {
         List<FileIdentity> GetFiles(); 
         string GetDirectory();
+        object GetInstance();
     }
 }

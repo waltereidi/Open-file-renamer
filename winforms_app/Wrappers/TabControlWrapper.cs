@@ -13,8 +13,8 @@ namespace Presentation.Wrappers
             _tabs = tabs;
         }
 
-        public T GetSelectedTabData<T>()
-            => _tabs.ElementAt(_tabControl.SelectedIndex).GetTabContent<T>();
+        public IOperationContract GetSelectedTabData()
+            => _tabs.ElementAt(_tabControl.SelectedIndex).GetTabContent();
 
 
     }

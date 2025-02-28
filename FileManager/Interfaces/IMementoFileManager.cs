@@ -13,6 +13,6 @@ namespace FileManager.Interfaces
         public List<VersionedModifications.Version> GetAllVersions();
         public VersionedModifications.Version GetVersionById(Guid id);
         public Task SetState(List<IFileProcessor> state);
-        public Task Rollback(Guid old, List<FileInfo> current);
+        public Task Rollback(Guid old, List<FileIdentity> current);
     }
 }

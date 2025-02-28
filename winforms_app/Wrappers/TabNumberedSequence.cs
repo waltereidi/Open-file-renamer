@@ -44,19 +44,19 @@ namespace Presentation.Wrappers
         
         public List<IFileProcessor> Command()
         {
-            if (_radioButton_sequenceAfter.Checked) 
-                return _service.GetNumberedSequenceAfterPreview(
-                    _directory.Text.ToString(), 
-                    GetSeparator(), 
-                    _previewGrid.GetAllFiles(new(_directory.Text))
-                    );
+            //if (_radioButton_sequenceAfter.Checked) 
+            //    return _service.GetNumberedSequenceAfterPreview(
+            //        _directory.Text.ToString(), 
+            //        GetSeparator(), 
+            //        _previewGrid.GetAllFiles(new(_directory.Text))
+            //        );
 
-            else if (_radioButton_sequenceBefore.Checked) 
-                return _service.GetNumberedSequenceBeforePreview(
-                    _directory.Text.ToString(),
-                    GetSeparator(),
-                    _previewGrid.GetAllFiles(new(_directory.Text))
-                    );
+            //else if (_radioButton_sequenceBefore.Checked) 
+            //    return _service.GetNumberedSequenceBeforePreview(
+            //        _directory.Text.ToString(),
+            //        GetSeparator(),
+            //        _previewGrid.GetAllFiles(new(_directory.Text))
+            //        );
 
             throw new ArgumentNullException("Option is not selected");
         }
@@ -68,8 +68,10 @@ namespace Presentation.Wrappers
         }
         public IOperationContract GetTabContent()
         {
-            if (_radioButton_sequenceAfter.Checked) return new NumberedSequenceBefore(GetSeparator());
-            else if (_radioButton_sequenceBefore.Checked) return new NumberedSequenceBefore(GetSeparator());
+            if (_radioButton_sequenceAfter.Checked) 
+                return new NumberedSequenceAfter(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)) , _text.Text);
+            else if (_radioButton_sequenceBefore.Checked) 
+                return new NumberedSequenceBefore(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)), _text.Text);
             else throw new InvalidOperationException();
         }
 

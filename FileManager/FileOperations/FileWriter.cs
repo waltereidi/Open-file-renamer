@@ -1,4 +1,5 @@
-﻿using FileManager.Interfaces;
+﻿using FileManager.DAO;
+using FileManager.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,11 @@ namespace FileManager.FileOperations
             }
 
         }
-        public async Task Rollback(List<FileInfo> current )
+        public async Task Rollback(List<FileIdentity> current )
         {
             if(_file.Any(x => current.Any(a => x.GetIdentity().Equals(a))))
             {
-                var canRollback = _file.Where(x => current.Any(a => x.GetIdentity().Equals(a)));
+                var canRollback = _file.Where(x => current.Select(s=> s.GetFile()).Any(a => x.GetIdentity().Equals(a)));
                 canRollback.ToList();
                 _file.Select(s => Task.Run(() => s.Start())).ToArray();
             }

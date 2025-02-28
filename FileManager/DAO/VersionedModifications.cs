@@ -22,6 +22,8 @@ namespace FileManager.DAO
             => Versions.First(f => f.id == f.id);
 
         private bool AllFilesHaveSameCreationTimeInTicks(List<FileInfo> current, List<FileInfo> target )
-            => target.Where(w => current.Any(x => x.CreationTime.Ticks == w.CreationTime.Ticks)).Count() == current.Count();
+            => target
+                .Where(w => current.Any(x => x.CreationTime.Ticks == w.CreationTime.Ticks))
+                .Count() == current.Count();
     } 
 }
