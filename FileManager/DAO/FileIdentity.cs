@@ -11,18 +11,18 @@ namespace FileManager.DAO
     /// </summary>
     public class FileIdentity
     {
-        public readonly long Id;
+        public readonly string Id;
         public readonly DirectoryInfo Dir;
         public string GetId() => Id.ToString();
         private FileIdentity(FileInfo fi )
         {
-            Id = fi.CreationTime.Ticks;
+            Id = fi.FullName;
             Dir = fi.Directory ?? throw new Exception(nameof(fi));
         }
         public static FileIdentity Instance(FileInfo fi) => new FileIdentity(fi);
         public static FileIdentity Instance(string id , DirectoryInfo di)
         {
-            var file = di.GetFiles().First(x=> x.CreationTime.Ticks.ToString() == id);
+            var file = di.GetFiles().First(x=> x.FullName == id);
             return Instance(file);
         }
 
@@ -38,7 +38,7 @@ namespace FileManager.DAO
         }
 
         public FileInfo GetFile() => Dir.GetFiles().First(x => this.Equals(x) );
-        public bool Equals(FileInfo fi) => Id == fi.CreationTime.Ticks;
+        public bool Equals(FileInfo fi) => Id == fi.FullName;
         public bool Equals(string id ) => Id.ToString() == id;
 
     }

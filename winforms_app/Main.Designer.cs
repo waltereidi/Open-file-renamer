@@ -65,15 +65,15 @@ namespace winforms_app
 
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
-            label_versioning = new Label();
-            comboBox_versioning = new ComboBox();
-            comboBoxWrapper = new ComboBox_Versioning(
-                comboBox_versioning
-                , tabControl 
-                , dataGridView_preview 
-                , dataGridView_selection
-                , label_currentDirectory 
-                );
+            //label_versioning = new Label();
+            //comboBox_versioning = new ComboBox();
+            //comboBoxWrapper = new ComboBox_Versioning(
+            //    comboBox_versioning
+            //    , tabControl 
+            //    , dataGridView_preview 
+            //    , dataGridView_selection
+            //    , label_currentDirectory 
+            //    );
             TabNumberedSequenceWrapper = new TabNumberedSequence(
                 label_currentDirectory,
                 numberedSequence_label, 
@@ -408,8 +408,8 @@ namespace winforms_app
             // 
             flowLayoutPanel_preview.Controls.Add(tabControl);
             flowLayoutPanel_preview.Controls.Add(dataGridView_preview);
-            flowLayoutPanel_preview.Controls.Add(label_versioning);
-            flowLayoutPanel_preview.Controls.Add(comboBox_versioning);
+            //flowLayoutPanel_preview.Controls.Add(label_versioning);
+            //flowLayoutPanel_preview.Controls.Add(comboBox_versioning);
             flowLayoutPanel_preview.Enabled = false;
             flowLayoutPanel_preview.Location = new Point(441, 35);
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
@@ -418,17 +418,17 @@ namespace winforms_app
             // 
             // label_versioning
             // 
-            label_versioning.Location = new Point(3, 372);
-            label_versioning.Name = "label_versioning";
-            label_versioning.Size = new Size(100, 23);
-            label_versioning.TabIndex = 16;
-            // 
-            // comboBox_versioning
-            // 
-            comboBox_versioning.Location = new Point(109, 375);
-            comboBox_versioning.Name = "comboBox_versioning";
-            comboBox_versioning.Size = new Size(121, 23);
-            comboBox_versioning.TabIndex = 17;
+            //label_versioning.Location = new Point(3, 372);
+            //label_versioning.Name = "label_versioning";
+            //label_versioning.Size = new Size(100, 23);
+            //label_versioning.TabIndex = 16;
+            //// 
+            //// comboBox_versioning
+            //// 
+            //comboBox_versioning.Location = new Point(109, 375);
+            //comboBox_versioning.Name = "comboBox_versioning";
+            //comboBox_versioning.Size = new Size(121, 23);
+            //comboBox_versioning.TabIndex = 17;
             // 
             // button_moveSelectedFiles
             // 
@@ -507,9 +507,9 @@ namespace winforms_app
         private TextBox NumberedSequence_text;
         private ITabNumberedSequence TabNumberedSequenceWrapper;
         private ITabControlWrapper TabControlWrapper;
-        private Label label_versioning;
-        private ComboBox comboBox_versioning;
-        private IComboBoxVersioning comboBoxWrapper;
+        //private Label label_versioning;
+        //private ComboBox comboBox_versioning;
+        //private IComboBoxVersioning comboBoxWrapper;
         private DataGridViewTextBoxColumn selection_column_FileName;
         private DataGridViewTextBoxColumn selection_column_FileSize;
         private DataGridViewTextBoxColumn selection_column_Hidden_FullName;

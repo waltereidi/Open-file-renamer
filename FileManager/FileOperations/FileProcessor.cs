@@ -13,7 +13,7 @@ namespace FileManager.FileOperations
         public FileProcessor(DirectoryInfo dr, FileIdentity fi)
         {
             var file = fi.GetFile();
-            Dir = dr;
+            Dir = file.Directory ?? throw new DirectoryNotFoundException();
             Id = fi;
             FileNameBefore = file.Name;
             FileExtensionBefore = file.Extension;
