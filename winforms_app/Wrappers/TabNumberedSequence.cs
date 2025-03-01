@@ -19,7 +19,7 @@ namespace Presentation.Wrappers
         private readonly MainApplicationService _service = new();
         private readonly DataGridView_Files _previewGrid;
         private readonly DataGridView_Files _selectionGrid;
-        public readonly TabPage _tab; 
+        public readonly TabPage _tab;
         private string GetSeparator() => _text.Text.ToString();
         public TabNumberedSequence(Label directory ,
             Label label ,
@@ -39,39 +39,20 @@ namespace Presentation.Wrappers
             _previewGrid = previewGrid;
             _selectionGrid = selectionGrid;
             _tab = tab;
-        }
-
-        
-        public List<IFileProcessor> Command()
-        {
-            //if (_radioButton_sequenceAfter.Checked) 
-            //    return _service.GetNumberedSequenceAfterPreview(
-            //        _directory.Text.ToString(), 
-            //        GetSeparator(), 
-            //        _previewGrid.GetAllFiles(new(_directory.Text))
-            //        );
-
-            //else if (_radioButton_sequenceBefore.Checked) 
-            //    return _service.GetNumberedSequenceBeforePreview(
-            //        _directory.Text.ToString(),
-            //        GetSeparator(),
-            //        _previewGrid.GetAllFiles(new(_directory.Text))
-            //        );
-
-            throw new ArgumentNullException("Option is not selected");
+            
         }
 
         public void GetPreview(object sender, EventArgs e)
         {
-            var files = Command();
+            var files = _service.GetPreview( GetTabContent());
             _previewGrid.AddNewRowList(files , _selectionGrid);
         }
         public IOperationContract GetTabContent()
         {
             if (_radioButton_sequenceAfter.Checked) 
-                return new NumberedSequenceAfter(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)) , _text.Text);
+                return new NumberedSequenceAfter(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)) , _directory.Text);
             else if (_radioButton_sequenceBefore.Checked) 
-                return new NumberedSequenceBefore(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)), _text.Text);
+                return new NumberedSequenceBefore(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)), _directory.Text);
             else throw new InvalidOperationException();
         }
 

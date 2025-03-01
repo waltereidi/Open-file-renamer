@@ -28,8 +28,8 @@ namespace winforms_app
 
         private void button_start_click(object sender, EventArgs e)
         {
-            
-
+            _service = new MainApplicationService();
+            _service.RenameFiles(TabControlWrapper.GetSelectedTabData());
         }
 
         private void button1_Click_1(object sender, EventArgs e)

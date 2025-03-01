@@ -18,39 +18,38 @@ public class MainApplicationService
     public List<IFileProcessor> GetPreview(IOperationContract contract )
     {
         FileManagerService fm = new( new(contract.GetDirectory()));
-        return Command( contract , fm , true) ?? throw new ArgumentNullException(); 
+        return CommandPreview( contract , fm ) ?? throw new ArgumentNullException(); 
     }
-    private List<IFileProcessor>? Command(IOperationContract contract, FileManagerService fm , bool preview) 
+    private List<IFileProcessor> CommandPreview(IOperationContract contract, FileManagerService fm ) 
         => contract.GetInstance() 
         switch 
         {
-            NumberedSequenceBefore e => 
-                preview 
-                ? fm.GetNumberedSequenceBeforePreview(contract.GetFiles(), e._Separator) 
-                : fm.GetNumberedSequenceBefore(contract.GetFiles(), e._Separator).IsCompletedSuccessfully 
-                    ? null
-                    : throw new Exception(),
-            NumberedSequenceAfter e =>
-                preview
-                ? fm.GetNumberedSequenceAfterPreview(contract.GetFiles(), e._Separator)
-                : fm.GetNumberedSequenceAfter(contract.GetFiles(), e._Separator).IsCompletedSuccessfully
-                    ? null
-                    : throw new Exception(),
+            NumberedSequenceBefore e => fm.GetNumberedSequenceBeforePreview(contract.GetFiles(), e._Separator),
+            NumberedSequenceAfter e => fm.GetNumberedSequenceAfterPreview(contract.GetFiles(), e._Separator),
             //Place here more operations call
             _ => throw new InvalidOperationException()
         };
+    private Task CommandRename(IOperationContract contract, FileManagerService fm)
+      => contract.GetInstance()
+      switch
+      {
+          NumberedSequenceBefore e => fm.GetNumberedSequenceBefore(contract.GetFiles(), e._Separator),
+          NumberedSequenceAfter e => fm.GetNumberedSequenceAfter(contract.GetFiles(), e._Separator),
+          //Place here more operations call
+          _ => throw new InvalidOperationException()
+      };
     public void RenameFiles(IOperationContract contract)
     {
         FileManagerService fm = new(new(contract.GetDirectory()));
-        Command(contract, fm, false);
+        CommandRename(contract, fm);
     }
 
     public MainApplicationServiceDTO.RollbackMessage RollBackVersion(Guid id ,List<FileIdentity> files ,string directory )
     {
         IVersionControl fm = new FileManagerService(new(directory));
-        var task =fm.RollbackOperation(files , id);
+        Task.Run(() => fm.RollbackOperation(files , id));
         
-        return new(task.IsCompletedSuccessfully ? "Success" : "Error");
+        return new(true ? "Success" : "Error");
     }
     public List<FileInfo> SearchFiles(string searchText, string directory, Main_SearchFilter? filter = null)
     => new FileManagerService(new DirectoryInfo(directory)).GetFilesContains(searchText);
