@@ -50,41 +50,23 @@ namespace winforms_app
             tabPage_numberedSequence = new TabPage();
             numberedSequence_label = new Label();
             NumberedSequence_text = new TextBox();
+            label_currentDirectory = new Label();
             numbered_Sequence_before = new RadioButton();
             numbered_sequence_after = new RadioButton();
-            tabPage2 = new TabPage();
-            label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
+            preview_column_FileName = new DataGridViewTextBoxColumn();
+            preview_column_FileSize = new DataGridViewTextBoxColumn();
+            preview_column_Hidden_FullName = new DataGridViewTextBoxColumn();
             dataGridView_selection = new DataGridView_Files();
             selection_column_FileName = new DataGridViewTextBoxColumn();
             selection_column_FileSize = new DataGridViewTextBoxColumn();
             selection_column_Hidden_FullName = new DataGridViewTextBoxColumn();
-            preview_column_FileName = new DataGridViewTextBoxColumn();
-            preview_column_FileSize = new DataGridViewTextBoxColumn();
-            preview_column_Hidden_FullName = new DataGridViewTextBoxColumn();
-
+            tabPage_patternMatching = new TabPage();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
-            //label_versioning = new Label();
-            //comboBox_versioning = new ComboBox();
-            //comboBoxWrapper = new ComboBox_Versioning(
-            //    comboBox_versioning
-            //    , tabControl 
-            //    , dataGridView_preview 
-            //    , dataGridView_selection
-            //    , label_currentDirectory 
-            //    );
-            TabNumberedSequenceWrapper = new TabNumberedSequence(
-                label_currentDirectory,
-                numberedSequence_label, 
-                NumberedSequence_text,
-                numbered_Sequence_before,
-                numbered_sequence_after,
-                dataGridView_preview,
-                dataGridView_selection,
-                tabPage_numberedSequence
-                );
             button_moveSelectedFiles = new Button();
+            comboBox1 = new ComboBox();
+            textBox1 = new TextBox();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -92,6 +74,7 @@ namespace winforms_app
             tabPage_numberedSequence.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_preview).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).BeginInit();
+            tabPage_patternMatching.SuspendLayout();
             flowLayoutPanel_Selection.SuspendLayout();
             flowLayoutPanel_preview.SuspendLayout();
             SuspendLayout();
@@ -102,7 +85,7 @@ namespace winforms_app
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0, 0, 2, 0);
-            toolStrip1.Size = new Size(797, 25);
+            toolStrip1.Size = new Size(955, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -124,10 +107,10 @@ namespace winforms_app
             // 
             toolStrip2.Dock = DockStyle.Bottom;
             toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1, toolStripLabel_progress });
-            toolStrip2.Location = new Point(0, 454);
+            toolStrip2.Location = new Point(0, 459);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new Padding(0, 0, 2, 0);
-            toolStrip2.Size = new Size(797, 25);
+            toolStrip2.Size = new Size(955, 25);
             toolStrip2.TabIndex = 3;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -222,17 +205,16 @@ namespace winforms_app
             // 
             // tabControl
             // 
-            var tabs = new List<ITabControl> { TabNumberedSequenceWrapper };
-            TabControlWrapper = new TabControlWrapper(tabControl, tabs);
-            tabs.ForEach(f => tabControl.Controls.Add(f.TabGetInstance()));
-            
+            tabControl.Controls.Add(tabPage_numberedSequence);
+            tabControl.Controls.Add(tabPage_patternMatching);
             tabControl.Dock = DockStyle.Bottom;
             tabControl.Location = new Point(4, 3);
             tabControl.Margin = new Padding(4, 3, 4, 3);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(334, 89);
+            tabControl.Size = new Size(499, 110);
             tabControl.TabIndex = 15;
+            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             // 
             // tabPage_numberedSequence
             // 
@@ -244,7 +226,7 @@ namespace winforms_app
             tabPage_numberedSequence.Margin = new Padding(4, 3, 4, 3);
             tabPage_numberedSequence.Name = "tabPage_numberedSequence";
             tabPage_numberedSequence.Padding = new Padding(4, 3, 4, 3);
-            tabPage_numberedSequence.Size = new Size(326, 61);
+            tabPage_numberedSequence.Size = new Size(491, 82);
             tabPage_numberedSequence.TabIndex = 0;
             tabPage_numberedSequence.Text = "Numbered Sequence";
             tabPage_numberedSequence.UseVisualStyleBackColor = true;
@@ -264,43 +246,6 @@ namespace winforms_app
             NumberedSequence_text.Name = "NumberedSequence_text";
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
-            NumberedSequence_text.KeyUp += TabNumberedSequenceWrapper.GetPreview;
-            // 
-            // numbered_Sequence_before
-            // 
-            numbered_Sequence_before.AutoSize = true;
-            numbered_Sequence_before.Checked = true;
-            numbered_Sequence_before.Location = new Point(224, 6);
-            numbered_Sequence_before.Name = "numbered_Sequence_before";
-            numbered_Sequence_before.Size = new Size(61, 19);
-            numbered_Sequence_before.TabIndex = 1;
-            numbered_Sequence_before.TabStop = true;
-            numbered_Sequence_before.Text = "Before";
-            numbered_Sequence_before.UseVisualStyleBackColor = true;
-            numbered_Sequence_before.Click += TabNumberedSequenceWrapper.GetPreview;
-            // 
-            // numbered_sequence_after
-            // 
-            numbered_sequence_after.AutoSize = true;
-            numbered_sequence_after.Location = new Point(224, 39);
-            numbered_sequence_after.Name = "numbered_sequence_after";
-            numbered_sequence_after.Size = new Size(49, 19);
-            numbered_sequence_after.TabIndex = 0;
-            numbered_sequence_after.TabStop = true;
-            numbered_sequence_after.Text = "After";
-            numbered_sequence_after.UseVisualStyleBackColor = true;
-            numbered_sequence_after.Click += TabNumberedSequenceWrapper.GetPreview;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(4, 3, 4, 3);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(4, 3, 4, 3);
-            tabPage2.Size = new Size(326, 61);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // label_currentDirectory
             // 
@@ -314,84 +259,100 @@ namespace winforms_app
             label_currentDirectory.TabIndex = 16;
             label_currentDirectory.Text = "Select a directory";
             // 
+            // numbered_Sequence_before
+            // 
+            numbered_Sequence_before.AutoSize = true;
+            numbered_Sequence_before.Checked = true;
+            numbered_Sequence_before.Location = new Point(224, 6);
+            numbered_Sequence_before.Name = "numbered_Sequence_before";
+            numbered_Sequence_before.Size = new Size(61, 19);
+            numbered_Sequence_before.TabIndex = 1;
+            numbered_Sequence_before.TabStop = true;
+            numbered_Sequence_before.Text = "Before";
+            numbered_Sequence_before.UseVisualStyleBackColor = true;
+            // 
+            // numbered_sequence_after
+            // 
+            numbered_sequence_after.AutoSize = true;
+            numbered_sequence_after.Location = new Point(224, 39);
+            numbered_sequence_after.Name = "numbered_sequence_after";
+            numbered_sequence_after.Size = new Size(49, 19);
+            numbered_sequence_after.TabIndex = 0;
+            numbered_sequence_after.TabStop = true;
+            numbered_sequence_after.Text = "After";
+            numbered_sequence_after.UseVisualStyleBackColor = true;
+            // 
             // dataGridView_preview
             // 
             dataGridView_preview.AllowUserToAddRows = false;
             dataGridView_preview.AllowUserToResizeRows = false;
-            dataGridView_preview.Location = new Point(3, 98);
+            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] { preview_column_FileName, preview_column_FileSize, preview_column_Hidden_FullName });
+            dataGridView_preview.Location = new Point(3, 119);
             dataGridView_preview.Name = "dataGridView_preview";
             dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView_preview.Size = new Size(335, 271);
+            dataGridView_preview.Size = new Size(499, 302);
             dataGridView_preview.TabIndex = 0;
             dataGridView_preview.CellDoubleClick += dataGridView_preview_cellDoubleClick;
             dataGridView_preview.SelectionChanged += dataGridView_preview_selectionChanged;
-            dataGridView_preview.Columns.AddRange(new DataGridViewColumn[] 
-            { 
-                preview_column_FileName, 
-                preview_column_FileSize, 
-                preview_column_Hidden_FullName 
-            });
             // 
-            // Column_preview_FileName
+            // preview_column_FileName
             // 
-            preview_column_FileName.HeaderText = "Name";
-            preview_column_FileName.Name = "preview_Column_FileName";
             preview_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            preview_column_FileName.HeaderText = "Name";
+            preview_column_FileName.Name = "preview_column_FileName";
             // 
-            // Column_preview_FileSize
+            // preview_column_FileSize
             // 
             preview_column_FileSize.HeaderText = "Size";
-            preview_column_FileSize.Name = "Column_preview_FileSize";
-            preview_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            preview_column_FileSize.Name = "preview_column_FileSize";
             // 
-            // Column_preview_Hidden_FullName
+            // preview_column_Hidden_FullName
             // 
             preview_column_Hidden_FullName.HeaderText = "hidden Id";
-            preview_column_Hidden_FullName.Name = "Column_Hidden_Id";
+            preview_column_Hidden_FullName.Name = "preview_column_Hidden_FullName";
             preview_column_Hidden_FullName.Visible = false;
-            dataGridView_preview.AllowUserToAddRows = false;
-            dataGridView_preview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView_preview.AllowUserToResizeRows = false;
             // 
             // dataGridView_selection
             // 
             dataGridView_selection.AllowUserToAddRows = false;
             dataGridView_selection.AllowUserToResizeRows = false;
+            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] { selection_column_FileName, selection_column_FileSize, selection_column_Hidden_FullName });
             dataGridView_selection.Location = new Point(3, 100);
             dataGridView_selection.Name = "dataGridView_selection";
             dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView_selection.Size = new Size(341, 291);
+            dataGridView_selection.Size = new Size(341, 321);
             dataGridView_selection.TabIndex = 0;
             dataGridView_selection.CellDoubleClick += dataGridView_selection_cellDoubleClick;
             dataGridView_selection.SelectionChanged += dataGridView_selection_selectionChanged;
-            dataGridView_selection.Columns.AddRange(new DataGridViewColumn[] 
-            { 
-                selection_column_FileName, 
-                selection_column_FileSize, 
-                selection_column_Hidden_FullName 
-            });
             // 
-            // Column_Selection_FileName
+            // selection_column_FileName
             // 
-            selection_column_FileName.HeaderText = "Name";
-            selection_column_FileName.Name = "selection_Column_FileName";
             selection_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            selection_column_FileName.HeaderText = "Name";
+            selection_column_FileName.Name = "selection_column_FileName";
             // 
-            // Column_Selection_FileSize
+            // selection_column_FileSize
             // 
             selection_column_FileSize.HeaderText = "Size";
-            selection_column_FileSize.Name = "Column_Selection_FileSize";
-            selection_column_FileName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            selection_column_FileSize.Name = "selection_column_FileSize";
             // 
-            // Column_Selection_Hidden_FullName
+            // selection_column_Hidden_FullName
             // 
             selection_column_Hidden_FullName.HeaderText = "hidden Id";
-            selection_column_Hidden_FullName.Name = "Column_Hidden_Id";
+            selection_column_Hidden_FullName.Name = "selection_column_Hidden_FullName";
             selection_column_Hidden_FullName.Visible = false;
-            dataGridView_selection.AllowUserToAddRows = false;
-            dataGridView_selection.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView_selection.AllowUserToResizeRows = false;
-
+            // 
+            // tabPage_patternMatching
+            // 
+            tabPage_patternMatching.Controls.Add(textBox1);
+            tabPage_patternMatching.Controls.Add(comboBox1);
+            tabPage_patternMatching.Location = new Point(4, 24);
+            tabPage_patternMatching.Name = "tabPage_patternMatching";
+            tabPage_patternMatching.Padding = new Padding(3);
+            tabPage_patternMatching.Size = new Size(491, 82);
+            tabPage_patternMatching.TabIndex = 1;
+            tabPage_patternMatching.Text = "Pattern";
+            tabPage_patternMatching.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel_Selection
             // 
@@ -401,34 +362,18 @@ namespace winforms_app
             flowLayoutPanel_Selection.Enabled = false;
             flowLayoutPanel_Selection.Location = new Point(12, 35);
             flowLayoutPanel_Selection.Name = "flowLayoutPanel_Selection";
-            flowLayoutPanel_Selection.Size = new Size(349, 398);
+            flowLayoutPanel_Selection.Size = new Size(349, 421);
             flowLayoutPanel_Selection.TabIndex = 0;
             // 
             // flowLayoutPanel_preview
             // 
             flowLayoutPanel_preview.Controls.Add(tabControl);
             flowLayoutPanel_preview.Controls.Add(dataGridView_preview);
-            //flowLayoutPanel_preview.Controls.Add(label_versioning);
-            //flowLayoutPanel_preview.Controls.Add(comboBox_versioning);
             flowLayoutPanel_preview.Enabled = false;
             flowLayoutPanel_preview.Location = new Point(441, 35);
             flowLayoutPanel_preview.Name = "flowLayoutPanel_preview";
-            flowLayoutPanel_preview.Size = new Size(344, 398);
+            flowLayoutPanel_preview.Size = new Size(502, 421);
             flowLayoutPanel_preview.TabIndex = 0;
-            // 
-            // label_versioning
-            // 
-            //label_versioning.Location = new Point(3, 372);
-            //label_versioning.Name = "label_versioning";
-            //label_versioning.Size = new Size(100, 23);
-            //label_versioning.TabIndex = 16;
-            //// 
-            //// comboBox_versioning
-            //// 
-            //comboBox_versioning.Location = new Point(109, 375);
-            //comboBox_versioning.Name = "comboBox_versioning";
-            //comboBox_versioning.Size = new Size(121, 23);
-            //comboBox_versioning.TabIndex = 17;
             // 
             // button_moveSelectedFiles
             // 
@@ -440,13 +385,28 @@ namespace winforms_app
             button_moveSelectedFiles.UseVisualStyleBackColor = true;
             button_moveSelectedFiles.Click += button_moveSelectedFiles_Click;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(6, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(231, 23);
+            comboBox1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 46);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(231, 21);
+            textBox1.TabIndex = 1;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(797, 479);
+            ClientSize = new Size(955, 484);
             Controls.Add(button_moveSelectedFiles);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
@@ -469,12 +429,13 @@ namespace winforms_app
             tabPage_numberedSequence.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_preview).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
+            tabPage_patternMatching.ResumeLayout(false);
+            tabPage_patternMatching.PerformLayout();
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
             flowLayoutPanel_preview.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
-            
         }
 
         #endregion
@@ -491,7 +452,6 @@ namespace winforms_app
         private TabControl tabControl;
         
         private TabPage tabPage_numberedSequence;
-        private TabPage tabPage2;
         private RadioButton radioButton_smallerThan;
         private RadioButton radioButton_contains;
         private RadioButton radioButton_greaterThan;
@@ -505,7 +465,9 @@ namespace winforms_app
         private RadioButton numbered_sequence_after;
         private Label numberedSequence_label;
         private TextBox NumberedSequence_text;
+
         private ITabNumberedSequence TabNumberedSequenceWrapper;
+        private ITabPatternMatching TabPatternMatchingWrapper; 
         private ITabControlWrapper TabControlWrapper;
         //private Label label_versioning;
         //private ComboBox comboBox_versioning;
@@ -516,5 +478,8 @@ namespace winforms_app
         private DataGridViewTextBoxColumn preview_column_FileName;
         private DataGridViewTextBoxColumn preview_column_FileSize;
         private DataGridViewTextBoxColumn preview_column_Hidden_FullName;
+        private TabPage tabPage_patternMatching;
+        private TextBox textBox1;
+        private ComboBox comboBox1;
     }
 }

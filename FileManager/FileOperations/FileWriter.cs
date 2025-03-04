@@ -21,9 +21,9 @@ namespace FileManager.FileOperations
             }
             catch (Exception ex)
             {
-                //var e = _file.Select(s => Task.Run(() => s.Revert())).ToArray();
-                //await Task.WhenAll(e);
-                //throw new Exception(ex.Message);
+                var e = _file.Select(s => Task.Run(() => s.Revert())).ToArray();
+                await Task.WhenAll(e);
+                throw new Exception(ex.Message);
             }
 
         }

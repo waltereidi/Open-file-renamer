@@ -27,9 +27,11 @@ namespace Presentation.UI
         {
             this.AllowUserToAddRows = true;
             var rowIdentities = GetTableRowIdentities(anotherGrid);
-            EnsureFileCanBeAdded(rowIdentities, file.Id );
-            var row = GetRow(file);
-            this.Rows.Add(row);
+            if(EnsureFileCanBeAdded(rowIdentities, file.Id))
+            {
+                var row = GetRow(file);
+                this.Rows.Add(row);
+            }
             this.AllowUserToAddRows = false;
         }
            

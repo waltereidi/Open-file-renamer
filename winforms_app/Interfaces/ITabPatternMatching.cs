@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Interfaces
 {
-    public interface ITabControl
+    internal interface ITabPatternMatching
     {
-        public IOperationContract GetTabContent();
-        public TabPage GetInstance();
-
     }
 }

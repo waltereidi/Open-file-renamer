@@ -56,7 +56,7 @@ namespace Presentation.Wrappers
             else throw new InvalidOperationException();
         }
 
-        public TabPage TabGetInstance() => this._tab;
+        public TabPage GetInstance() => this._tab;
         
     }
 }

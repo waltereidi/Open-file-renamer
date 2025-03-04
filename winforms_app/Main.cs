@@ -115,5 +115,10 @@ namespace winforms_app
         {
 
         }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
