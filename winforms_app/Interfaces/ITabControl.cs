@@ -10,6 +10,7 @@ namespace Presentation.Interfaces
     {
         public IOperationContract GetTabContent();
         public TabPage GetInstance();
+        public void GetPreview(object sender, EventArgs e);
 
     }
 }

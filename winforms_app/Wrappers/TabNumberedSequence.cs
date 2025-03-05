@@ -8,7 +8,7 @@ using Presentation.UI;
 
 namespace Presentation.Wrappers
 {
-    public class TabNumberedSequence : ITabNumberedSequence
+    public class TabNumberedSequence : TabController
     {
         
         private readonly Label _label;
@@ -17,9 +17,6 @@ namespace Presentation.Wrappers
         private readonly RadioButton _radioButton_sequenceAfter;
         private readonly Label _directory;
         private readonly MainApplicationService _service = new();
-        private readonly DataGridView_Files _previewGrid;
-        private readonly DataGridView_Files _selectionGrid;
-        public readonly TabPage _tab;
         private string GetSeparator() => _text.Text.ToString();
         public TabNumberedSequence(Label directory ,
             Label label ,
@@ -29,25 +26,17 @@ namespace Presentation.Wrappers
             DataGridView_Files previewGrid ,
             DataGridView_Files selectionGrid , 
             TabPage tab 
-            ) 
+            ) : base (previewGrid , selectionGrid , tab)
         {
             _label = label;
             _text = text;
             _radioButton_sequenceBefore = sequenceBefore;
             _radioButton_sequenceAfter = sequenceAfter; 
             _directory = directory;
-            _previewGrid = previewGrid;
-            _selectionGrid = selectionGrid;
-            _tab = tab;
             
         }
 
-        public void GetPreview(object sender, EventArgs e)
-        {
-            var files = _service.GetPreview( GetTabContent());
-            _previewGrid.AddNewRowList(files , _selectionGrid);
-        }
-        public IOperationContract GetTabContent()
+        public override IOperationContract GetTabContent()
         {
             if (_radioButton_sequenceAfter.Checked) 
                 return new NumberedSequenceAfter(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)) , _directory.Text);
@@ -56,7 +45,7 @@ namespace Presentation.Wrappers
             else throw new InvalidOperationException();
         }
 
-        public TabPage GetInstance() => this._tab;
+
         
     }
 }

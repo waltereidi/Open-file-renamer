@@ -1,5 +1,7 @@
 using ApplicationService;
 using ApplicationService.Enum;
+using Presentation.Interfaces;
+using Presentation.Wrappers;
 
 namespace winforms_app
 {
@@ -9,7 +11,40 @@ namespace winforms_app
         public Main()
         {
             InitializeComponent();
+            InitializeTabPatternMatchingWrapper();
+            InitializaTabNumberedSequenceWrapper();
+            InitializeTabAppend();
         }
+        private void InitializeTabAppend()
+            => TabAppendWrapper = new TabAppendWrapper
+                (
+                    label_currentDirectory,
+                    textBox_append,
+                    dataGridView_preview,
+                    dataGridView_selection,
+                    tabPage_append,
+                    radioButton_append_appendAt,
+                    radioButton_append_appendToEnd,
+                    radioButton_append_appendToStart
+                );
+
+        private void InitializaTabNumberedSequenceWrapper()
+            =>TabNumberedSequenceWrapper = new TabNumberedSequence
+                (
+                    label_currentDirectory,
+                    numberedSequence_label,
+                    NumberedSequence_text,
+                    numbered_Sequence_before,
+                    numbered_sequence_after,
+                    dataGridView_preview,
+                    dataGridView_selection,
+                    tabPage_numberedSequence
+                );
+        
+
+        private void InitializeTabPatternMatchingWrapper()
+            => TabControlWrapper = new TabControlWrapper(tabControl, 
+                new List<ITabControl> { TabNumberedSequenceWrapper });
 
         private void menuOpt_file_open_Click(object sender, EventArgs e)
         {

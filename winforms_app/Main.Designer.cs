@@ -50,9 +50,20 @@ namespace winforms_app
             tabPage_numberedSequence = new TabPage();
             numberedSequence_label = new Label();
             NumberedSequence_text = new TextBox();
-            label_currentDirectory = new Label();
             numbered_Sequence_before = new RadioButton();
             numbered_sequence_after = new RadioButton();
+            tabPage_patternMatching = new TabPage();
+            label1 = new Label();
+            textBox_Pattern_to = new TextBox();
+            textBox_pattern_from = new TextBox();
+            comboBox1 = new ComboBox();
+            tabPage_append = new TabPage();
+            radioButton_append_appendAt = new RadioButton();
+            radioButton_append_appendToEnd = new RadioButton();
+            radioButton_append_appendToStart = new RadioButton();
+            label2 = new Label();
+            textBox_append = new TextBox();
+            label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
             preview_column_FileName = new DataGridViewTextBoxColumn();
             preview_column_FileSize = new DataGridViewTextBoxColumn();
@@ -61,20 +72,18 @@ namespace winforms_app
             selection_column_FileName = new DataGridViewTextBoxColumn();
             selection_column_FileSize = new DataGridViewTextBoxColumn();
             selection_column_Hidden_FullName = new DataGridViewTextBoxColumn();
-            tabPage_patternMatching = new TabPage();
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             button_moveSelectedFiles = new Button();
-            comboBox1 = new ComboBox();
-            textBox1 = new TextBox();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage_numberedSequence.SuspendLayout();
+            tabPage_patternMatching.SuspendLayout();
+            tabPage_append.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_preview).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView_selection).BeginInit();
-            tabPage_patternMatching.SuspendLayout();
             flowLayoutPanel_Selection.SuspendLayout();
             flowLayoutPanel_preview.SuspendLayout();
             SuspendLayout();
@@ -207,6 +216,7 @@ namespace winforms_app
             // 
             tabControl.Controls.Add(tabPage_numberedSequence);
             tabControl.Controls.Add(tabPage_patternMatching);
+            tabControl.Controls.Add(tabPage_append);
             tabControl.Dock = DockStyle.Bottom;
             tabControl.Location = new Point(4, 3);
             tabControl.Margin = new Padding(4, 3, 4, 3);
@@ -247,18 +257,6 @@ namespace winforms_app
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
             // 
-            // label_currentDirectory
-            // 
-            label_currentDirectory.AutoSize = true;
-            label_currentDirectory.FlatStyle = FlatStyle.Flat;
-            label_currentDirectory.ForeColor = Color.Red;
-            label_currentDirectory.Location = new Point(4, 0);
-            label_currentDirectory.Margin = new Padding(4, 0, 4, 0);
-            label_currentDirectory.Name = "label_currentDirectory";
-            label_currentDirectory.Size = new Size(100, 15);
-            label_currentDirectory.TabIndex = 16;
-            label_currentDirectory.Text = "Select a directory";
-            // 
             // numbered_Sequence_before
             // 
             numbered_Sequence_before.AutoSize = true;
@@ -281,6 +279,127 @@ namespace winforms_app
             numbered_sequence_after.TabStop = true;
             numbered_sequence_after.Text = "After";
             numbered_sequence_after.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_patternMatching
+            // 
+            tabPage_patternMatching.Controls.Add(label1);
+            tabPage_patternMatching.Controls.Add(textBox_Pattern_to);
+            tabPage_patternMatching.Controls.Add(textBox_pattern_from);
+            tabPage_patternMatching.Controls.Add(comboBox1);
+            tabPage_patternMatching.Location = new Point(4, 24);
+            tabPage_patternMatching.Name = "tabPage_patternMatching";
+            tabPage_patternMatching.Padding = new Padding(3);
+            tabPage_patternMatching.Size = new Size(491, 82);
+            tabPage_patternMatching.TabIndex = 1;
+            tabPage_patternMatching.Text = "Pattern";
+            tabPage_patternMatching.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(239, 49);
+            label1.Name = "label1";
+            label1.Size = new Size(17, 15);
+            label1.TabIndex = 3;
+            label1.Text = "to";
+            // 
+            // textBox_Pattern_to
+            // 
+            textBox_Pattern_to.Location = new Point(262, 46);
+            textBox_Pattern_to.Name = "textBox_Pattern_to";
+            textBox_Pattern_to.Size = new Size(223, 21);
+            textBox_Pattern_to.TabIndex = 2;
+            // 
+            // textBox_pattern_from
+            // 
+            textBox_pattern_from.Location = new Point(6, 46);
+            textBox_pattern_from.Name = "textBox_pattern_from";
+            textBox_pattern_from.Size = new Size(231, 21);
+            textBox_pattern_from.TabIndex = 1;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(6, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(231, 23);
+            comboBox1.TabIndex = 0;
+            // 
+            // tabPage_append
+            // 
+            tabPage_append.Controls.Add(radioButton_append_appendAt);
+            tabPage_append.Controls.Add(radioButton_append_appendToEnd);
+            tabPage_append.Controls.Add(radioButton_append_appendToStart);
+            tabPage_append.Controls.Add(label2);
+            tabPage_append.Controls.Add(textBox_append);
+            tabPage_append.Location = new Point(4, 24);
+            tabPage_append.Name = "tabPage_append";
+            tabPage_append.Padding = new Padding(3);
+            tabPage_append.Size = new Size(491, 82);
+            tabPage_append.TabIndex = 2;
+            tabPage_append.Text = "Append";
+            tabPage_append.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_append_appendAt
+            // 
+            radioButton_append_appendAt.AutoSize = true;
+            radioButton_append_appendAt.Location = new Point(240, 56);
+            radioButton_append_appendAt.Name = "radioButton_append_appendAt";
+            radioButton_append_appendAt.Size = new Size(126, 19);
+            radioButton_append_appendAt.TabIndex = 4;
+            radioButton_append_appendAt.TabStop = true;
+            radioButton_append_appendAt.Text = "Append at position";
+            radioButton_append_appendAt.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_append_appendToEnd
+            // 
+            radioButton_append_appendToEnd.AutoSize = true;
+            radioButton_append_appendToEnd.Location = new Point(240, 31);
+            radioButton_append_appendToEnd.Name = "radioButton_append_appendToEnd";
+            radioButton_append_appendToEnd.Size = new Size(104, 19);
+            radioButton_append_appendToEnd.TabIndex = 3;
+            radioButton_append_appendToEnd.TabStop = true;
+            radioButton_append_appendToEnd.Text = "Append to end";
+            radioButton_append_appendToEnd.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_append_appendToStart
+            // 
+            radioButton_append_appendToStart.AutoSize = true;
+            radioButton_append_appendToStart.Location = new Point(240, 6);
+            radioButton_append_appendToStart.Name = "radioButton_append_appendToStart";
+            radioButton_append_appendToStart.Size = new Size(106, 19);
+            radioButton_append_appendToStart.TabIndex = 2;
+            radioButton_append_appendToStart.TabStop = true;
+            radioButton_append_appendToStart.Text = "Append to start";
+            radioButton_append_appendToStart.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(17, 16);
+            label2.Name = "label2";
+            label2.Size = new Size(43, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Text to";
+            // 
+            // textBox_append
+            // 
+            textBox_append.Location = new Point(17, 46);
+            textBox_append.Name = "textBox_append";
+            textBox_append.Size = new Size(210, 21);
+            textBox_append.TabIndex = 0;
+            // 
+            // label_currentDirectory
+            // 
+            label_currentDirectory.AutoSize = true;
+            label_currentDirectory.FlatStyle = FlatStyle.Flat;
+            label_currentDirectory.ForeColor = Color.Red;
+            label_currentDirectory.Location = new Point(4, 0);
+            label_currentDirectory.Margin = new Padding(4, 0, 4, 0);
+            label_currentDirectory.Name = "label_currentDirectory";
+            label_currentDirectory.Size = new Size(100, 15);
+            label_currentDirectory.TabIndex = 16;
+            label_currentDirectory.Text = "Select a directory";
             // 
             // dataGridView_preview
             // 
@@ -342,18 +461,6 @@ namespace winforms_app
             selection_column_Hidden_FullName.Name = "selection_column_Hidden_FullName";
             selection_column_Hidden_FullName.Visible = false;
             // 
-            // tabPage_patternMatching
-            // 
-            tabPage_patternMatching.Controls.Add(textBox1);
-            tabPage_patternMatching.Controls.Add(comboBox1);
-            tabPage_patternMatching.Location = new Point(4, 24);
-            tabPage_patternMatching.Name = "tabPage_patternMatching";
-            tabPage_patternMatching.Padding = new Padding(3);
-            tabPage_patternMatching.Size = new Size(491, 82);
-            tabPage_patternMatching.TabIndex = 1;
-            tabPage_patternMatching.Text = "Pattern";
-            tabPage_patternMatching.UseVisualStyleBackColor = true;
-            // 
             // flowLayoutPanel_Selection
             // 
             flowLayoutPanel_Selection.Controls.Add(label_currentDirectory);
@@ -385,21 +492,6 @@ namespace winforms_app
             button_moveSelectedFiles.UseVisualStyleBackColor = true;
             button_moveSelectedFiles.Click += button_moveSelectedFiles_Click;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(6, 12);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(231, 23);
-            comboBox1.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(6, 46);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(231, 21);
-            textBox1.TabIndex = 1;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -427,10 +519,12 @@ namespace winforms_app
             tabControl.ResumeLayout(false);
             tabPage_numberedSequence.ResumeLayout(false);
             tabPage_numberedSequence.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView_preview).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
             tabPage_patternMatching.ResumeLayout(false);
             tabPage_patternMatching.PerformLayout();
+            tabPage_append.ResumeLayout(false);
+            tabPage_append.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_preview).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_selection).EndInit();
             flowLayoutPanel_Selection.ResumeLayout(false);
             flowLayoutPanel_Selection.PerformLayout();
             flowLayoutPanel_preview.ResumeLayout(false);
@@ -466,12 +560,6 @@ namespace winforms_app
         private Label numberedSequence_label;
         private TextBox NumberedSequence_text;
 
-        private ITabNumberedSequence TabNumberedSequenceWrapper;
-        private ITabPatternMatching TabPatternMatchingWrapper; 
-        private ITabControlWrapper TabControlWrapper;
-        //private Label label_versioning;
-        //private ComboBox comboBox_versioning;
-        //private IComboBoxVersioning comboBoxWrapper;
         private DataGridViewTextBoxColumn selection_column_FileName;
         private DataGridViewTextBoxColumn selection_column_FileSize;
         private DataGridViewTextBoxColumn selection_column_Hidden_FullName;
@@ -479,7 +567,29 @@ namespace winforms_app
         private DataGridViewTextBoxColumn preview_column_FileSize;
         private DataGridViewTextBoxColumn preview_column_Hidden_FullName;
         private TabPage tabPage_patternMatching;
-        private TextBox textBox1;
+        private TextBox textBox_pattern_from;
         private ComboBox comboBox1;
+        private TabPage tabPage_append;
+        private Label label1;
+        private TextBox textBox_Pattern_to;
+        //
+        // Custom Wrappers
+        //
+        private ITabControl TabNumberedSequenceWrapper;
+        private ITabControl TabPatternMatchingWrapper;
+        private ITabControl TabAppendWrapper;
+        
+        private ITabControlWrapper TabControlWrapper;
+
+        private RadioButton radioButton_append_appendAt;
+        private RadioButton radioButton_append_appendToEnd;
+        private RadioButton radioButton_append_appendToStart;
+        private Label label2;
+        private TextBox textBox_append;
+        //Code removed for further implementation
+        //private Label label_versioning;
+        //private ComboBox comboBox_versioning;
+        //private IComboBoxVersioning comboBoxWrapper;
+
     }
 }
