@@ -2,6 +2,7 @@ using ApplicationService;
 using ApplicationService.Enum;
 using Presentation.Interfaces;
 using Presentation.Wrappers;
+using System.Net.Http.Headers;
 
 namespace winforms_app
 {
@@ -14,7 +15,9 @@ namespace winforms_app
             InitializeTabPatternMatchingWrapper();
             InitializaTabNumberedSequenceWrapper();
             InitializeTabAppend();
+            InitializeTabControl();
         }
+
         private void InitializeTabAppend()
             => TabAppendWrapper = new TabAppendWrapper
                 (
@@ -27,7 +30,7 @@ namespace winforms_app
                     radioButton_append_appendToEnd,
                     radioButton_append_appendToStart
                 );
-
+        
         private void InitializaTabNumberedSequenceWrapper()
             =>TabNumberedSequenceWrapper = new TabNumberedSequence
                 (
@@ -40,12 +43,27 @@ namespace winforms_app
                     dataGridView_selection,
                     tabPage_numberedSequence
                 );
-        
 
+
+        private void InitializeTabControl()
+            => TabPatternMatchingWrapper = new TabPatternMatching
+            (
+                label_currentDirectory,
+                label_patternMatching_to,
+                textBox_Pattern_to,
+                textBox_pattern_from,
+                comboBox_patternMatching_operation,
+                dataGridView_preview,
+                dataGridView_selection,
+                tabPage_patternMatching
+            );
         private void InitializeTabPatternMatchingWrapper()
-            => TabControlWrapper = new TabControlWrapper(tabControl, 
-                new List<ITabControl> { TabNumberedSequenceWrapper });
-
+            => TabControlWrapper = new TabControlWrapper(tabControl,
+                new List<ITabControl> { 
+                    TabNumberedSequenceWrapper, 
+                    TabPatternMatchingWrapper, 
+                    TabAppendWrapper 
+                });
         private void menuOpt_file_open_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -93,14 +111,14 @@ namespace winforms_app
                 case "radioButton_greaterThan":
                     textBox_searchFilter.ChangeToNumber();
                     files.AddRange(_service.SearchFilesFromSize(
-                        textBox_searchFilter.GetSize(),
+                        textBox_searchFilter.GetNumber(),
                         label_currentDirectory.Text,
                         Main_SearchFilter.BiggerThan
                         )); break;
                 case "radioButton_smallerThan":
                     textBox_searchFilter.ChangeToNumber();
                     files.AddRange(_service.SearchFilesFromSize(
-                        textBox_searchFilter.GetSize(),
+                        textBox_searchFilter.GetNumber(),
                         label_currentDirectory.Text,
                         Main_SearchFilter.SmallerThan
                         )); break;

@@ -53,16 +53,16 @@ namespace winforms_app
             numbered_Sequence_before = new RadioButton();
             numbered_sequence_after = new RadioButton();
             tabPage_patternMatching = new TabPage();
-            label1 = new Label();
+            label_patternMatching_to = new Label();
             textBox_Pattern_to = new TextBox();
             textBox_pattern_from = new TextBox();
-            comboBox1 = new ComboBox();
+            comboBox_patternMatching_operation = new ComboBox();
             tabPage_append = new TabPage();
             radioButton_append_appendAt = new RadioButton();
             radioButton_append_appendToEnd = new RadioButton();
             radioButton_append_appendToStart = new RadioButton();
             label2 = new Label();
-            textBox_append = new TextBox();
+            textBox_append = new AlsoNumberTextBox();
             label_currentDirectory = new Label();
             dataGridView_preview = new DataGridView_Files();
             preview_column_FileName = new DataGridViewTextBoxColumn();
@@ -282,10 +282,10 @@ namespace winforms_app
             // 
             // tabPage_patternMatching
             // 
-            tabPage_patternMatching.Controls.Add(label1);
+            tabPage_patternMatching.Controls.Add(label_patternMatching_to);
             tabPage_patternMatching.Controls.Add(textBox_Pattern_to);
             tabPage_patternMatching.Controls.Add(textBox_pattern_from);
-            tabPage_patternMatching.Controls.Add(comboBox1);
+            tabPage_patternMatching.Controls.Add(comboBox_patternMatching_operation);
             tabPage_patternMatching.Location = new Point(4, 24);
             tabPage_patternMatching.Name = "tabPage_patternMatching";
             tabPage_patternMatching.Padding = new Padding(3);
@@ -294,14 +294,14 @@ namespace winforms_app
             tabPage_patternMatching.Text = "Pattern";
             tabPage_patternMatching.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // label_patternMatching_to
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(239, 49);
-            label1.Name = "label1";
-            label1.Size = new Size(17, 15);
-            label1.TabIndex = 3;
-            label1.Text = "to";
+            label_patternMatching_to.AutoSize = true;
+            label_patternMatching_to.Location = new Point(239, 49);
+            label_patternMatching_to.Name = "label_patternMatching_to";
+            label_patternMatching_to.Size = new Size(17, 15);
+            label_patternMatching_to.TabIndex = 3;
+            label_patternMatching_to.Text = "to";
             // 
             // textBox_Pattern_to
             // 
@@ -317,13 +317,13 @@ namespace winforms_app
             textBox_pattern_from.Size = new Size(231, 21);
             textBox_pattern_from.TabIndex = 1;
             // 
-            // comboBox1
+            // comboBox_patternMatching_operation
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(6, 12);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(231, 23);
-            comboBox1.TabIndex = 0;
+            comboBox_patternMatching_operation.FormattingEnabled = true;
+            comboBox_patternMatching_operation.Location = new Point(6, 12);
+            comboBox_patternMatching_operation.Name = "comboBox_patternMatching_operation";
+            comboBox_patternMatching_operation.Size = new Size(231, 23);
+            comboBox_patternMatching_operation.TabIndex = 0;
             // 
             // tabPage_append
             // 
@@ -343,6 +343,7 @@ namespace winforms_app
             // radioButton_append_appendAt
             // 
             radioButton_append_appendAt.AutoSize = true;
+            radioButton_append_appendAt.Checked = true;
             radioButton_append_appendAt.Location = new Point(240, 56);
             radioButton_append_appendAt.Name = "radioButton_append_appendAt";
             radioButton_append_appendAt.Size = new Size(126, 19);
@@ -568,9 +569,9 @@ namespace winforms_app
         private DataGridViewTextBoxColumn preview_column_Hidden_FullName;
         private TabPage tabPage_patternMatching;
         private TextBox textBox_pattern_from;
-        private ComboBox comboBox1;
+        private ComboBox comboBox_patternMatching_operation;
         private TabPage tabPage_append;
-        private Label label1;
+        private Label label_patternMatching_to;
         private TextBox textBox_Pattern_to;
         //
         // Custom Wrappers
@@ -585,7 +586,7 @@ namespace winforms_app
         private RadioButton radioButton_append_appendToEnd;
         private RadioButton radioButton_append_appendToStart;
         private Label label2;
-        private TextBox textBox_append;
+        private AlsoNumberTextBox textBox_append;
         //Code removed for further implementation
         //private Label label_versioning;
         //private ComboBox comboBox_versioning;

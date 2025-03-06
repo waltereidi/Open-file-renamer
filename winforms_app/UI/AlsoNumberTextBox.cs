@@ -29,7 +29,7 @@ namespace Presentation.UI
             }
             
         }
-        public long? GetSize()
+        public long? GetNumber()
         {
             long size = 0;
             long.TryParse(this.Text , out size);

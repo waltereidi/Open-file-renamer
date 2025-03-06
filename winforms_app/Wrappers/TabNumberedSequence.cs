@@ -15,7 +15,6 @@ namespace Presentation.Wrappers
         private readonly TextBox _text;
         private readonly RadioButton _radioButton_sequenceBefore;
         private readonly RadioButton _radioButton_sequenceAfter;
-        private readonly Label _directory;
         private readonly MainApplicationService _service = new();
         private string GetSeparator() => _text.Text.ToString();
         public TabNumberedSequence(Label directory ,
@@ -26,14 +25,12 @@ namespace Presentation.Wrappers
             DataGridView_Files previewGrid ,
             DataGridView_Files selectionGrid , 
             TabPage tab 
-            ) : base (previewGrid , selectionGrid , tab)
+            ) : base (previewGrid , selectionGrid , tab , directory)
         {
             _label = label;
             _text = text;
             _radioButton_sequenceBefore = sequenceBefore;
             _radioButton_sequenceAfter = sequenceAfter; 
-            _directory = directory;
-            
         }
 
         public override IOperationContract GetTabContent()

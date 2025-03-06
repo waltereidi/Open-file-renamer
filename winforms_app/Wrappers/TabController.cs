@@ -11,15 +11,17 @@ namespace Presentation.Wrappers
 {
     public abstract class TabController : ITabControl
     {
+        protected readonly Label _directory;
         protected readonly DataGridView_Files _previewGrid;
         protected readonly DataGridView_Files _selectionGrid;
         protected readonly MainApplicationService _service = new();
         protected readonly TabPage _tab; 
-        public TabController(DataGridView_Files preview, DataGridView_Files selection, TabPage tab ) 
+        public TabController(DataGridView_Files preview, DataGridView_Files selection, TabPage tab,Label dir ) 
         {
             _previewGrid = preview;
             _selectionGrid = selection;
             _tab = tab;
+            _directory = dir;
         }
 
         public virtual void GetPreview(object sender, EventArgs e)
