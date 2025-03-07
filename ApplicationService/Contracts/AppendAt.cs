@@ -7,10 +7,12 @@ namespace ApplicationService.Contracts
     {
 
         public long _position { get; private set; }
-        public AppendAt(long position, List<FileIdentity> files, string dir)
+        public string _text { get; private set; }
+        public AppendAt(long position, string text, List<FileIdentity> files, string dir)
             : base(dir, files)
         {
             _position= position;
+            _text = text;
         }
     }
 }

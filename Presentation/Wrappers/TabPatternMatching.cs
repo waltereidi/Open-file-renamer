@@ -3,7 +3,7 @@ using Presentation.UI;
 
 namespace Presentation.Wrappers
 {
-    public class TabPatternMatching : TabController
+    public class TabPatternMatching : TabController 
     {
         private Label label_currentDirectory;
         private Label label_patternMatching_to;

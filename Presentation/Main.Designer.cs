@@ -4,7 +4,7 @@ using Presentation.Interfaces;
 using Presentation.UI;
 using Presentation.Wrappers;
 
-namespace winforms_app
+namespace Presentation
 {
     partial class Main
     {
@@ -75,6 +75,8 @@ namespace winforms_app
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             button_moveSelectedFiles = new Button();
+            textBox_append_position = new AlsoNumberTextBox();
+            label_append_postion = new Label();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -256,6 +258,7 @@ namespace winforms_app
             NumberedSequence_text.Name = "NumberedSequence_text";
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
+
             // 
             // numbered_Sequence_before
             // 
@@ -268,6 +271,7 @@ namespace winforms_app
             numbered_Sequence_before.TabStop = true;
             numbered_Sequence_before.Text = "Before";
             numbered_Sequence_before.UseVisualStyleBackColor = true;
+
             // 
             // numbered_sequence_after
             // 
@@ -309,6 +313,7 @@ namespace winforms_app
             textBox_Pattern_to.Name = "textBox_Pattern_to";
             textBox_Pattern_to.Size = new Size(223, 21);
             textBox_Pattern_to.TabIndex = 2;
+            
             // 
             // textBox_pattern_from
             // 
@@ -324,9 +329,12 @@ namespace winforms_app
             comboBox_patternMatching_operation.Name = "comboBox_patternMatching_operation";
             comboBox_patternMatching_operation.Size = new Size(231, 23);
             comboBox_patternMatching_operation.TabIndex = 0;
+            
             // 
             // tabPage_append
             // 
+            tabPage_append.Controls.Add(label_append_postion);
+            tabPage_append.Controls.Add(textBox_append_position);
             tabPage_append.Controls.Add(radioButton_append_appendAt);
             tabPage_append.Controls.Add(radioButton_append_appendToEnd);
             tabPage_append.Controls.Add(radioButton_append_appendToStart);
@@ -351,6 +359,7 @@ namespace winforms_app
             radioButton_append_appendAt.TabStop = true;
             radioButton_append_appendAt.Text = "Append at position";
             radioButton_append_appendAt.UseVisualStyleBackColor = true;
+
             // 
             // radioButton_append_appendToEnd
             // 
@@ -362,6 +371,7 @@ namespace winforms_app
             radioButton_append_appendToEnd.TabStop = true;
             radioButton_append_appendToEnd.Text = "Append to end";
             radioButton_append_appendToEnd.UseVisualStyleBackColor = true;
+
             // 
             // radioButton_append_appendToStart
             // 
@@ -373,21 +383,23 @@ namespace winforms_app
             radioButton_append_appendToStart.TabStop = true;
             radioButton_append_appendToStart.Text = "Append to start";
             radioButton_append_appendToStart.UseVisualStyleBackColor = true;
+
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(17, 16);
+            label2.Location = new Point(15, 56);
             label2.Name = "label2";
-            label2.Size = new Size(43, 15);
+            label2.Size = new Size(49, 15);
             label2.TabIndex = 1;
-            label2.Text = "Text to";
+            label2.Text = "Append";
+            label2.Click += label2_Click;
             // 
             // textBox_append
             // 
-            textBox_append.Location = new Point(17, 46);
+            textBox_append.Location = new Point(67, 54);
             textBox_append.Name = "textBox_append";
-            textBox_append.Size = new Size(210, 21);
+            textBox_append.Size = new Size(164, 21);
             textBox_append.TabIndex = 0;
             // 
             // label_currentDirectory
@@ -493,6 +505,22 @@ namespace winforms_app
             button_moveSelectedFiles.UseVisualStyleBackColor = true;
             button_moveSelectedFiles.Click += button_moveSelectedFiles_Click;
             // 
+            // textBox_append_position
+            // 
+            textBox_append_position.Location = new Point(67, 10);
+            textBox_append_position.Name = "textBox_append_position";
+            textBox_append_position.Size = new Size(40, 21);
+            textBox_append_position.TabIndex = 5;
+            // 
+            // label_append_postion
+            // 
+            label_append_postion.AutoSize = true;
+            label_append_postion.Location = new Point(17, 12);
+            label_append_postion.Name = "label_append_postion";
+            label_append_postion.Size = new Size(51, 15);
+            label_append_postion.TabIndex = 6;
+            label_append_postion.Text = "Position";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -578,7 +606,7 @@ namespace winforms_app
         //
         private ITabControl TabNumberedSequenceWrapper;
         private ITabControl TabPatternMatchingWrapper;
-        private ITabControl TabAppendWrapper;
+        private ITabAppend TabAppendWrapper;
         
         private ITabControlWrapper TabControlWrapper;
 
@@ -587,6 +615,8 @@ namespace winforms_app
         private RadioButton radioButton_append_appendToStart;
         private Label label2;
         private AlsoNumberTextBox textBox_append;
+        private Label label_append_postion;
+        private AlsoNumberTextBox textBox_append_position;
         //Code removed for further implementation
         //private Label label_versioning;
         //private ComboBox comboBox_versioning;

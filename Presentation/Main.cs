@@ -4,7 +4,7 @@ using Presentation.Interfaces;
 using Presentation.Wrappers;
 using System.Net.Http.Headers;
 
-namespace winforms_app
+namespace Presentation
 {
     public partial class Main : Form
     {
@@ -28,11 +28,12 @@ namespace winforms_app
                     tabPage_append,
                     radioButton_append_appendAt,
                     radioButton_append_appendToEnd,
-                    radioButton_append_appendToStart
+                    radioButton_append_appendToStart,
+                    textBox_append_position
                 );
-        
+
         private void InitializaTabNumberedSequenceWrapper()
-            =>TabNumberedSequenceWrapper = new TabNumberedSequence
+            => TabNumberedSequenceWrapper = new TabNumberedSequenceWrapper
                 (
                     label_currentDirectory,
                     numberedSequence_label,
@@ -59,10 +60,10 @@ namespace winforms_app
             );
         private void InitializeTabPatternMatchingWrapper()
             => TabControlWrapper = new TabControlWrapper(tabControl,
-                new List<ITabControl> { 
-                    TabNumberedSequenceWrapper, 
-                    TabPatternMatchingWrapper, 
-                    TabAppendWrapper 
+                new List<ITabControl> {
+                    TabNumberedSequenceWrapper,
+                    TabPatternMatchingWrapper,
+                    TabAppendWrapper
                 });
         private void menuOpt_file_open_Click(object sender, EventArgs e)
         {
@@ -170,6 +171,11 @@ namespace winforms_app
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

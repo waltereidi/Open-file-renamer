@@ -1,4 +1,4 @@
-namespace winforms_app
+namespace Presentation
 {
     internal static class Program
     {

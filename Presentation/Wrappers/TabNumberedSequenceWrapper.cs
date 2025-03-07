@@ -8,7 +8,7 @@ using Presentation.UI;
 
 namespace Presentation.Wrappers
 {
-    public class TabNumberedSequence : TabController
+    public class TabNumberedSequenceWrapper : TabController
     {
         
         private readonly Label _label;
@@ -17,7 +17,7 @@ namespace Presentation.Wrappers
         private readonly RadioButton _radioButton_sequenceAfter;
         private readonly MainApplicationService _service = new();
         private string GetSeparator() => _text.Text.ToString();
-        public TabNumberedSequence(Label directory ,
+        public TabNumberedSequenceWrapper(Label directory ,
             Label label ,
             TextBox text ,
             RadioButton sequenceBefore,
@@ -30,15 +30,29 @@ namespace Presentation.Wrappers
             _label = label;
             _text = text;
             _radioButton_sequenceBefore = sequenceBefore;
-            _radioButton_sequenceAfter = sequenceAfter; 
+            _radioButton_sequenceAfter = sequenceAfter;
+
+            text.KeyUp += this.GetPreview;
+            _radioButton_sequenceBefore.CheckedChanged += this.GetPreview;
+            _radioButton_sequenceAfter.CheckedChanged += this.GetPreview;
         }
 
         public override IOperationContract GetTabContent()
         {
             if (_radioButton_sequenceAfter.Checked) 
-                return new NumberedSequenceAfter(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)) , _directory.Text);
+                return new NumberedSequenceAfter
+                    (
+                        GetSeparator(),
+                        _previewGrid.GetAllFiles(new(_directory.Text)) , 
+                        _directory.Text
+                    );
             else if (_radioButton_sequenceBefore.Checked) 
-                return new NumberedSequenceBefore(GetSeparator(), _previewGrid.GetAllFiles(new(_directory.Text)), _directory.Text);
+                return new NumberedSequenceBefore
+                    (
+                        GetSeparator(), 
+                        _previewGrid.GetAllFiles(new(_directory.Text)), 
+                        _directory.Text
+                    );
             else throw new InvalidOperationException();
         }
 
