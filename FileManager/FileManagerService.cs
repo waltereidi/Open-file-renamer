@@ -50,6 +50,32 @@ namespace FileManager
         public VersionedModifications.Version GetVersionById(Guid id)
             => _memento.GetVersionById(id);
 
+        public List<IFileProcessor> GetAppendAtPreview(List<FileIdentity> files, int position , string text)
+            => files.Select((value, i)
+                => {
+                    IFileProcessor f = new AppendAt(_dir._dir, value,position ,text );
+                    return f;
+                }).ToList();
 
+        public async Task GetAppendAt(List<FileIdentity> files, int position, string text)
+            => await _memento.SetState(GetAppendAtPreview(files, position, text));
+
+        public List<IFileProcessor> GetAppendToEndPreview(List<FileIdentity> files, string text)
+            => files.Select((value, i)
+                => {
+                    IFileProcessor f = new AppendToEnd(_dir._dir, value, text);
+                    return f;
+                }).ToList();
+        public async Task GetAppendToEnd(List<FileIdentity> files,string text)
+            => await _memento.SetState(GetAppendToEndPreview(files, text));
+
+        public List<IFileProcessor> GetAppendToStartPreview(List<FileIdentity> files, string text)
+            => files.Select((value, i)
+                => {
+                    IFileProcessor f = new AppendToStart(_dir._dir, value, text);
+                    return f;
+                }).ToList();
+        public async Task GetAppendToStart(List<FileIdentity> files, string text)
+            => await _memento.SetState( GetAppendToStartPreview(files, text));
     }
 }

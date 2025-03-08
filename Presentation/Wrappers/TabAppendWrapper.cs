@@ -15,7 +15,7 @@ namespace Presentation.Wrappers
         private RadioButton _radioButton_append_appendAt;
         private RadioButton _radioButton_append_appendToEnd;
         private RadioButton _radioButton_append_appendToStart;
-        private long GetPosition() => _textBox_append_position.GetNumber() ?? 0;
+        private int GetPosition() => unchecked((int)_textBox_append_position.GetNumber()); 
         private string GetText() => _textBox_append.Text.ToString();
         public TabAppendWrapper(
             Label label_currentDirectory, 
@@ -40,14 +40,17 @@ namespace Presentation.Wrappers
             this._radioButton_append_appendToStart = radioButton_append_appendToStart;
             this._textBox_append_position = textBox_append_position;
 
-            radioButton_append_appendAt.CheckedChanged += this.ApplyClickEvent;
-            radioButton_append_appendAt.CheckedChanged += this.GetPreview;
+            this._radioButton_append_appendAt.CheckedChanged += this.ApplyClickEvent;
+            this._radioButton_append_appendAt.CheckedChanged += this.GetPreview;
 
-            radioButton_append_appendToEnd.CheckedChanged += this.ApplyClickEvent;
-            radioButton_append_appendToEnd.CheckedChanged += this.GetPreview;
+            this._radioButton_append_appendToEnd.CheckedChanged += this.ApplyClickEvent;
+            this._radioButton_append_appendToEnd.CheckedChanged += this.GetPreview;
 
-            radioButton_append_appendToStart.CheckedChanged += this.ApplyClickEvent;
-            radioButton_append_appendToStart.CheckedChanged += this.GetPreview;
+            this._radioButton_append_appendToStart.CheckedChanged += this.ApplyClickEvent;
+            this._radioButton_append_appendToStart.CheckedChanged += this.GetPreview;
+
+            this._textBox_append.KeyUp += this.GetPreview;
+            this._textBox_append_position.KeyUp += this.GetPreview;
         }
         public void ApplyClickEvent(object sender, EventArgs e)
         {

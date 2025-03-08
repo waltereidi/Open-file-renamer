@@ -26,6 +26,10 @@ public class MainApplicationService
         {
             NumberedSequenceBefore e => fm.GetNumberedSequenceBeforePreview(contract.GetFiles(), e._Separator),
             NumberedSequenceAfter e => fm.GetNumberedSequenceAfterPreview(contract.GetFiles(), e._Separator),
+            AppendAt e => fm.GetAppendAtPreview(contract.GetFiles(), e._position, e._text),
+            AppendToEnd e => fm.GetAppendToEndPreview(contract.GetFiles(), e._text),
+            AppendToStart e => fm.GetAppendToStartPreview(contract.GetFiles(), e._text),
+
             //Place here more operations call
             _ => throw new InvalidOperationException()
         };
@@ -35,6 +39,9 @@ public class MainApplicationService
       {
           NumberedSequenceBefore e => fm.GetNumberedSequenceBefore(contract.GetFiles(), e._Separator),
           NumberedSequenceAfter e => fm.GetNumberedSequenceAfter(contract.GetFiles(), e._Separator),
+          AppendAt e => fm.GetAppendAt(contract.GetFiles(), e._position, e._text),
+          AppendToEnd e => fm.GetAppendToEnd(contract.GetFiles(), e._text),
+          AppendToStart e => fm.GetAppendToStart(contract.GetFiles(), e._text),
           //Place here more operations call
           _ => throw new InvalidOperationException()
       };

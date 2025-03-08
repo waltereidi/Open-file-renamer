@@ -29,11 +29,11 @@ namespace Presentation.UI
             }
             
         }
-        public long? GetNumber()
+        public long GetNumber()
         {
             long size = 0;
             long.TryParse(this.Text , out size);
-            return size != 0 ? size : null; 
+            return size; 
         }
     }
 }
