@@ -25,7 +25,7 @@ namespace Tests.FileManager.DAO
         public void ExistentFileIdCanReturnNewFile()
         {
             var file = base._testDirPath.GetFiles().First(); 
-            var instance = FileIdentity.Instance( file.CreationTime.Ticks.ToString() , _testDirPath );
+            var instance = FileIdentity.Instance( file.FullName.ToString() , _testDirPath );
 
             Assert.True(instance.GetFile().Exists);
         }

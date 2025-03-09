@@ -31,8 +31,8 @@ namespace FileManager.FileOperations
                 .Substring(0, base.FileNameBefore.LastIndexOf('.'));
 
             int position = _position;
-            if (nameWithouthExtension.Length-1 > position)
-                position = nameWithouthExtension.Length-1;
+            if (position > nameWithouthExtension.Length-1  )
+                position = nameWithouthExtension.Length;
 
             string result = nameWithouthExtension.Substring(0, position);
 
