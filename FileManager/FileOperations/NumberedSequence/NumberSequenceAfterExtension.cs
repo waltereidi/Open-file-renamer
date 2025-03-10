@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager.FileOperations
+namespace FileManager.FileOperations.NumberedSequence
 {
     public class NumberSequenceAfterExtension : FileProcessor
     {
@@ -21,15 +21,15 @@ namespace FileManager.FileOperations
 
         public override string GetRenameTo()
         {
-            string nameWithouthExtension = base.FileNameBefore
-                .Substring(0, base.FileNameBefore.LastIndexOf('.'));
+            string nameWithouthExtension = FileNameBefore
+                .Substring(0, FileNameBefore.LastIndexOf('.'));
 
-            return String.Concat
+            return string.Concat
                 (
                     nameWithouthExtension,
                     Separator,
                     Sequence,
-                    base.FileExtensionBefore
+                    FileExtensionBefore
                 );
         }
     }

@@ -8,7 +8,6 @@ namespace Presentation.Wrappers
 {
     public class TabAppendWrapper : TabController, ITabAppend
     {
-        
         private AlsoNumberTextBox _textBox_append;
         private AlsoNumberTextBox _textBox_append_position;
         private TabPage _tabPage_append;

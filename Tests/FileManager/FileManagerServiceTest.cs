@@ -22,7 +22,7 @@ namespace Tests.FileManager
             list.ForEach(f => Assert.True( f.GetRenameTo().Contains("_")));
         }
         [Fact]
-        public void TestAppendAtPreview()
+        public void TestAppendAtPatternPreview()
         {
             var list = _service.GetAppendAtPreview(_files, 2 ,"_");
 
@@ -30,8 +30,36 @@ namespace Tests.FileManager
 
             list.ForEach(f => Assert.True(f.GetRenameTo().Substring(2 ).Contains("_")));
         }
+        [Fact]
+        public void TestReplacePatternPreview()
+        {
 
+        }
+        [Fact]
+        public void TestToLowerPatternPreview()
+        {
 
+        }
+        [Fact]
+        public void TestToUpperPatternPreview()
+        {
+
+        }
+        [Fact]
+        public void TestWordsPatternPreview()
+        {
+       
+        }
+        [Fact]
+        public void TestDigitsPatternPreview()
+        {
+
+        }
+        [Fact]
+        public void TestRegexPatternPreview()
+        {
+
+        }
     }
 
 }

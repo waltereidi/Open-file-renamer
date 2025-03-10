@@ -54,8 +54,8 @@ namespace Presentation
             numbered_sequence_after = new RadioButton();
             tabPage_patternMatching = new TabPage();
             label_patternMatching_to = new Label();
-            textBox_Pattern_to = new TextBox();
-            textBox_pattern_from = new TextBox();
+            textBox_Pattern_to = new AlsoNumberTextBox();
+            textBox_pattern_from = new AlsoNumberTextBox();
             comboBox_patternMatching_operation = new ComboBox();
             tabPage_append = new TabPage();
             radioButton_append_appendAt = new RadioButton();
@@ -596,11 +596,11 @@ namespace Presentation
         private DataGridViewTextBoxColumn preview_column_FileSize;
         private DataGridViewTextBoxColumn preview_column_Hidden_FullName;
         private TabPage tabPage_patternMatching;
-        private TextBox textBox_pattern_from;
+        private AlsoNumberTextBox textBox_pattern_from;
         private ComboBox comboBox_patternMatching_operation;
         private TabPage tabPage_append;
         private Label label_patternMatching_to;
-        private TextBox textBox_Pattern_to;
+        private AlsoNumberTextBox textBox_Pattern_to;
         //
         // Custom Wrappers
         //
