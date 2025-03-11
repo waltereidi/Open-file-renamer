@@ -1,5 +1,6 @@
 ﻿using FileManager;
 using FileManager.DAO;
+using System.Text.RegularExpressions;
 
 namespace Tests.FileManager
 {
@@ -33,17 +34,36 @@ namespace Tests.FileManager
         [Fact]
         public void TestReplacePatternPreview()
         {
+            var list = _service.GetReplacePatternPreview(_files, "_", "");
 
+            var results = list.Select(s => s.GetRenameTo()).ToList();
+
+            list.ForEach(f => Assert.True(!f.GetRenameTo().Contains("_")));
         }
         [Fact]
         public void TestToLowerPatternPreview()
         {
+            var list = _service.GetToLowerPatternPreview(_files);
 
+            list.ForEach(f => Assert.True( 
+                Regex.Match( 
+                    f.GetRenameTo() , 
+                    @"[A-Z]" , 
+                    RegexOptions.None).Index < 1
+                ));
         }
         [Fact]
         public void TestToUpperPatternPreview()
         {
+            var list = _service.GetToUpperPatternPreview(_files);
 
+
+            list.ForEach( f => Assert.True(
+                Regex.Match(
+                    f.GetRenameTo().Substring(0, f.GetRenameTo().LastIndexOf('.')),
+                    @"[a-z]",
+                    RegexOptions.None).Index < 1
+                ));
         }
         [Fact]
         public void TestWordsPatternPreview()

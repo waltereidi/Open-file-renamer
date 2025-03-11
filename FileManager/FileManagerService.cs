@@ -87,38 +87,38 @@ namespace FileManager
                     return f;
                 }).ToList();
 
-        public List<IFileProcessor> GetWordsPatternPreview(List<FileIdentity> files, string pattern, string text)
+        //public List<IFileProcessor> GetWordsPatternPreview(List<FileIdentity> files, string pattern, string text)
+        //    => files.Select((value, i)
+        //        => {
+        //            IFileProcessor f = new ReplacePattern(_dir._dir, value, pattern, text);
+        //            return f;
+        //        }).ToList();
+
+        //public List<IFileProcessor> GetDigitsPatternPreview(List<FileIdentity> files, string text)
+        //    => files.Select((value, i)
+        //        => {
+        //            IFileProcessor f = new AppendToStart(_dir._dir, value, text);
+        //            return f;
+        //        }).ToList();
+
+        public List<IFileProcessor> GetRegexPatternPreview(List<FileIdentity> files,RegexPattern regex, string text)
             => files.Select((value, i)
                 => {
-                    IFileProcessor f = new ReplacePattern(_dir._dir, value, pattern, text);
+                    IFileProcessor f = new RegexPattern(_dir._dir, value, regex , text);
                     return f;
                 }).ToList();
 
-        public List<IFileProcessor> GetDigitsPatternPreview(List<FileIdentity> files, string text)
+        public List<IFileProcessor> GetToLowerPatternPreview(List<FileIdentity> files)
             => files.Select((value, i)
                 => {
-                    IFileProcessor f = new AppendToStart(_dir._dir, value, text);
+                    IFileProcessor f = new ToLowerPattern(_dir._dir, value);
                     return f;
                 }).ToList();
 
-        public List<IFileProcessor> GetRegexPatternPreview(List<FileIdentity> files, string text)
+        public List<IFileProcessor> GetToUpperPatternPreview(List<FileIdentity> files)
             => files.Select((value, i)
                 => {
-                    IFileProcessor f = new AppendToStart(_dir._dir, value, text);
-                    return f;
-                }).ToList();
-
-        public List<IFileProcessor> GetToLowerPatternPreview(List<FileIdentity> files, string text)
-            => files.Select((value, i)
-                => {
-                    IFileProcessor f = new AppendToStart(_dir._dir, value, text);
-                    return f;
-                }).ToList();
-
-        public List<IFileProcessor> GetToUpperPatternPreview(List<FileIdentity> files, string text)
-            => files.Select((value, i)
-                => {
-                    IFileProcessor f = new AppendToStart(_dir._dir, value, text);
+                    IFileProcessor f = new ToUpperPattern(_dir._dir, value);
                     return f;
                 }).ToList();
     }

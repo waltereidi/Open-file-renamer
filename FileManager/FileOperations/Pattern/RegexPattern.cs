@@ -3,23 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FileManager.FileOperations.Pattern
 {
     public class RegexPattern : FileProcessor
     {
-        private readonly int _position;
+        private readonly Regex _regex;
         private readonly string? _text;
         public RegexPattern
         (
             DirectoryInfo path,
             FileIdentity fi,
-            int position,
+            Regex regex,
             string? text = null
         ) : base(path, fi)
         {
-            _position = position;
+            _regex = regex;
             _text = text;
         }
 
@@ -30,7 +31,8 @@ namespace FileManager.FileOperations.Pattern
                 .Substring(0, FileNameBefore.LastIndexOf('.'));
 
 
-            return null;
+            string modifiedName = Regex.Replace(nameWithouthExtension, _regex.ToString() , _text);
+            return String.Concat(modifiedName , base.FileExtensionBefore);
         }
     }
 }

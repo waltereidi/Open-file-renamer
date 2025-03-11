@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager.FileOperations.Pattern
+namespace FileManager.FileOperations.Remove
 {
-    public class DigitsPattern : FileProcessor
+    public class WordsPattern : FileProcessor
     {
         private readonly int _position;
         private readonly string? _text;
-        public DigitsPattern
+        public WordsPattern
         (
             DirectoryInfo path,
             FileIdentity fi,
@@ -22,15 +22,12 @@ namespace FileManager.FileOperations.Pattern
             _position = position;
             _text = text;
         }
-
-
-
         public override string GetRenameTo()
         {
             string nameWithouthExtension = FileNameBefore
                 .Substring(0, FileNameBefore.LastIndexOf('.'));
 
-        
+
             return null;
         }
     }

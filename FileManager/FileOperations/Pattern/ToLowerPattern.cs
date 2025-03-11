@@ -14,13 +14,10 @@ namespace FileManager.FileOperations.Pattern
         public ToLowerPattern
         (
             DirectoryInfo path,
-            FileIdentity fi,
-            int position,
-            string? text = null
+            FileIdentity fi
         ) : base(path, fi)
         {
-            _position = position;
-            _text = text;
+
         }
         public override string GetRenameTo()
         {
@@ -28,7 +25,7 @@ namespace FileManager.FileOperations.Pattern
                 .Substring(0, FileNameBefore.LastIndexOf('.'));
 
 
-            return null;
+            return String.Concat( nameWithouthExtension.ToLower(), FileExtensionBefore);
         }
     }
 }
