@@ -10,13 +10,13 @@ namespace FileManager.FileOperations.Pattern
 {
     public class RegexPattern : FileProcessor
     {
-        private readonly Regex _regex;
+        private readonly RegexPattern _regex;
         private readonly string? _text;
         public RegexPattern
         (
             DirectoryInfo path,
             FileIdentity fi,
-            Regex regex,
+            RegexPattern regex,
             string? text = null
         ) : base(path, fi)
         {

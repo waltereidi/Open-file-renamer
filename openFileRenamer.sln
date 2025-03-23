@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DC1BB23E-5155-4C25-A9CE-91E9DCCD8D99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Maui", "..\OpenFileRenamer Maui 9\Presentation.Maui\Presentation.Maui.csproj", "{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,11 @@ Global
 		{DC1BB23E-5155-4C25-A9CE-91E9DCCD8D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC1BB23E-5155-4C25-A9CE-91E9DCCD8D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC1BB23E-5155-4C25-A9CE-91E9DCCD8D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A45E83A-8C53-0A18-B90C-C6B3D3E6E9FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
