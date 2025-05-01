@@ -1,6 +1,5 @@
-﻿using FileManager.Interfaces;
+﻿using ApplicationService.Interfaces;
 using Presentation.Interfaces;
-using System.Windows.Forms;
 namespace Presentation.Wrappers
 {
     public class TabControlWrapper : ITabControlWrapper
@@ -16,6 +15,9 @@ namespace Presentation.Wrappers
         public IOperationContract GetSelectedTabData()
             => _tabs.ElementAt(_tabControl.SelectedIndex).GetTabContent();
 
-
+        IOperationContract ITabControlWrapper.GetSelectedTabData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

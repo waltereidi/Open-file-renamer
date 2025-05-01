@@ -1,5 +1,4 @@
 ﻿using FileManager.DAO;
-using Presentation.Interfaces;
 
 namespace ApplicationService.Contracts
 {

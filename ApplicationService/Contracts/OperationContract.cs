@@ -1,11 +1,5 @@
-﻿using FileManager.DAO;
-using Presentation.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApplicationService.Interfaces;
+using FileManager.DAO;
 
 namespace ApplicationService.Contracts
 {

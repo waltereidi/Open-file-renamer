@@ -1,8 +1,6 @@
 ﻿using ApplicationService;
 using ApplicationService.Contracts;
-using ApplicationService.Enum;
-using FileManager.Interfaces;
-using Presentation.Interfaces;
+using ApplicationService.Interfaces;
 using Presentation.UI;
 
 

@@ -1,8 +1,7 @@
-﻿using ApplicationService.Enum;
-using FileManager.DAO;
+﻿using FileManager.DAO;
 
 
-namespace Presentation.Interfaces
+namespace ApplicationService.Interfaces
 {
     public interface IOperationContract
     {
