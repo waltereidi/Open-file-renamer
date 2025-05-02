@@ -1,0 +1,4 @@
+[submodule "OpenFileRenamer-Maui-9"]
+	path = OpenFileRenamer-Maui-9
+	url = https://github.com/waltereidi/OpenFileRenamer-Maui-9
+	branch = master
