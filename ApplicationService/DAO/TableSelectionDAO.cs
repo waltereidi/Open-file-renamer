@@ -13,20 +13,19 @@ namespace ApplicationService.DAO
             public FileIdentity FileIdentity { get; set; }
             public bool IsChecked { get; set; } = true;
         }
-        public TableSelectionDAO(DirectoryInfo dir, DataFilterDAO filter)
-            :base(dir)
-        {
-            Rows = new();
-            DataFilter = filter;
-            GetTableFiles();
-        }
-
         private IDataFilter DataFilter { get; set; }
         private List<TableSelectionDAO.TableRows> Rows { get;set; }
         public List<TableSelectionDAO.TableRows> GetRows()
             => Rows;
         public IEnumerable<TableSelectionDAO.TableRows> GetCheckedRows()
             => Rows.Where(x => x.IsChecked);
+        public TableSelectionDAO(DirectoryInfo dir, IDataFilter filter)
+            :base(dir)
+        {
+            Rows = new();
+            DataFilter = filter;
+            GetTableFiles();
+        }
 
         public void SetDataFilter(IDataFilter d)
         {
