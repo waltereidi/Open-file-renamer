@@ -46,6 +46,7 @@ namespace ApplicationService.DAO
         {
             switch (FilterOption)
             {
+
                 case DataFilterOption.Contains:
                     return x => x.Contains(Text);
                 case DataFilterOption.BiggerThan:
