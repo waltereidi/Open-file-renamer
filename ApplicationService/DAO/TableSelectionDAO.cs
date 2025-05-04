@@ -12,6 +12,7 @@ namespace ApplicationService.DAO
             public long FileSize { get; set; }
             public FileIdentity FileIdentity { get; set; }
             public bool IsChecked { get; set; } = true;
+            
         }
         private IDataFilter DataFilter { get; set; }
         private List<TableSelectionDAO.TableRows> Rows { get;set; }
@@ -39,11 +40,8 @@ namespace ApplicationService.DAO
             });
         private List<TableSelectionDAO.TableRows> ReCheckFiles(List<TableSelectionDAO.TableRows> rows)
         {
-            List<FileIdentity> checkedFiles = this.Rows.Where(x => x.IsChecked)
-                    .Select(s => s.FileIdentity).ToList();
-                
-            rows.ForEach(f => f.IsChecked = checkedFiles.Any(x => x.Id.Equals(f.FileIdentity.Id) == false)
-                ? false
+            rows.ForEach(f => f.IsChecked = Rows.Any(x => x.FileIdentity.Equals(f.FileIdentity.Id))
+                ? Rows.First(x=> x.FileIdentity.Equals(f.FileIdentity.Id) ).IsChecked
                 : true );
 
             return rows;
