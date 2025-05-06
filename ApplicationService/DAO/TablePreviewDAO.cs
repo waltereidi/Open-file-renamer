@@ -11,26 +11,33 @@ namespace ApplicationService.DAO
             public string FileName { get; set; }
             public FileIdentity FileIdentity { get; set; }
         }
-        private IDataPreview DataPreview { get; set; }
+        private readonly MainApplicationService _service;
+        private IOperationContract OperationContract { get; set; }
         private List<TablePreviewDAO.TableRows> Rows { get;set; }
         public List<TablePreviewDAO.TableRows> GetRows()
             => Rows;
-        public TablePreviewDAO(DirectoryInfo dir, IDataPreview preview)
+        public TablePreviewDAO(DirectoryInfo dir, IOperationContract oc)
             :base(dir)
         {
+            _service = new MainApplicationService();
+
             Rows = new();
-            DataPreview = preview;
-            GetTableFiles();
+            OperationContract = oc;
+            GetPreview();
         }
 
-        public void SetDataPreview(IDataPreview d)
+        public void SetDataPreview(IOperationContract oc)
         {
-            DataPreview = d;
-            GetTableFiles();
+            OperationContract = oc;
+            GetPreview();
         }
   
-        private void GetTableFiles()
+        private void GetPreview()
         {
+            if (OperationContract == null)
+                return;
+
+            var files = _service.GetPreview(OperationContract);   
             //var rows = Dir.GetFiles()
             //    .Select(s => new TablePreviewDAO.TableRows()
             //    {

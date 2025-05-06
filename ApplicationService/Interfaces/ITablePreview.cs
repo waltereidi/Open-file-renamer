@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationService.Interfaces
 {
-    internal interface ITablePreview
+    public interface ITablePreview
     {
     }
 }
