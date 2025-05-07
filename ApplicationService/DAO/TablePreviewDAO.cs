@@ -1,6 +1,7 @@
 ﻿using ApplicationService.DTO;
 using ApplicationService.Interfaces;
 using FileManager.DAO;
+using FileManager.Interfaces;
 
 namespace ApplicationService.DAO
 {
@@ -10,19 +11,24 @@ namespace ApplicationService.DAO
         {
             public string FileName { get; set; }
             public FileIdentity FileIdentity { get; set; }
+            public TableRows(FileIdentity fi , string renameTo)
+            {
+                FileIdentity = fi;
+                FileName = renameTo; 
+            }
         }
+
         private readonly MainApplicationService _service;
         private IOperationContract OperationContract { get; set; }
         private List<TablePreviewDAO.TableRows> Rows { get;set; }
         public List<TablePreviewDAO.TableRows> GetRows()
             => Rows;
-        public TablePreviewDAO(DirectoryInfo dir, IOperationContract oc)
+        public TablePreviewDAO(DirectoryInfo dir)
             :base(dir)
         {
             _service = new MainApplicationService();
 
             Rows = new();
-            OperationContract = oc;
             GetPreview();
         }
 
@@ -37,7 +43,10 @@ namespace ApplicationService.DAO
             if (OperationContract == null)
                 return;
 
-            var files = _service.GetPreview(OperationContract);   
+            List<IFileProcessor> files = _service.GetPreview(OperationContract);
+            Rows = files.Select(s => new TablePreviewDAO.TableRows(s.GetIdentity(),s.GetRenameTo()))
+                .ToList();
+
             //var rows = Dir.GetFiles()
             //    .Select(s => new TablePreviewDAO.TableRows()
             //    {
