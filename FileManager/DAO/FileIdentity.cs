@@ -32,7 +32,9 @@ namespace FileManager.DAO
                 .ToList();
         }
 
-        public FileInfo GetFile() => Dir.GetFiles().First(x => this.Equals(x) );
+        public FileInfo GetFile() => Dir.GetFiles().Any(x => this.Equals(x))
+            ? Dir.GetFiles().First(x => this.Equals(x) )
+            : null ;
         public bool Equals(FileInfo fi) => Id == fi.FullName;
         public bool Equals(string id ) => Id.ToString() == id;
 

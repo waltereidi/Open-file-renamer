@@ -3,6 +3,7 @@ using FileManager.DirectoryOperations;
 using FileManager.FileOperations.Append;
 using FileManager.FileOperations.NumberedSequence;
 using FileManager.FileOperations.Pattern;
+using FileManager.FileOperations.Remove;
 using FileManager.Interfaces;
 using System.Collections.Generic;
 
@@ -101,7 +102,7 @@ namespace FileManager
         //            return f;
         //        }).ToList();
 
-        public List<IFileProcessor> GetRegexPatternPreview(List<FileIdentity> files,RegexPattern regex, string text)
+        public List<IFileProcessor> GetRegexPatternPreview(List<FileIdentity> files,string regex, string text)
             => files.Select((value, i)
                 => {
                     IFileProcessor f = new RegexPattern(_dir._dir, value, regex , text);
@@ -121,5 +122,7 @@ namespace FileManager
                     IFileProcessor f = new ToUpperPattern(_dir._dir, value);
                     return f;
                 }).ToList();
+
+
     }
 }

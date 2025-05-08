@@ -28,7 +28,10 @@ public class MainApplicationService
             AppendAt e => fm.GetAppendAtPreview(contract.GetFiles(), e._position, e._text),
             AppendToEnd e => fm.GetAppendToEndPreview(contract.GetFiles(), e._text),
             AppendToStart e => fm.GetAppendToStartPreview(contract.GetFiles(), e._text),
-
+            ReplacePattern e => fm.GetReplacePatternPreview(contract.GetFiles(), e._pattern, e._text),
+            ToLowerPattern e => fm.GetToLowerPatternPreview(contract.GetFiles()),
+            ToUpperPattern e => fm.GetToUpperPatternPreview(contract.GetFiles()),
+            RegexPattern e => fm.GetRegexPatternPreview(contract.GetFiles(), e._pattern, e._text),
             //Place here more operations call
             _ => throw new InvalidOperationException()
         };

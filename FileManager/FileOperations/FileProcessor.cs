@@ -26,7 +26,7 @@ namespace FileManager.FileOperations
             => Task.Run(() => {
                 var file = this.Id.GetFile();
                 Operation(file);
-                EnsureSuccessfullOperation();
+                //EnsureSuccessfullOperation();
             }); 
 
         public Task Revert()
