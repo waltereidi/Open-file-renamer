@@ -122,6 +122,17 @@ namespace FileManager
                     IFileProcessor f = new ToUpperPattern(_dir._dir, value);
                     return f;
                 }).ToList();
+        public async Task GetToUpperPattern(List<FileIdentity> files)
+            => await _memento.SetState(GetToUpperPatternPreview(files));
+
+        public async Task GetToLowerPattern(List<FileIdentity> files)
+            => await _memento.SetState(GetToLowerPatternPreview(files));
+
+        public async Task GetRegexPattern(List<FileIdentity> files , string regex, string text)
+            => await _memento.SetState(GetRegexPatternPreview(files , regex , text ));
+
+        public async Task GetReplacePattern(List<FileIdentity> files, string pattern, string text)
+            => await _memento.SetState(GetReplacePatternPreview(files , pattern ,text));
 
 
     }

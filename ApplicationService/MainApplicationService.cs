@@ -44,6 +44,10 @@ public class MainApplicationService
           AppendAt e => fm.GetAppendAt(contract.GetFiles(), e._position, e._text),
           AppendToEnd e => fm.GetAppendToEnd(contract.GetFiles(), e._text),
           AppendToStart e => fm.GetAppendToStart(contract.GetFiles(), e._text),
+          ReplacePattern e => fm.GetReplacePattern(contract.GetFiles(), e._pattern, e._text),
+          ToLowerPattern e => fm.GetToLowerPattern(contract.GetFiles()),
+          ToUpperPattern e => fm.GetToUpperPattern(contract.GetFiles()),
+          RegexPattern e => fm.GetRegexPattern(contract.GetFiles(), e._pattern, e._text),
           //Place here more operations call
           _ => throw new InvalidOperationException()
       };
@@ -75,21 +79,7 @@ public class MainApplicationService
             default: throw new InvalidOperationException();
         }
     }
-    //public List<IFileProcessor> GetNumberedSequenceAfterPreview
-    //    (
-    //        string directory,
-    //        string separator,
-    //        List<FileIdentity> files
-    //    )
-    //{
-    //    INumberedSequence fm = new FileManagerService(new DirectoryInfo(directory));
-    //    return fm.GetNumberedSequenceAfterPreview(files, separator);
-    //}
-    //public List<IFileProcessor> GetNumberedSequenceBeforePreview(string directory, string separator, List<FileIdentity> files)
-    //{
-    //    INumberedSequence fm = new FileManagerService(new DirectoryInfo(directory));
-    //    return fm.GetNumberedSequenceBeforePreview(files , separator);
-    //}
+
     public List<Tuple<Guid, int>> GetVersions(string directory)
     {
         IVersionControl vc = new FileManagerService(new(directory));

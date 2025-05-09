@@ -66,19 +66,9 @@ namespace Tests.FileManager
                 ));
         }
         [Fact]
-        public void TestWordsPatternPreview()
-        {
-       
-        }
-        [Fact]
-        public void TestDigitsPatternPreview()
-        {
-
-        }
-        [Fact]
         public void TestRegexPatternPreview()
         {
-
+            
         }
     }
 

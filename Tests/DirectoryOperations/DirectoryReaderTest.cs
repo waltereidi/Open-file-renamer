@@ -30,6 +30,7 @@ namespace Tests.DirectoryOperations
             DirectoryReader dr = new(base._testDirPath);
             
             var files = dr.GetFilesContains("test" );
+            files.First().CreationTime = DateTime.Now;
 
             Assert.True(files.Count() > 0);
         }

@@ -11,6 +11,8 @@ namespace FileManager
             => _versioning = new VersionedModifications();
         public List<VersionedModifications.Version> GetAllVersions() 
             => _versioning.Versions;
+
+
         public Task SetState(List<IFileProcessor> files) 
         {
             if (!_versioning.Versions.Any()) 
