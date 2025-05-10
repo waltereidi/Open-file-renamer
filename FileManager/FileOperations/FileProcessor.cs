@@ -26,15 +26,15 @@ namespace FileManager.FileOperations
             => Task.Run(() => {
                 var file = this.Id.GetFile();
                 Operation(file);
-                //EnsureSuccessfullOperation();
+                EnsureSuccessfullOperation();
             }); 
 
         public Task Revert()
             => Task.Run(() => {
-                var file = this.Id.GetFile();
                 RevertOperation();
                 EnsureSuccessfullRevert();
             });
+
         private void EnsureSuccessfullRevert()
         {
             var file = this.Id.GetFile();
@@ -45,7 +45,7 @@ namespace FileManager.FileOperations
                 throw new IOException("Could not rename file back to its original name before operation");
         }
         private void RevertOperation()
-            => this.Id.GetFile()
+            => new FileInfo(Path.Combine(Dir.FullName, GetRenameTo()))
                 .MoveTo(Path.Combine(Dir.FullName , FileNameBefore));
 
         private void Operation(FileInfo fi)
@@ -54,8 +54,8 @@ namespace FileManager.FileOperations
 
         protected virtual void EnsureSuccessfullOperation()
         {
-            var file = this.Id.GetFile();
-            if (!file.Name.Equals(GetRenameTo()) || !file.Exists)
+            var file = new FileInfo(Path.Combine(Dir.FullName, GetRenameTo()));
+            if (!file.Exists)
                 throw new IOException($"Could not find a file named {GetRenameTo()}");
         }
 
@@ -66,5 +66,8 @@ namespace FileManager.FileOperations
         }
         public FileIdentity GetIdentity() => this.Id;
         public DirectoryInfo GetDirectory() => this.Dir;
+
+        public bool IsFile(FileInfo fi)
+            => fi.FullName == new FileInfo(Path.Combine(Dir.FullName, GetRenameTo())).FullName;
     }
 }

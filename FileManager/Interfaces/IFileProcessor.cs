@@ -9,5 +9,6 @@ namespace FileManager.Interfaces
         public Task Revert();
         public FileIdentity GetIdentity();
         public DirectoryInfo GetDirectory();
+        public bool IsFile(FileInfo fi);
     }
 }

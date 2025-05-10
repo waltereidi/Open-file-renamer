@@ -17,7 +17,6 @@ namespace FileManager
         public FileManagerService(DirectoryInfo dr) 
             => _dir = new DirectoryReader(dr);
 
-        public List<VersionedModifications.Version> GetAllVersions() => _memento.GetAllVersions();
         public List<FileInfo> GetFiles() => _dir.GetFiles();
         public List<FileInfo> GetFilesContains(string text) => _dir.GetFilesContains(text);
         public List<FileInfo> GetFilesGreaterThan(long? size) => _dir.GetFilesGreaterThan(size);
@@ -32,8 +31,8 @@ namespace FileManager
         public async Task GetNumberedSequenceAfter(List<FileIdentity> files, string separator)
             => await _memento.SetState(GetNumberedSequenceAfterPreview(files, separator));
 
-        public async Task RollbackOperation(List<FileIdentity> fi , Guid version)
-            => await _memento.Rollback(version, fi);
+        public async Task RollbackOperation(List<FileIdentity> fi )
+            => await _memento.Rollback(fi);
 
      
         public List<IFileProcessor> GetNumberedSequenceBeforePreview(List<FileIdentity> files, string separator)
@@ -47,11 +46,6 @@ namespace FileManager
         public async Task GetNumberedSequenceBefore(List<FileIdentity> files, string separator)
             => await _memento.SetState(GetNumberedSequenceBeforePreview(files, separator));
 
-        public List<VersionedModifications.Version> GetAllVersion()
-            => _memento.GetAllVersions();
-
-        public VersionedModifications.Version GetVersionById(Guid id)
-            => _memento.GetVersionById(id);
 
         public List<IFileProcessor> GetAppendAtPreview(List<FileIdentity> files, int position , string text)
             => files.Select((value, i)

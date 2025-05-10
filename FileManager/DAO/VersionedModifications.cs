@@ -10,20 +10,10 @@ namespace FileManager.DAO
     public class VersionedModifications
     {
         public record Version(Guid id, List<IFileProcessor> files , int order);
-        public List<Version> Versions { get; private set; }
-        public VersionedModifications() => Versions = new();
-
+        private Version _Version { get; set; }
+        public List<IFileProcessor> GetVersion() => _Version.files;
         public void AddVersion(List<IFileProcessor> files)
-        {
-            var id = Guid.NewGuid();
-            Versions.Add(new Version(id, files, Versions.Count()+1 ));
-        }
-        public VersionedModifications.Version GetVersionById(Guid id)
-            => Versions.First(f => f.id == f.id);
+            => _Version = new Version(Guid.NewGuid(), files, 0);
 
-        private bool AllFilesHaveSameCreationTimeInTicks(List<FileInfo> current, List<FileInfo> target )
-            => target
-                .Where(w => current.Any(x => x.CreationTime.Ticks == w.CreationTime.Ticks))
-                .Count() == current.Count();
     } 
 }

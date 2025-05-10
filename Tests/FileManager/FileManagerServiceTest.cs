@@ -15,6 +15,7 @@ namespace Tests.FileManager
             _files = FileIdentity.Instances(files.Select(f => f.FullName).ToList()
                 , files.First().Directory ?? throw new ArgumentNullException());
         }
+
         [Fact]
         public void TestNumberSequenceBeforeExtensionPreview()
         {
@@ -66,10 +67,13 @@ namespace Tests.FileManager
                 ));
         }
         [Fact]
-        public void TestRegexPatternPreview()
+        public void TestRollBackOperation()
         {
+            var list = _service.GetToUpperPattern(_files);
+            _service.RollbackOperation();
             
         }
+
     }
 
 }

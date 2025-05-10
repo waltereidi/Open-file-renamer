@@ -9,8 +9,6 @@ namespace FileManager.Interfaces
 {
     public interface IVersionControl
     {
-        public List<VersionedModifications.Version> GetAllVersion();
-        public VersionedModifications.Version GetVersionById(Guid id);
-        public Task RollbackOperation(List<FileIdentity> fi, Guid version);
+        public Task RollbackOperation(List<FileIdentity> fi);
     }
 }
