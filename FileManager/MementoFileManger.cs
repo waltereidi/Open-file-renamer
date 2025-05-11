@@ -1,6 +1,7 @@
 ﻿using FileManager.DAO;
 using FileManager.FileOperations;
 using FileManager.Interfaces;
+using System.Net.Http.Headers;
 
 namespace FileManager
 {
@@ -15,15 +16,18 @@ namespace FileManager
             return ExecuteOperation(files);
         }
         public Task Rollback(List<FileIdentity> current)
+            => new FileWriter(_versioning.GetVersion())
+                .Rollback(current);
+        public Task Rollback()
         {
-            //var elegibleFiles = _versioning.GetVersion().Where(x=>x.IsFile());
-            
-            
-            return null;
-            //=> new FileWriter(_versioning.GetVersion())
-            //.Rollback(current);
+            var current = _versioning.GetVersion()
+                .Select(s => FileIdentity.Instance(new(Path.Combine(s.GetDirectory().FullName, s.GetRenameTo()))))
+                .ToList();
+           
+            return new FileWriter(_versioning.GetVersion())
+                .Rollback(current);
         }
-            
+             
 
         private Task ExecuteOperation(List<IFileProcessor> files) 
             => new FileWriter(files).Start();

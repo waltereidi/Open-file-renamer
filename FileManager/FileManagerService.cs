@@ -33,8 +33,9 @@ namespace FileManager
 
         public async Task RollbackOperation(List<FileIdentity> fi )
             => await _memento.Rollback(fi);
+        public async Task RollbackOperation()
+                    => await _memento.Rollback();
 
-     
         public List<IFileProcessor> GetNumberedSequenceBeforePreview(List<FileIdentity> files, string separator)
             => files.Select((value, i)
                 =>

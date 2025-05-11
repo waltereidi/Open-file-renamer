@@ -10,7 +10,6 @@ namespace ApplicationService;
 
 public class MainApplicationService
 {
-
     public MainApplicationService()
     {
     }
@@ -60,8 +59,15 @@ public class MainApplicationService
     public MainApplicationServiceDTO.RollbackMessage RollBackVersion(Guid id ,List<FileIdentity> files ,string directory )
     {
         IVersionControl fm = new FileManagerService(new(directory));
-        Task.Run(() => fm.RollbackOperation(files , id));
+        Task.Run(() => fm.RollbackOperation(files));
         
+        return new(true ? "Success" : "Error");
+    }
+    public MainApplicationServiceDTO.RollbackMessage RollBackVersion(string directory)
+    {
+        IVersionControl fm = new FileManagerService(new(directory));
+        Task.Run(() => fm.RollbackOperation());
+
         return new(true ? "Success" : "Error");
     }
     public List<FileInfo> SearchFiles(string searchText, string directory, Main_SearchFilter? filter = null)
@@ -78,19 +84,6 @@ public class MainApplicationService
                 return fm.GetFilesGreaterThan(size);
             default: throw new InvalidOperationException();
         }
-    }
-
-    public List<Tuple<Guid, int>> GetVersions(string directory)
-    {
-        IVersionControl vc = new FileManagerService(new(directory));
-        return vc.GetAllVersion()
-            .Select(s => new Tuple<Guid, int>(s.id, s.order))
-            .ToList();
-    }
-    public VersionedModifications.Version GetVersionById(string directory, Guid id)
-    {
-        IVersionControl vc = new FileManagerService(new(directory));
-        return vc.GetVersionById(id);
     }
 
 

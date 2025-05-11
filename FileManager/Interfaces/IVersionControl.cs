@@ -10,5 +10,6 @@ namespace FileManager.Interfaces
     public interface IVersionControl
     {
         public Task RollbackOperation(List<FileIdentity> fi);
+        public Task RollbackOperation();
     }
 }

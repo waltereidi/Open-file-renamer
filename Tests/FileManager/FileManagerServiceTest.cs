@@ -69,8 +69,12 @@ namespace Tests.FileManager
         [Fact]
         public void TestRollBackOperation()
         {
-            var list = _service.GetToUpperPattern(_files);
-            _service.RollbackOperation();
+            _service.GetToUpperPattern(_files).Wait();
+            var files = _service.GetFiles()
+                .Select(s=> FileIdentity.Instance(s))
+                .ToList(); 
+
+            _service.RollbackOperation(files).Wait();
             
         }
 

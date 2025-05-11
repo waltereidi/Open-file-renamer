@@ -29,14 +29,14 @@ namespace FileManager.FileOperations
         }
         public async Task Rollback(List<FileIdentity> current )
         {
-            if(_file.Any(x => current.Any(a => x.GetIdentity().Equals(a))))
+            if( _file.Any(x => current.Any( a => x.IsFile(a.GetFile()))) ) 
             {
-                var canRollback = _file.Where(x => current.Select(s=> s.GetFile()).Any(a => x.GetIdentity().Equals(a)));
-                canRollback.ToList();
-                _file.Select(s => Task.Run(() => s.Start())).ToArray();
+                var canRollback = _file.Where(x => current.Any(a => x.IsFile(a.GetFile())))
+                    .ToList();
+
+                var e = _file.Select(s => Task.Run(() => s.Revert())).ToArray(); 
+                await Task.WhenAll(e);
             }
-            
-            
         }
     }
 }
