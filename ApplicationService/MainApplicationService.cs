@@ -86,8 +86,12 @@ public class MainApplicationService
         }
     }
 
-
-
-
-
+    public void RefreshFileList(string directory )
+    {
+        IDirectoryReader fm = new FileManagerService(new DirectoryInfo(directory));
+        var f = fm.GetFiles();
+        
+        IVersionControl vc = new FileManagerService(new DirectoryInfo(directory));
+        var files = vc.GetPreviousVersion().Where(x => f.Where(cx => x.IsFile(cx)).ToList();
+    }
 }

@@ -129,6 +129,7 @@ namespace FileManager
         public async Task GetReplacePattern(List<FileIdentity> files, string pattern, string text)
             => await _memento.SetState(GetReplacePatternPreview(files , pattern ,text));
 
-
+        public List<IFileProcessor> GetPreviousVersion()
+            => _memento.GetVersion().files;
     }
 }

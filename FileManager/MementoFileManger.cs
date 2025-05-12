@@ -28,6 +28,8 @@ namespace FileManager
                 .Rollback(current);
         }
              
+        public VersionedModifications.Version GetVersion()
+            => _versioning.GetVersion();
 
         private Task ExecuteOperation(List<IFileProcessor> files) 
             => new FileWriter(files).Start();

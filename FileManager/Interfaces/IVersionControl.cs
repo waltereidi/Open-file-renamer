@@ -11,5 +11,6 @@ namespace FileManager.Interfaces
     {
         public Task RollbackOperation(List<FileIdentity> fi);
         public Task RollbackOperation();
+        public List<IFileProcessor> GetPreviousVersion();
     }
 }
