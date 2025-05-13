@@ -16,24 +16,22 @@ namespace FileManager
             return ExecuteOperation(files);
         }
         public Task Rollback(List<FileIdentity> current)
-            => new FileWriter(_versioning.GetVersion())
+            => new FileWriter(_versioning.GetVersionForRollback())
                 .Rollback(current);
+
         public Task Rollback()
         {
             var current = _versioning.GetVersion()
                 .Select(s => FileIdentity.Instance(new(Path.Combine(s.GetDirectory().FullName, s.GetRenameTo()))))
                 .ToList();
            
-            return new FileWriter(_versioning.GetVersion())
-                .Rollback(current);
+            return Rollback(current);
         }
              
-        public VersionedModifications.Version GetVersion()
+        public List<IFileProcessor> GetVersion()
             => _versioning.GetVersion();
 
         private Task ExecuteOperation(List<IFileProcessor> files) 
             => new FileWriter(files).Start();
-
-        
     }
 }

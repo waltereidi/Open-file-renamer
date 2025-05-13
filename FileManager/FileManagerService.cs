@@ -3,9 +3,7 @@ using FileManager.DirectoryOperations;
 using FileManager.FileOperations.Append;
 using FileManager.FileOperations.NumberedSequence;
 using FileManager.FileOperations.Pattern;
-using FileManager.FileOperations.Remove;
 using FileManager.Interfaces;
-using System.Collections.Generic;
 
 
 namespace FileManager
@@ -130,6 +128,6 @@ namespace FileManager
             => await _memento.SetState(GetReplacePatternPreview(files , pattern ,text));
 
         public List<IFileProcessor> GetPreviousVersion()
-            => _memento.GetVersion().files;
+            => _memento.GetVersion();
     }
 }

@@ -59,9 +59,10 @@ public class MainApplicationService
     public MainApplicationServiceDTO.RollbackMessage RollBackVersion(Guid id ,List<FileIdentity> files ,string directory )
     {
         IVersionControl fm = new FileManagerService(new(directory));
-        Task.Run(() => fm.RollbackOperation(files));
-        
-        return new(true ? "Success" : "Error");
+        return fm.RollbackOperation(files)
+            .ContinueWith(_=> {
+                return new MainApplicationServiceDTO.RollbackMessage(_.IsCompletedSuccessfully ? "Success" : "Error");
+                }).Result;
     }
     public MainApplicationServiceDTO.RollbackMessage RollBackVersion(string directory)
     {
@@ -86,12 +87,16 @@ public class MainApplicationService
         }
     }
 
-    public void RefreshFileList(string directory )
+    public List<FileIdentity> RefreshFileList(string directory )
     {
         IDirectoryReader fm = new FileManagerService(new DirectoryInfo(directory));
         var f = fm.GetFiles();
         
         IVersionControl vc = new FileManagerService(new DirectoryInfo(directory));
-        var files = vc.GetPreviousVersion().Where(x => f.Where(cx => x.IsFile(cx)).ToList();
+        var prev = vc.GetPreviousVersion();
+        return vc.GetPreviousVersion()
+            .Where(x => f.Any(cx => x.IsFile(cx)))
+            .Select(s=>s.GetIdentity())
+            .ToList();
     }
 }

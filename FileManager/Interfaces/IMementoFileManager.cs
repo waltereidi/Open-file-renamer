@@ -12,6 +12,6 @@ namespace FileManager.Interfaces
         public Task SetState(List<IFileProcessor> state);
         public Task Rollback(List<FileIdentity> current);
         public Task Rollback();
-        public VersionedModifications.Version GetVersion();
+        public List<IFileProcessor> GetVersion();
     }
 }
