@@ -52,7 +52,7 @@ namespace ApplicationService.DAO
                 .Where(x => Predicate(x))
                 .Select(s => new TableSelectionDAO.TableRows()
                 {
-                    FileIdentity = FileIdentity.Instance(s.FullName, Dir),
+                    FileIdentity = FileIdentity.Instance(s.CreationTime.Ticks.ToString(), Dir),
                     FileName = s.Name,
                     FileSize = s.Length,
                     IsChecked = true

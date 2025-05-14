@@ -22,6 +22,9 @@ namespace FileManager.FileOperations.Pattern
 
         public override string GetRenameTo()
         {
+            if (String.IsNullOrEmpty(_regex) || String.IsNullOrEmpty(_text))
+                return FileNameBefore;
+
             string nameWithouthExtension = FileNameBefore
                 .Substring(0, FileNameBefore.LastIndexOf('.'));
 

@@ -87,16 +87,22 @@ public class MainApplicationService
         }
     }
 
-    public List<FileIdentity> RefreshFileList(string directory )
+    public List<FileIdentity> RefreshFileList(string directory , List<FileIdentity> lfi )
     {
         IDirectoryReader fm = new FileManagerService(new DirectoryInfo(directory));
         var f = fm.GetFiles();
+
+        if (lfi.Any(x => x.GetFile() == null))
+        {
+            IVersionControl vc = new FileManagerService(new DirectoryInfo(directory));
+            var prev = vc.GetPreviousVersion();
+            return vc.GetPreviousVersion()
+                .Where(x => f.Any(cx => x.IsFile(cx)))
+                .Select(s => s.GetIdentity())
+                .ToList();
+        }
+        else
+            return f.Select(s=> FileIdentity.Instance(s)).ToList();
         
-        IVersionControl vc = new FileManagerService(new DirectoryInfo(directory));
-        var prev = vc.GetPreviousVersion();
-        return vc.GetPreviousVersion()
-            .Where(x => f.Any(cx => x.IsFile(cx)))
-            .Select(s=>s.GetIdentity())
-            .ToList();
     }
 }

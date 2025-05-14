@@ -20,13 +20,16 @@ namespace FileManager.FileOperations.Pattern
         ) : base(path, fi)
         {
             _pattern= pattern;
-            _text = text;
+            _text = text?? "";
         }
 
 
 
         public override string GetRenameTo()
         {
+            if (String.IsNullOrEmpty(_pattern) )
+                return FileNameBefore;
+
             string nameWithouthExtension = FileNameBefore
                 .Substring(0, FileNameBefore.LastIndexOf('.'));
 
