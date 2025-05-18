@@ -2,6 +2,7 @@
 using ApplicationService.Interfaces;
 using Presentation.Interfaces;
 using Presentation.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Presentation.Wrappers
 {
@@ -16,9 +17,9 @@ namespace Presentation.Wrappers
             new(0 , "Replace"),
             new(1 , "ToLower"),
             new(2 , "ToUpper"),
-            new(3 , "Words"),
-            new(4 , "Digits"),
-            new(5 , "Regex"),
+            //new(3 , "Words"),
+            //new(4 , "Digits"),
+            new(3 , "Regex"),
         }; 
 
         public TabPatternMatching(
@@ -44,7 +45,10 @@ namespace Presentation.Wrappers
             this.textBox_pattern_from = textBox_pattern_from;
             this.comboBox_patternMatching_operation = comboBox_patternMatching_operation;
             AddComboOptions();
-
+            this.comboBox_patternMatching_operation.SelectedIndexChanged += this.ApplyComboSelectEvent;
+            this.comboBox_patternMatching_operation.SelectedIndexChanged += this.GetPreview;
+            this.textBox_Pattern_to.TextChanged += this.GetPreview;
+            this.textBox_pattern_from.TextChanged += this.GetPreview;
         }
         private void AddComboOptions()
             => comboBox_patternMatching_operation.Items.AddRange(
@@ -59,9 +63,9 @@ namespace Presentation.Wrappers
                 case 0: ApplyReplace();break;
                 case 1: ApplyToLower();break;
                 case 2: ApplyToUpper();break;
-                case 3: ApplyWords();break;
-                case 4: ApplyDigits();break;
-                case 5: ApplyRegex(); break;
+                //case 3: ApplyWords();break;
+                //case 4: ApplyDigits();break;
+                case 3: ApplyRegex(); break;
                 default: throw new InvalidOperationException();
             }
         }
@@ -99,9 +103,9 @@ namespace Presentation.Wrappers
         public override IOperationContract GetTabContent()
             => comboBox_patternMatching_operation.SelectedIndex switch
             {
-                0 => new ReplacePattern( 
+                0 => new ReplacePattern(
+                    textBox_pattern_from.Text,
                     textBox_Pattern_to.Text , 
-                    textBox_pattern_from.Text  , 
                     base._previewGrid.GetAllFiles(new(_directory.Text)), 
                     _directory.Text
                     ),
@@ -113,19 +117,19 @@ namespace Presentation.Wrappers
                     base._previewGrid.GetAllFiles(new(_directory.Text)),
                     _directory.Text
                     ),
-                3 => new WordsPattern(
+                //3 => new WordsPattern(
+                //    textBox_pattern_from.Text,
+                //    base._previewGrid.GetAllFiles(new(_directory.Text)),
+                //    _directory.Text
+                //    ),
+                //4 => new DigitsPattern(
+                //    textBox_pattern_from.Text,
+                //    base._previewGrid.GetAllFiles(new(_directory.Text)),
+                //    _directory.Text
+                //    ),
+                3 => new RegexPattern(
                     textBox_pattern_from.Text,
-                    base._previewGrid.GetAllFiles(new(_directory.Text)),
-                    _directory.Text
-                    ),
-                4 => new DigitsPattern(
-                    textBox_pattern_from.Text,
-                    base._previewGrid.GetAllFiles(new(_directory.Text)),
-                    _directory.Text
-                    ),
-                5 => new RegexPattern(
                     textBox_Pattern_to.Text,
-                    textBox_pattern_from.Text,
                     base._previewGrid.GetAllFiles(new(_directory.Text)),
                     _directory.Text
                     ),
