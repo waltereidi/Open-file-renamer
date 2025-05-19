@@ -58,6 +58,8 @@ namespace Presentation
             textBox_pattern_from = new AlsoNumberTextBox();
             comboBox_patternMatching_operation = new ComboBox();
             tabPage_append = new TabPage();
+            label_append_postion = new Label();
+            textBox_append_position = new AlsoNumberTextBox();
             radioButton_append_appendAt = new RadioButton();
             radioButton_append_appendToEnd = new RadioButton();
             radioButton_append_appendToStart = new RadioButton();
@@ -75,8 +77,7 @@ namespace Presentation
             flowLayoutPanel_Selection = new FlowLayoutPanel();
             flowLayoutPanel_preview = new FlowLayoutPanel();
             button_moveSelectedFiles = new Button();
-            textBox_append_position = new AlsoNumberTextBox();
-            label_append_postion = new Label();
+            btn_rollback = new Button();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             groupBox_filter.SuspendLayout();
@@ -258,7 +259,6 @@ namespace Presentation
             NumberedSequence_text.Name = "NumberedSequence_text";
             NumberedSequence_text.Size = new Size(211, 21);
             NumberedSequence_text.TabIndex = 2;
-
             // 
             // numbered_Sequence_before
             // 
@@ -271,7 +271,6 @@ namespace Presentation
             numbered_Sequence_before.TabStop = true;
             numbered_Sequence_before.Text = "Before";
             numbered_Sequence_before.UseVisualStyleBackColor = true;
-
             // 
             // numbered_sequence_after
             // 
@@ -313,7 +312,6 @@ namespace Presentation
             textBox_Pattern_to.Name = "textBox_Pattern_to";
             textBox_Pattern_to.Size = new Size(223, 21);
             textBox_Pattern_to.TabIndex = 2;
-            
             // 
             // textBox_pattern_from
             // 
@@ -329,7 +327,6 @@ namespace Presentation
             comboBox_patternMatching_operation.Name = "comboBox_patternMatching_operation";
             comboBox_patternMatching_operation.Size = new Size(231, 23);
             comboBox_patternMatching_operation.TabIndex = 0;
-            
             // 
             // tabPage_append
             // 
@@ -348,6 +345,22 @@ namespace Presentation
             tabPage_append.Text = "Append";
             tabPage_append.UseVisualStyleBackColor = true;
             // 
+            // label_append_postion
+            // 
+            label_append_postion.AutoSize = true;
+            label_append_postion.Location = new Point(17, 12);
+            label_append_postion.Name = "label_append_postion";
+            label_append_postion.Size = new Size(51, 15);
+            label_append_postion.TabIndex = 6;
+            label_append_postion.Text = "Position";
+            // 
+            // textBox_append_position
+            // 
+            textBox_append_position.Location = new Point(67, 10);
+            textBox_append_position.Name = "textBox_append_position";
+            textBox_append_position.Size = new Size(40, 21);
+            textBox_append_position.TabIndex = 5;
+            // 
             // radioButton_append_appendAt
             // 
             radioButton_append_appendAt.AutoSize = true;
@@ -359,7 +372,6 @@ namespace Presentation
             radioButton_append_appendAt.TabStop = true;
             radioButton_append_appendAt.Text = "Append at position";
             radioButton_append_appendAt.UseVisualStyleBackColor = true;
-
             // 
             // radioButton_append_appendToEnd
             // 
@@ -371,7 +383,6 @@ namespace Presentation
             radioButton_append_appendToEnd.TabStop = true;
             radioButton_append_appendToEnd.Text = "Append to end";
             radioButton_append_appendToEnd.UseVisualStyleBackColor = true;
-
             // 
             // radioButton_append_appendToStart
             // 
@@ -383,7 +394,6 @@ namespace Presentation
             radioButton_append_appendToStart.TabStop = true;
             radioButton_append_appendToStart.Text = "Append to start";
             radioButton_append_appendToStart.UseVisualStyleBackColor = true;
-
             // 
             // label2
             // 
@@ -505,21 +515,15 @@ namespace Presentation
             button_moveSelectedFiles.UseVisualStyleBackColor = true;
             button_moveSelectedFiles.Click += button_moveSelectedFiles_Click;
             // 
-            // textBox_append_position
+            // btn_rollback
             // 
-            textBox_append_position.Location = new Point(67, 10);
-            textBox_append_position.Name = "textBox_append_position";
-            textBox_append_position.Size = new Size(40, 21);
-            textBox_append_position.TabIndex = 5;
-            // 
-            // label_append_postion
-            // 
-            label_append_postion.AutoSize = true;
-            label_append_postion.Location = new Point(17, 12);
-            label_append_postion.Name = "label_append_postion";
-            label_append_postion.Size = new Size(51, 15);
-            label_append_postion.TabIndex = 6;
-            label_append_postion.Text = "Position";
+            btn_rollback.Location = new Point(367, 309);
+            btn_rollback.Name = "btn_rollback";
+            btn_rollback.Size = new Size(66, 56);
+            btn_rollback.TabIndex = 6;
+            btn_rollback.Text = "Rollback";
+            btn_rollback.UseVisualStyleBackColor = true;
+            btn_rollback.Click += btn_rollback_Click;
             // 
             // Main
             // 
@@ -528,6 +532,7 @@ namespace Presentation
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(955, 484);
+            Controls.Add(btn_rollback);
             Controls.Add(button_moveSelectedFiles);
             Controls.Add(flowLayoutPanel_preview);
             Controls.Add(flowLayoutPanel_Selection);
@@ -617,6 +622,7 @@ namespace Presentation
         private AlsoNumberTextBox textBox_append;
         private Label label_append_postion;
         private AlsoNumberTextBox textBox_append_position;
+        private Button btn_rollback;
         //Code removed for further implementation
         //private Label label_versioning;
         //private ComboBox comboBox_versioning;

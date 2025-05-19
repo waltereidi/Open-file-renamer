@@ -15,9 +15,5 @@ namespace Presentation.Wrappers
         public IOperationContract GetSelectedTabData()
             => _tabs.ElementAt(_tabControl.SelectedIndex).GetTabContent();
 
-        IOperationContract ITabControlWrapper.GetSelectedTabData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -8,7 +8,6 @@ namespace Presentation.UI
     public class DataGridView_Files : DataGridView
     {
         private DataGridViewRowCollection StoredRows { get; set; }
-
         public DataGridView_Files() 
         {
         }
@@ -22,20 +21,21 @@ namespace Presentation.UI
             this.Rows.Clear();
             files.ForEach(f => AppendRow(f , anotherGrid) );
         }
-
+        
         private void AppendRow(FilePreview file, DataGridView_Files anotherGrid)
         {
             this.AllowUserToAddRows = true;
             var rowIdentities = GetTableRowIdentities(anotherGrid);
             if(EnsureFileCanBeAdded(rowIdentities, file.Id))
             {
-                var row = GetRow(file);
+                var row = MakeRow(file);
                 this.Rows.Add(row);
             }
             this.AllowUserToAddRows = false;
         }
            
-        private DataGridViewRow GetRow(FilePreview file)
+
+        private DataGridViewRow MakeRow(FilePreview file)
         {
             DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
             row.ReadOnly = true;
@@ -55,7 +55,8 @@ namespace Presentation.UI
         /// <returns></returns>
         public bool EnsureFileCanBeAdded(List<string> rowIdentities, FileIdentity id)
             => !rowIdentities.Any( x => id.Equals(x) );
-
+        public void Clear()
+            => this.Rows.Clear();
         public List<string> GetTableRowIdentities(DataGridView_Files source)
         {
             List<string> result = new(); 
@@ -66,6 +67,7 @@ namespace Presentation.UI
             }
             return result;
         }
+
         public List<string> GetIdentityFromIndexes(List<int> indexes)
             => indexes.Select(s 
                 => this.Rows[s].Cells[2].Value.ToString() ?? throw new ArgumentNullException() )

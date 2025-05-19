@@ -1,5 +1,6 @@
 using ApplicationService;
 using ApplicationService.Enum;
+using FileManager.DAO;
 using Presentation.Interfaces;
 using Presentation.Wrappers;
 using System.Net.Http.Headers;
@@ -12,10 +13,11 @@ namespace Presentation
         public Main()
         {
             InitializeComponent();
-            InitializeTabPatternMatchingWrapper();
+
             InitializaTabNumberedSequenceWrapper();
             InitializeTabAppend();
             InitializeTabControl();
+            InitializeTabPatternMatchingWrapper();
         }
 
         private void InitializeTabAppend()
@@ -82,8 +84,16 @@ namespace Presentation
 
         private void button_start_click(object sender, EventArgs e)
         {
-            _service = new MainApplicationService();
-            _service.RenameFiles(TabControlWrapper.GetSelectedTabData());
+            try
+            {
+                _service = new MainApplicationService();
+                _service.RenameFiles(TabControlWrapper.GetSelectedTabData());
+                refresh_filesPreview();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -179,5 +189,28 @@ namespace Presentation
         {
 
         }
+
+        private void btn_rollback_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _service.RollBackVersion(label_currentDirectory.Text);
+                refresh_filesPreview();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void refresh_filesPreview()
+        {
+            var identities = dataGridView_preview.GetTableRowIdentities(dataGridView_preview)
+                    .Select(s=>FileIdentity.Instance(s,new(label_currentDirectory.Text)).GetFile())
+                    .ToList();
+
+            dataGridView_preview.Clear();
+            dataGridView_preview.AddNewRowList(identities, dataGridView_selection );
+        }
+
     }
 }

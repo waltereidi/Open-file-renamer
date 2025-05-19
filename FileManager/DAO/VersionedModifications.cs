@@ -23,6 +23,7 @@ namespace FileManager.DAO
             Id = new Guid();
             Files = files;
             Order = 0;
+            IsRollback = false;
         }
     } 
 }
