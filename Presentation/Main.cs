@@ -82,12 +82,14 @@ namespace Presentation
             }
         }
 
-        private void button_start_click(object sender, EventArgs e)
+        private async void button_start_click(object sender, EventArgs e)
         {
             try
             {
                 _service = new MainApplicationService();
-                _service.RenameFiles(TabControlWrapper.GetSelectedTabData());
+                var result = _service.RenameFiles(TabControlWrapper.GetSelectedTabData());
+                await result;
+                MessageBox.Show(result.IsCompletedSuccessfully ? "Success" : "Error" );
                 refresh_filesPreview();
             }
             catch (Exception ex)
@@ -96,15 +98,6 @@ namespace Presentation
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private void searchFilter_Changed(object sender, EventArgs e)
         {
             var radioChecked = groupBox_filter.Controls
@@ -175,26 +168,14 @@ namespace Presentation
         private void dataGridView_preview_selectionChanged(object sender, EventArgs e)
             => dataGridView_preview.DeselectAnotherGrid(dataGridView_selection);
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_rollback_Click(object sender, EventArgs e)
+        private async void btn_rollback_Click(object sender, EventArgs e)
         {
             try
             {
-                _service.RollBackVersion(label_currentDirectory.Text);
+                var result = await _service.RollBackVersion(label_currentDirectory.Text);
+                
+                MessageBox.Show(result.message);
                 refresh_filesPreview();
             }
             catch(Exception ex)

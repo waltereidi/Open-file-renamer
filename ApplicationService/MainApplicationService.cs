@@ -5,6 +5,7 @@ using ApplicationService.Interfaces;
 using FileManager;
 using FileManager.DAO;
 using FileManager.Interfaces;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ApplicationService; 
 
@@ -50,10 +51,10 @@ public class MainApplicationService
           //Place here more operations call
           _ => throw new InvalidOperationException()
       };
-    public void RenameFiles(IOperationContract contract)
+    public Task RenameFiles(IOperationContract contract)
     {
         FileManagerService fm = new(new(contract.GetDirectory()));
-        CommandRename(contract, fm);
+        return CommandRename(contract, fm);
     }
 
     public MainApplicationServiceDTO.RollbackMessage RollBackVersion(Guid id ,List<FileIdentity> files ,string directory )
@@ -64,12 +65,16 @@ public class MainApplicationService
                 return new MainApplicationServiceDTO.RollbackMessage(_.IsCompletedSuccessfully ? "Success" : "Error");
                 }).Result;
     }
-    public MainApplicationServiceDTO.RollbackMessage RollBackVersion(string directory)
+    public Task<MainApplicationServiceDTO.RollbackMessage> RollBackVersion(string directory)
     {
         IVersionControl fm = new FileManagerService(new(directory));
-        Task.Run(() => fm.RollbackOperation());
+        return fm.RollbackOperation()
+            .ContinueWith(_ =>
+            {
+                return new MainApplicationServiceDTO.RollbackMessage(  _.IsCompletedSuccessfully ? "Success" : "Error");
+            });
 
-        return new(true ? "Success" : "Error");
+        
     }
     public List<FileInfo> SearchFiles(string searchText, string directory, Main_SearchFilter? filter = null)
     => new FileManagerService(new DirectoryInfo(directory)).GetFilesContains(searchText);

@@ -227,7 +227,6 @@ namespace Presentation
             tabControl.SelectedIndex = 0;
             tabControl.Size = new Size(499, 110);
             tabControl.TabIndex = 15;
-            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             // 
             // tabPage_numberedSequence
             // 
@@ -403,7 +402,6 @@ namespace Presentation
             label2.Size = new Size(49, 15);
             label2.TabIndex = 1;
             label2.Text = "Append";
-            label2.Click += label2_Click;
             // 
             // textBox_append
             // 
