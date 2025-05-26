@@ -128,9 +128,8 @@
         1 - Filtros&nbsp;<br>
         &nbsp;
     </h5>
-    <figure class="image" data-ckbox-resource-id="QJ-D6YTMuZyD">
-        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.webp 367w" sizes="(max-width: 367px) 100vw, 367px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.png" width="367" height="91"></picture>
-    </figure>
+    ![image](https://github.com/user-attachments/assets/e3b27e48-e550-408d-884a-95eea5892d16)
+
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
         adicione um novo tipo de Enum em <strong>ApplicationService.Enum.Main_SearchFilter</strong> e implemente uma nova leitura de diretórios no projeto FileManager com a interface <strong>FileManager.Interfaces.IDirectoryReader</strong><br>
@@ -139,12 +138,10 @@
     <h5 style="margin-left:40px;">
         <strong>2 - Preview e Renomeação de arquivos</strong>
     </h5>
-    <figure class="image" data-ckbox-resource-id="9bDf06OeI5MW">
-        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/400.webp 400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/480.webp 480w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.webp 507w" sizes="(max-width: 507px) 100vw, 507px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.png" width="507" height="126"></picture>
-    </figure>
-    <figure class="image" data-ckbox-resource-id="he9UgWzm6VhK">
-        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/200.webp 200w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/400.webp 400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/600.webp 600w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/800.webp 800w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1000.webp 1000w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1200.webp 1200w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1400.webp 1400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1600.webp 1600w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1800.webp 1800w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1992.webp 1992w" sizes="(max-width: 1992px) 100vw, 1992px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1992.png" width="1992" height="1580"></picture>
-    </figure>
+  ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)
+
+![Classe UML (1)](https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3)
+
     <h5 style="margin-left:40px;">
         Interfaces&nbsp;
     </h5>
