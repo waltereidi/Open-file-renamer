@@ -128,9 +128,7 @@
         1 - Filtros&nbsp;<br>
         &nbsp;
     </h5>
-    <figure class="image" data-ckbox-resource-id="QJ-D6YTMuZyD">
-        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.webp 367w" sizes="(max-width: 367px) 100vw, 367px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.png" width="367" height="91"></picture>
-    </figure>
+           ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
         adicione um novo tipo de Enum em <strong>ApplicationService.Enum.Main_SearchFilter</strong> e implemente uma nova leitura de diretórios no projeto FileManager com a interface <strong>FileManager.Interfaces.IDirectoryReader</strong><br>
@@ -139,11 +137,8 @@
     <h5 style="margin-left:40px;">
         <strong>2 - Preview e Renomeação de arquivos</strong>
     </h5>
-    <figure class="image" data-ckbox-resource-id="9bDf06OeI5MW">
-        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/400.webp 400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/480.webp 480w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.webp 507w" sizes="(max-width: 507px) 100vw, 507px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.png" width="507" height="126"></picture>
-    </figure>
-![Classe UML (1)](https://github.com/user-attachments/assets/ebc866c7-c853-4314-96ad-bf78161c46ce)
-
+        ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)
+        ![Classe UML (1)](https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3)
     <h5 style="margin-left:40px;">
         Interfaces&nbsp;
     </h5>
