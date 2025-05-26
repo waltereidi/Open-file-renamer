@@ -128,7 +128,8 @@
         1 - Filtros&nbsp;<br>
         &nbsp;
     </h5>
-    ![image](https://github.com/user-attachments/assets/e3b27e48-e550-408d-884a-95eea5892d16)
+   ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
+
 
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
