@@ -128,9 +128,7 @@
         1 - Filtros&nbsp;<br>
         &nbsp;
     </h5>
-    <figure class="image" data-ckbox-resource-id="QJ-D6YTMuZyD">
            ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
-    </figure>
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
         adicione um novo tipo de Enum em <strong>ApplicationService.Enum.Main_SearchFilter</strong> e implemente uma nova leitura de diretórios no projeto FileManager com a interface <strong>FileManager.Interfaces.IDirectoryReader</strong><br>
@@ -139,12 +137,8 @@
     <h5 style="margin-left:40px;">
         <strong>2 - Preview e Renomeação de arquivos</strong>
     </h5>
-    <figure class="image" data-ckbox-resource-id="9bDf06OeI5MW">
         ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)
-    </figure>
-    <figure class="image" data-ckbox-resource-id="he9UgWzm6VhK">
         ![Classe UML (1)](https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3)
-    </figure>
     <h5 style="margin-left:40px;">
         Interfaces&nbsp;
     </h5>
