@@ -80,26 +80,19 @@
     </h4>
     <p style="margin-left:40px;">
         O acesso de arquivos físicos deve ser feito através da classe <strong>FileManager.DAO.FileIdentity</strong>,<strong> </strong>o acesso deve ser uma única fonte da verdade e imutável, desta forma será possível facilitar as operações de rollback , renomeação de arquivos&nbsp;<strong> </strong>e leitura.&nbsp;<br>
-        referencias (Desenvolvimento guiado por testes "TDD", Kent Beck ISBN 978-85-7780-747-5):&nbsp;
+        É importante notar que a classe FileIdentity deve ser interpretada como uma identidade única para o arquivo antes e depois de modificar seu nome, enquanto ainda estiver no mesmo diretório, desta forma será possível encontrá-lo para retornar á sua última versão.<br>
+        A pratica de utilização de <strong>ValueObjects </strong>vai evitar sinónimos e vários bugs durante o processo de desenvolvimento.<br>
+        ( referencias "Desenvolvimento guiado por testes TDD, Kent Beck ISBN 978-85-7780-747-5 ")
     </p>
-    <blockquote>
-        <p>
-            Há uma grande vantagem em usar Value Object: você não tem que se preocu-<br>
-            par com problemas de sinônimos. Digamos que eu tenho um cheque e coloque sua<br>
-            quantia em $5, e então eu crio outra quantia de cheque com os mesmos $5. Alguns<br>
-            dos piores bugs da minha carreira ocorreram quando mudar o valor do primeiro<br>
-            cheque mudou, inadvertidamente, o valor do segundo cheque. Isso são sinônimos.<br>
-            Quando você tem Value Object, não precisa se preocupar com sinônimos. Se<br>
-            eu tenho $5, então tenho certeza que ele vai ser $5 para todo o sempre. Se alguém<br>
-            quer $7, então terá que criar um objeto totalmente novo.
-        </p>
-    </blockquote>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
     <h4 style="margin-left:40px;">
         Adicionar novas operações de renomeação de arquivos :&nbsp;<br>
         &nbsp;
     </h4>
     <h5 style="margin-left:40px;">
-        Operação de renomear arquivos :&nbsp;
+        1 -Adicione uma operação de renomear arquivos :&nbsp;
     </h5>
     <p style="margin-left:40px;">
         Novas operações de renomeação devem utilizar-se da classe base :<strong> FileManager.FileOperations.FileProcessor</strong>, a classe utiliza o padrão GOF "Strategy" e é implementada á classe<strong> FileManager.FileOperations.FileWriter.</strong><br>
@@ -108,14 +101,56 @@
         &nbsp;
     </p>
     <h5 style="margin-left:40px;">
-        Implementar operação de renomear arquivo para ser utilizada na camada de serviço
+        2 - Implemente a operação de renomear arquivo em <strong>FileManagerService</strong>&nbsp;
     </h5>
     <p style="margin-left:40px;">
         A classe <strong>FileManager.FileManagerService</strong> deve implementar todas as operações que estão expostas á camada de serviço, Operações de Leitura de arquivos devem estar contidas na interface <strong>IDirectoryReader </strong>e Operações relacionadas ao versionamento de arquivos na interface <strong>IVersionControl.&nbsp;</strong><br>
         Note que todas as operações que modificam o nome de arquivos estão isentas de interface mas são intermediadas pela interface <strong>IMementoFileManager, </strong>que implementa o Design Pattern GOF Memento para armazenar a última modificação de arquivo feita.<br>
-        <br>
-        <br>
-        <br>
+        &nbsp;
+    </p>
+    <h5 style="margin-left:40px;">
+        3 - Adicione uma chamada á o serviço implementado no projeto FileManager na camada de serviço
+    </h5>
+    <p style="margin-left:40px;">
+        Agora faça a implementação necessária para utilizar o serviço na camada de serviço, pode-se utilizar das implementações já existentes ou delegar da forma que for necessário a camada de presentação.<br>
+        &nbsp;
+    </p>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
+    <h4 style="margin-left:40px;">
+        Camada de Presentação Windows Forms
+    </h4>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
+    <h5 style="margin-left:40px;">
+        1 - Filtros&nbsp;<br>
+        &nbsp;
+    </h5>
+    <figure class="image" data-ckbox-resource-id="QJ-D6YTMuZyD">
+        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.webp 367w" sizes="(max-width: 367px) 100vw, 367px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/QJ-D6YTMuZyD/images/367.png" width="367" height="91"></picture>
+    </figure>
+    <p style="margin-left:40px;">
+        Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
+        adicione um novo tipo de Enum em <strong>ApplicationService.Enum.Main_SearchFilter</strong> e implemente uma nova leitura de diretórios no projeto FileManager com a interface <strong>FileManager.Interfaces.IDirectoryReader</strong><br>
+        &nbsp;
+    </p>
+    <h5 style="margin-left:40px;">
+        <strong>2 - Preview e Renomeação de arquivos</strong>
+    </h5>
+    <figure class="image" data-ckbox-resource-id="9bDf06OeI5MW">
+        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/80.webp 80w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/160.webp 160w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/240.webp 240w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/320.webp 320w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/400.webp 400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/480.webp 480w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.webp 507w" sizes="(max-width: 507px) 100vw, 507px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/9bDf06OeI5MW/images/507.png" width="507" height="126"></picture>
+    </figure>
+    <figure class="image" data-ckbox-resource-id="he9UgWzm6VhK">
+        <picture><source srcset="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/200.webp 200w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/400.webp 400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/600.webp 600w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/800.webp 800w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1000.webp 1000w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1200.webp 1200w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1400.webp 1400w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1600.webp 1600w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1800.webp 1800w,https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1992.webp 1992w" sizes="(max-width: 1992px) 100vw, 1992px" type="image/webp"><img src="https://ckbox.cloud/c4aeda5f6ee2b8a3a8a0/assets/he9UgWzm6VhK/images/1992.png" width="1992" height="1580"></picture>
+    </figure>
+    <h5 style="margin-left:40px;">
+        Interfaces&nbsp;
+    </h5>
+    <p style="margin-left:40px;">
+        <strong>ITabControlWrapper : </strong>Esta interface recebe todas as Tabs de file preview e rename e envia um IOperationContract para a camada de serviço retornar a operação de preview ou rename de arquivos.<br>
+        <strong>ITabControl : </strong>Esta interface&nbsp;<br>
         <br>
         &nbsp;
     </p>
