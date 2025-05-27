@@ -126,7 +126,7 @@
         &nbsp;
     </h5>
     <p>
-        ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
+        <img src="https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb">
     </p>
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
