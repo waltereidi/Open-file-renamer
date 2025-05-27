@@ -20,13 +20,10 @@
         &nbsp;
     </p>
     <h2>
-        1. História do Open file renamer
+        1. Open file renamer
     </h2>
     <p style="margin-left:40px;" data-foo="bar">
-        O open file rename nasceu como uma proposta de estudos windowsform auto-didata e foi finalizada para ser entregue á um trabalho de pós graduação em desenvolvimento full stack.
-    </p>
-    <p style="margin-left:40px;" data-foo="bar">
-        &nbsp;
+        Queremos uma aplicação que dê uma ferramenta gratuita e de código aberto para auxiliar operações comuns do dia a dia de quem precisa organizar uma grande quantidades de arquivos.
     </p>
     <p style="margin-left:40px;" data-foo="bar">
         &nbsp;
@@ -128,7 +125,9 @@
         1 - Filtros&nbsp;<br>
         &nbsp;
     </h5>
-           ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
+    <p>
+        ![image](https://github.com/user-attachments/assets/b18723d9-1ab0-43e2-94b6-94fe4bba15eb)
+    </p>
     <p style="margin-left:40px;">
         Implemente novos tipos de filtros enviando um evento para o método privado : <strong>searchFilter_Changed </strong>da classe <strong>Presentation.Main,</strong><br>
         adicione um novo tipo de Enum em <strong>ApplicationService.Enum.Main_SearchFilter</strong> e implemente uma nova leitura de diretórios no projeto FileManager com a interface <strong>FileManager.Interfaces.IDirectoryReader</strong><br>
@@ -137,14 +136,51 @@
     <h5 style="margin-left:40px;">
         <strong>2 - Preview e Renomeação de arquivos</strong>
     </h5>
-        ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)
+    <p>
+        ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)&nbsp;
+    </p>
+    <p>
         ![Classe UML (1)](https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3)
+    </p>
     <h5 style="margin-left:40px;">
         Interfaces&nbsp;
     </h5>
     <p style="margin-left:40px;">
-        <strong>ITabControlWrapper : </strong>Esta interface recebe todas as Tabs de file preview e rename e envia um IOperationContract para a camada de serviço retornar a operação de preview ou rename de arquivos.<br>
-        <strong>ITabControl : </strong>Esta interface&nbsp;<br>
+        <strong>ITabControlWrapper :I</strong>nterface que recebe todas as Tabs de file preview e rename e envia um IOperationContract para a camada de serviço retornar a operação de preview ou rename de arquivos.<br>
+        &nbsp;
+    </p>
+    <p style="margin-left:40px;">
+        <strong>ITabControl : I</strong>nterface&nbsp;que é utilizada na design pattern Strategy com finalidade de delegar a opções escolhidas de reanomeação de arquivo e convertelas para a interface IOperationContract<br>
+        &nbsp;
+    </p>
+    <p style="margin-left:40px;">
+        <strong>IOperationContract </strong>: É o contralo estabelecido para organizar os dados necessários para solicitar uma utilização de renomeação de arquivos fornecida pela camada de serviço, todas as chamadas de file rename devem implementar esta interface.
+    </p>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
+    <h5 style="margin-left:40px;">
+        3 - Rollback de renomeação&nbsp;
+    </h5>
+    <p style="margin-left:40px;">
+        A implementação atual envia o nome do diretório e refaz a ultima operação armazenada no memento do File Manager
+    </p>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
+    <p style="margin-left:40px;">
+        &nbsp;
+    </p>
+    <h3 style="margin-left:40px;">
+        Micro Serviço File Renamer
+    </h3>
+    <h3 style="margin-left:40px;">
+       ![Diagrama de sequencia FileManager (1)](https://github.com/user-attachments/assets/f380bb87-3e21-4406-b935-4aa4880218de)
+
+    </h3>
+    <p style="margin-left:40px;">
+        Todas as operações que modificam arquivos devem passar pelo Memento antes de serem iniciadas, isto inclui também operações de Rollback.<br>
+        Operações referentes á apenas leitura de arquivos podem ser isoladas em uma classe separada e não precisam passar pelo memento.<br>
         <br>
         &nbsp;
     </p>
