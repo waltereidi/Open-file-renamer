@@ -23,7 +23,7 @@
         1. Open file renamer
     </h2>
     <p style="margin-left:40px;" data-foo="bar">
-        Queremos uma aplicação que dê uma ferramenta gratuita e de código aberto para auxiliar operações comuns do dia a dia de quem precisa organizar uma grande quantidades de arquivos.
+        Queremos uma aplicação que dê uma ferramenta gratuita e de código aberto para auxiliar operações comuns do dia a dia de quem precisa organizar uma grande quantidades de arquivos.<br>
         [<a src="https://drive.google.com/file/d/155v-SYu8Wtzxqv2hS4F0Yms0r-RD_5Ul/view?usp=sharing">Download</a>](https://drive.google.com/file/d/155v-SYu8Wtzxqv2hS4F0Yms0r-RD_5Ul/view?usp=sharing)
     </p>
     <p style="margin-left:40px;" data-foo="bar">
