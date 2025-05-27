@@ -137,10 +137,10 @@
         <strong>2 - Preview e Renomeação de arquivos</strong>
     </h5>
     <p>
-        ![image](https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e)&nbsp;
+        <img src="https://github.com/user-attachments/assets/c1fd3e69-cc60-474e-b797-2761385c9b0e">
     </p>
     <p>
-        ![Classe UML (1)](https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3)
+        <img src="https://github.com/user-attachments/assets/fa7cafb2-8f2e-4e80-955e-f29443c52fc3">
     </p>
     <h5 style="margin-left:40px;">
         Interfaces&nbsp;
