@@ -174,10 +174,7 @@
     <h3 style="margin-left:40px;">
         Micro Serviço File Renamer
     </h3>
-    <h3 style="margin-left:40px;">
-       ![Diagrama de sequencia FileManager (1)](https://github.com/user-attachments/assets/f380bb87-3e21-4406-b935-4aa4880218de)
-
-    </h3>
+      ![Diagrama de sequencia FileManager (1)](https://github.com/user-attachments/assets/f380bb87-3e21-4406-b935-4aa4880218de)
     <p style="margin-left:40px;">
         Todas as operações que modificam arquivos devem passar pelo Memento antes de serem iniciadas, isto inclui também operações de Rollback.<br>
         Operações referentes á apenas leitura de arquivos podem ser isoladas em uma classe separada e não precisam passar pelo memento.<br>
