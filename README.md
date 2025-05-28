@@ -204,4 +204,12 @@
         O projeto iniciou com o acesso á leitura de arquivos com uma única fonte da verdade (SSOT), e foi possível de última hora definir a Identidade do arquivo como uma TimeStamp em vez do nome completo do arquivo e diretório, &nbsp;isto permitiu implementar o rollback de versão com um ponto negativo: modificando a data de criação do arquivo para criar uma identidade única para este arquivo com TimeStamp.Ticks .<br>
         &nbsp;
     </p>
+    <p style="margin-left:40px;">
+        <strong>Implementação de UI com tecnologia .NET MAUI&nbsp;</strong>
+    </p>
+    <p style="margin-left:40px;">
+        Foi iniciado os estudos de implementação de uma interface multi aplicação com a tecnologia .NET MAUI na versão .NET 9 community ToolKit e visual Studio 2022 Preview.&nbsp;<br>
+        Embora o projeto estivesse funcionando normalmente na versão Windows não foi possível publicar a pacote MSIX, havendo diversos bugs relatados na internet sobre a dificuldade de publicação para a Microsoft Partner.<br>
+        &nbsp;
+    </p>
 </article>
