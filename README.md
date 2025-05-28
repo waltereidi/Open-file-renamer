@@ -175,11 +175,33 @@
     <h3 style="margin-left:40px;">
         Micro Serviço File Renamer
     </h3>
-      <img src="https://github.com/user-attachments/assets/f380bb87-3e21-4406-b935-4aa4880218de">
+    <p>
+        <img src="https://github.com/user-attachments/assets/f380bb87-3e21-4406-b935-4aa4880218de">
+    </p>
     <p style="margin-left:40px;">
         Todas as operações que modificam arquivos devem passar pelo Memento antes de serem iniciadas, isto inclui também operações de Rollback.<br>
         Operações referentes á apenas leitura de arquivos podem ser isoladas em uma classe separada e não precisam passar pelo memento.<br>
+        &nbsp;
+    </p>
+    <h2 style="margin-left:40px;">
         <br>
+        4. Post mortem
+    </h2>
+    <p style="margin-left:40px;">
+        Após a conclusão do projeto foi possível ver problemas comuns em projetos pequenos com a finalidade de leitura e escrita de arquivos.<br>
+        &nbsp;
+    </p>
+    <p style="margin-left:40px;">
+        <strong>Planejamento para varias interfaces de usuário :&nbsp;</strong><br>
+        Foi &nbsp;possível verificar que embora a leitura e escrita de arquivos utiliza-se uma classe comum para abstrair suas funcionalidade de alto nível, a implementação carece de formas de substituir sua implementação, desta forma não foi possível trocar o metodo de acesso á dados sem comprometer todos as implementações já existentes.<br>
+        Isto foi notado após implementar toda a interface com .NET Maui e ter debugado apenas no windows, quando depurado em android, &nbsp;já não é mais possível ler ou modificar arquivos com a mesma classe <strong>FileInfo </strong>e <strong>DirectoryInfo</strong>.&nbsp;<br>
+        <br>
+        <strong>Delegar parte da logica da interface de usuário para a camada de serviço :&nbsp;</strong><br>
+        A camada de serviço ao decorrer do projeto acabou fazendo parte da lógica de delegação de dados da interface de usuário,<br>
+        desta forma a interface do .NET Maui já nasceu com um modelo para ser atendido.<br>
+        <br>
+        <strong>Modificação de última hora na forma de ler arquivos :&nbsp;</strong><br>
+        O projeto iniciou com o acesso á leitura de arquivos com uma única fonte da verdade (SSOT), e foi possível de última hora definir a Identidade do arquivo como uma TimeStamp em vez do nome completo do arquivo e diretório, &nbsp;isto permitiu implementar o rollback de versão com um ponto negativo: modificando a data de criação do arquivo para criar uma identidade única para este arquivo com TimeStamp.Ticks .<br>
         &nbsp;
     </p>
 </article>
